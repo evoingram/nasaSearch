@@ -1,6 +1,6 @@
 import React from 'react';
 
-function SingleVideo() {
+function Header() {
   return (
     <div className="App">
       <header className="App-header">
@@ -21,4 +21,4 @@ function SingleVideo() {
   );
 }
 
-export default SingleVideo;
+export default Header;

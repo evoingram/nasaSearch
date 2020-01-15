@@ -1,6 +1,6 @@
 import React from 'react';
 
-function SearchResultsLL() {
+function Header() {
   return (
     <div className="App">
       <header className="App-header">
@@ -21,4 +21,4 @@ function SearchResultsLL() {
   );
 }
 
-export default SearchResultsLL;
+export default Header;

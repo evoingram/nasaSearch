@@ -1,6 +1,6 @@
 import React from 'react';
 
-function SearchForm() {
+function SingleAudio() {
   return (
     <div className="App">
       <header className="App-header">
@@ -21,4 +21,4 @@ function SearchForm() {
   );
 }
 
-export default SearchForm;
+export default SingleAudio;

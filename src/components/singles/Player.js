@@ -1,6 +1,6 @@
 import React from 'react';
 
-function SortedMostPopular() {
+function Header() {
   return (
     <div className="App">
       <header className="App-header">
@@ -21,4 +21,4 @@ function SortedMostPopular() {
   );
 }
 
-export default SortedMostPopular;
+export default Header;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function SingleImage() {
+function Header() {
   return (
     <div className="App">
       <header className="App-header">
@@ -21,4 +21,4 @@ function SingleImage() {
   );
 }
 
-export default SingleImage;
+export default Header;
