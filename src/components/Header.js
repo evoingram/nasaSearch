@@ -18,13 +18,13 @@ const wobble3 = keyframes`
         transform: rotate(180deg) translateX(50vh) translateY(-20%);
     }
     50% {
-        transform: rotate(180deg) translateX(-70vh) translateY(0%);
+        transform: rotate(180deg) translateX(-70vh) translateY(-10%);
     }
     75% {
-        transform: rotate(180deg) translateX(-110vh) translateY(-10%);
+        transform: rotate(180deg) translateX(-80vh) translateY(-20%);
     }
     100% {
-        transform: rotate(180deg) translateX(-150vh) translateY(-20%);
+        transform: rotate(180deg) translateX(-150vh) translateY(0%);
     }
 `;
 const Rocket = styled.img`
