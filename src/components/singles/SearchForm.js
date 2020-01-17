@@ -83,47 +83,47 @@ class SearchForm extends React.Component {
 							/>
 						</SearchDiv>
 						<Checks id="mediaFilters">
-							<div id="images" class="filter">
+							<div id="images" className="filter">
 								<input
-									class="magic-checkbox"
+									className="magic-checkbox"
 									type="checkbox"
 									name="images"
 									id="imagescb"
 									value="option"
 								/>
-								<label for="imagescb"></label>
-								<label class="text" for="imagescb">
+								<label htmlFor="imagescb"></label>
+								<label className="text" htmlFor="imagescb">
 									Images
 								</label>
 							</div>
-							<div id="video" class="filter">
+							<div id="video" className="filter">
 								<input
-									class="magic-checkbox"
+									className="magic-checkbox"
 									type="checkbox"
 									name="video"
 									id="videocb"
 									value="option"
 								/>
-								<label for="videocb"></label>
-								<label class="text" for="videocb">
+								<label htmlFor="videocb"></label>
+								<label className="text" htmlFor="videocb">
 									Video
 								</label>
 							</div>
-							<div id="audio" class="filter">
+							<div id="audio" className="filter">
 								<input
-									class="magic-checkbox"
+									className="magic-checkbox"
 									type="checkbox"
 									name="audio"
 									id="audiocb"
 									value="option"
 								/>
-								<label for="audiocb"></label>
-								<label class="text" for="audiocb">
+								<label htmlFor="audiocb"></label>
+								<label className="text" htmlFor="audiocb">
 									Audio
 								</label>
 							</div>
 						</Checks>
-						<Button>Search NASA's multimedia library!</Button>
+						<Button>Search NASA's multimedia library</Button>
 					</Form>
 				</Div1>
 			</Center>

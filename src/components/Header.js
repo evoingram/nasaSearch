@@ -55,7 +55,7 @@ class Header extends React.Component {
 		return (
 			<div>
 				<ImgHeader>
-					<div id="rocket" class="rocket">
+					<div id="rocket" className="rocket">
 						<Rocket src={rocket} />
 					</div>
 					<h2>Welcome to Erica Ingram's</h2>
