@@ -27,10 +27,13 @@ const Div1 = styled.div`
 `;
 
 const fieldLength = {
-	fontSize: '1.5rem',
+	fontSize: '2rem',
 	width: '50%',
 	margin: '0',
-	padding: '0'
+	padding: '0',
+	backgroundColor: '#313332',
+	color: '#B2B3A3',
+	border: '5px solid #15418c'
 };
 const SearchDiv = styled.div`
 	display: flex;
@@ -43,12 +46,19 @@ const SearchDiv = styled.div`
 `;
 const Button = styled.button`
 	margin-top: 2%;
+	margin-bottom: 2%;
 	background-color: #15418c;
 	color: white;
 	font-family: 'Audiowide', cursive;
 	border: none;
 	padding-top: 2%;
 	padding-bottom: 2%;
+`;
+const Checks = styled.div`
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: center;
+	width: 100%;
 `;
 class SearchForm extends React.Component {
 	constructor(props) {
@@ -72,6 +82,47 @@ class SearchForm extends React.Component {
 								style={fieldLength}
 							/>
 						</SearchDiv>
+						<Checks id="mediaFilters">
+							<div id="images" class="filter">
+								<input
+									class="magic-checkbox"
+									type="checkbox"
+									name="images"
+									id="imagescb"
+									value="option"
+								/>
+								<label for="imagescb"></label>
+								<label class="text" for="imagescb">
+									Images
+								</label>
+							</div>
+							<div id="video" class="filter">
+								<input
+									class="magic-checkbox"
+									type="checkbox"
+									name="video"
+									id="videocb"
+									value="option"
+								/>
+								<label for="videocb"></label>
+								<label class="text" for="videocb">
+									Video
+								</label>
+							</div>
+							<div id="audio" class="filter">
+								<input
+									class="magic-checkbox"
+									type="checkbox"
+									name="audio"
+									id="audiocb"
+									value="option"
+								/>
+								<label for="audiocb"></label>
+								<label class="text" for="audiocb">
+									Audio
+								</label>
+							</div>
+						</Checks>
 						<Button>Search NASA's multimedia library!</Button>
 					</Form>
 				</Div1>

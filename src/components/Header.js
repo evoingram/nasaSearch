@@ -47,11 +47,9 @@ const Rocket = styled.img`
 // need rocket animation sliding in and out of screen side to side
 
 class Header extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			searchTerm: ''
-		};
+	constructor(props) {
+		super(props);
+		this.state = {};
 	}
 	render() {
 		return (
@@ -61,7 +59,7 @@ class Header extends React.Component {
 						<Rocket src={rocket} />
 					</div>
 					<h2>Welcome to Erica Ingram's</h2>
-					<h2>NASA Multimedia Library Search Clone</h2>
+					<h2>NASA Multimedia Library Search React Clone</h2>
 					<SearchForm />
 				</ImgHeader>
 			</div>

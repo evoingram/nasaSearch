@@ -27,9 +27,9 @@ function Footer() {
 		<div>
 			<ImgHeader>
 				<h2>
-					See more of Erica's work in{' '}
-					<Link href="https://www.aquoco.co/" target="_blank">
-						her portfolio.
+					{' '}
+					<Link href="https://www.ericaingram.com/" target="_blank">
+						See more of Erica's work in her portfolio.
 					</Link>
 				</h2>
 			</ImgHeader>

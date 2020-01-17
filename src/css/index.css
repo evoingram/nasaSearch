@@ -14,7 +14,7 @@ code {
   font-family: 'Audiowide';
   font-style: normal;
   font-weight: 400;
-  src: url('fonts/Audiowide-Regular.ttf');
+  src: url('../fonts/Audiowide-Regular.ttf');
   src: local('Audiowide');
 }
 
@@ -22,6 +22,6 @@ code {
   font-family: 'Russo One';
   font-style: normal;
   font-weight: 400;
-  src: url('fonts/RussoOne-Regular.ttf');
+  src: url('../fonts/RussoOne-Regular.ttf');
   src: local('Russo One');
 }
