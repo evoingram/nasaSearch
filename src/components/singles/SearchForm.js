@@ -17,7 +17,7 @@ const Center = styled.div`
 	justify-content: center;
 	margin: 0;
 	padding: 0;
-	padding-bottom: 10%;
+	padding-bottom: 3%;
 `;
 const Div1 = styled.div`
 	width: 100%;
@@ -41,6 +41,15 @@ const SearchDiv = styled.div`
 	margin: 0;
 	align-items: top;
 `;
+const Button = styled.button`
+	margin-top: 2%;
+	background-color: #15418c;
+	color: white;
+	font-family: 'Audiowide', cursive;
+	border: none;
+	padding-top: 2%;
+	padding-bottom: 2%;
+`;
 class SearchForm extends React.Component {
 	constructor(props) {
 		super(props);
@@ -63,7 +72,7 @@ class SearchForm extends React.Component {
 								style={fieldLength}
 							/>
 						</SearchDiv>
-						<button>Search NASA files!</button>
+						<Button>Search NASA's multimedia library!</Button>
 					</Form>
 				</Div1>
 			</Center>
