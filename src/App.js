@@ -196,13 +196,9 @@ class App extends React.Component {
 				<Header searchNASALibrary={this.searchNASALibrary} changeSearchTerm={this.changeSearchTerm} />
 				<header className="App-header">
 					<p>search containers will go here.</p>
-					{this.state.newestResults !== 'undefined' && this.state.newestResults != null ? (
-						this.state.newestResults.map(newResult => {
-							<Sorted key={newResult} newResult={newResult} />;
-						})
-					) : (
-						<div> Loading ... </div>
-					)}
+					<div className="wrapperNewest" id="wrapperNewest">
+						<Sorted newestResults={this.state.newestResults} />
+					</div>
 					<APOD
 						imgURL={this.state.imgURL}
 						copyright={this.state.copyright}
