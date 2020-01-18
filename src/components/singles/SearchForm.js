@@ -17,7 +17,7 @@ const Center = styled.div`
 	justify-content: center;
 	margin: 0;
 	padding: 0;
-	padding-bottom: 10%;
+	padding-bottom: 3%;
 `;
 const Div1 = styled.div`
 	width: 100%;
@@ -27,10 +27,13 @@ const Div1 = styled.div`
 `;
 
 const fieldLength = {
-	fontSize: '1.5rem',
+	fontSize: '2rem',
 	width: '50%',
 	margin: '0',
-	padding: '0'
+	padding: '0',
+	backgroundColor: '#313332',
+	color: '#B2B3A3',
+	border: '5px solid #15418c'
 };
 const SearchDiv = styled.div`
 	display: flex;
@@ -40,6 +43,22 @@ const SearchDiv = styled.div`
 	padding: 0;
 	margin: 0;
 	align-items: top;
+`;
+const Button = styled.button`
+	margin-top: 2%;
+	margin-bottom: 2%;
+	background-color: #15418c;
+	color: white;
+	font-family: 'Audiowide', cursive;
+	border: none;
+	padding-top: 2%;
+	padding-bottom: 2%;
+`;
+const Checks = styled.div`
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: center;
+	width: 100%;
 `;
 class SearchForm extends React.Component {
 	constructor(props) {
@@ -63,7 +82,48 @@ class SearchForm extends React.Component {
 								style={fieldLength}
 							/>
 						</SearchDiv>
-						<button>Search NASA files!</button>
+						<Checks id="mediaFilters">
+							<div id="images" className="filter">
+								<input
+									className="magic-checkbox"
+									type="checkbox"
+									name="images"
+									id="imagescb"
+									value="option"
+								/>
+								<label htmlFor="imagescb"></label>
+								<label className="text" htmlFor="imagescb">
+									Images
+								</label>
+							</div>
+							<div id="video" className="filter">
+								<input
+									className="magic-checkbox"
+									type="checkbox"
+									name="video"
+									id="videocb"
+									value="option"
+								/>
+								<label htmlFor="videocb"></label>
+								<label className="text" htmlFor="videocb">
+									Video
+								</label>
+							</div>
+							<div id="audio" className="filter">
+								<input
+									className="magic-checkbox"
+									type="checkbox"
+									name="audio"
+									id="audiocb"
+									value="option"
+								/>
+								<label htmlFor="audiocb"></label>
+								<label className="text" htmlFor="audiocb">
+									Audio
+								</label>
+							</div>
+						</Checks>
+						<Button>Search NASA's multimedia library</Button>
 					</Form>
 				</Div1>
 			</Center>
