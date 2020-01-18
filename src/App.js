@@ -62,10 +62,6 @@ class App extends React.Component {
 				this.setState({ copyright: response.data.copyright });
 				this.setState({ date: response.data.date });
 				this.setState({ explanation: response.data.explanation });
-				let fileInfo = new Blob([response.data.hdurl]);
-				this.getFileSize(response.data.hdurl);
-				this.setState({ fileSize: fileInfo.size });
-				this.setState({ fileFormat: fileInfo.type });
 				console.log('done contacting NASA apod');
 			})
 			.catch(error => {
@@ -73,7 +69,15 @@ class App extends React.Component {
 			});
 		this.getNewestNASALibrary();
 	};
+	/*
 
+				let fileInfo = new Blob([response.data.hdurl]);
+				this.getFileSize(response.data.hdurl);
+				this.setState({ fileSize: fileInfo.size });
+				this.setState({ fileFormat: fileInfo.type });
+
+
+*/
 	changeSearchTerm = event => {
 		console.log('search term being set');
 		this.setState({ searchTerm: event.target.value });
