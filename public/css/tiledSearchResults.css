@@ -1,21 +1,29 @@
 .row {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     padding: 0 4px;
+    max-width: 100%;
+}
+
+.wrapperNewest {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    max-width: 100%;
 }
 
 /* Create four equal columns that sits next to each other */
 
 .column {
-    flex: 20%;
-    max-width: 20%;
+    flex: 19%;
+    max-width: 19%;
     padding: 0 4px;
 }
 
 .column img {
     margin-top: 8px;
     vertical-align: middle;
-    width: 100%;
+    max-width: 100%;
 }
 
 /* Responsive layout - makes a two column-layout instead of four columns */
