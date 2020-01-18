@@ -5,7 +5,9 @@ import './css/magic.css';
 import Header from './components/Header.js';
 import Footer from './components/Footer.js';
 import APOD from './components/singles/APOD.js';
+import PlayerC from './components/singles/Player.js';
 import axios from 'axios';
+import './css/video-react.css';
 
 class App extends React.Component {
 	constructor() {
@@ -16,7 +18,8 @@ class App extends React.Component {
 			imgURL: '',
 			copyright: '',
 			date: '',
-			explanation: ''
+			explanation: '',
+			fileURL: 'http://images-assets.nasa.gov/video/Apollo 11 Overview/Apollo 11 Overview~preview.mp4'
 		};
 	}
 
@@ -56,6 +59,7 @@ class App extends React.Component {
 			<div className="App">
 				<Header />
 				<header className="App-header">
+					<PlayerC fileURL={this.state.fileURL} />
 					<p>search containers will go here.</p>
 					<APOD
 						imgURL={this.state.imgURL}
