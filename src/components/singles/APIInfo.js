@@ -1,24 +1,31 @@
 import React from 'react';
 
-function Header() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class APIInfo extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {};
+	}
+
+	render() {
+		return (
+			<div>
+				<p>
+					<b>NASA ID: </b> {this.props.nasaID}
+				</p>
+
+				<p>
+					<b>Center: </b> <a href={this.props.fileURL}>{this.props.center}</a>
+				</p>
+
+				<p>
+					<b>date created: </b> {this.props.dateCreated}
+				</p>
+				<p>
+					<b>description: </b> {this.props.description}
+				</p>
+			</div>
+		);
+	}
 }
 
-export default Header;
+export default APIInfo;

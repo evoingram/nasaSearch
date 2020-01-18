@@ -38,15 +38,15 @@ class APOD extends React.Component {
 				<div className="wrapper1">
 					<NasaH1>NASA Random Astronomy Photo of the Day:</NasaH1>
 					<div id="nasa1" className="nasa">
-						Copyright: <p class="explanation">{this.props.copyright}</p>
+						Copyright: <p className="explanation">{this.props.copyright}</p>
 					</div>
 					<div id="nasa2" className="nasa">
-						Date: <p class="explanation">{this.props.date}</p>
+						Date: <p className="explanation">{this.props.date}</p>
 					</div>
 				</div>
 				<div className="wrapper2">
 					<div id="nasa2" className="nasa1">
-						Explanation: <p class="explanation">{this.props.explanation}</p>
+						Explanation: <p className="explanation">{this.props.explanation}</p>
 					</div>
 					<div id="nasa3" className="nasaImg">
 						<NasaImage src={this.props.imgURL} alt="NASA Astronomy Photo of the Day" />

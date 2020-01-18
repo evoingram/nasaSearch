@@ -60,7 +60,10 @@ class Header extends React.Component {
 					</div>
 					<h2>Welcome to Erica Ingram's</h2>
 					<h2>NASA Multimedia Library Search React Clone</h2>
-					<SearchForm />
+					<SearchForm
+						searchNASALibrary={this.props.searchNASALibrary}
+						changeSearchTerm={this.props.changeSearchTerm}
+					/>
 				</ImgHeader>
 			</div>
 		);

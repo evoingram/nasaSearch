@@ -87,12 +87,13 @@ class SearchForm extends React.Component {
 								<input
 									className="magic-checkbox"
 									type="checkbox"
-									name="images"
-									id="imagescb"
+									name="imagecb"
+									id="imagecb"
 									value="option"
+									defaultChecked
 								/>
-								<label htmlFor="imagescb"></label>
-								<label className="text" htmlFor="imagescb">
+								<label htmlFor="imagecb"></label>
+								<label className="text" htmlFor="imagecb">
 									Images
 								</label>
 							</div>
@@ -100,9 +101,10 @@ class SearchForm extends React.Component {
 								<input
 									className="magic-checkbox"
 									type="checkbox"
-									name="video"
+									name="videocb"
 									id="videocb"
 									value="option"
+									defaultChecked
 								/>
 								<label htmlFor="videocb"></label>
 								<label className="text" htmlFor="videocb">
@@ -113,9 +115,10 @@ class SearchForm extends React.Component {
 								<input
 									className="magic-checkbox"
 									type="checkbox"
-									name="audio"
+									name="audiocb"
 									id="audiocb"
 									value="option"
+									defaultChecked
 								/>
 								<label htmlFor="audiocb"></label>
 								<label className="text" htmlFor="audiocb">
@@ -123,7 +126,7 @@ class SearchForm extends React.Component {
 								</label>
 							</div>
 						</Checks>
-						<Button>Search NASA's multimedia library</Button>
+						<Button onClick={this.props.searchNASALibrary}>Search NASA's multimedia library</Button>
 					</Form>
 				</Div1>
 			</Center>

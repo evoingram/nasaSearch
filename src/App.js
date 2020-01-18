@@ -2,9 +2,13 @@ import React from 'react';
 import './css/App.css';
 import './css/index.css';
 import './css/magic.css';
+import './css/video-react.css';
+import './css/tiledSearchResults.css';
 import Header from './components/Header.js';
 import Footer from './components/Footer.js';
+import Sorted from './components/containers/Sorted.js';
 import APOD from './components/singles/APOD.js';
+import PlayerC from './components/singles/Player.js';
 import axios from 'axios';
 
 class App extends React.Component {
@@ -16,9 +20,29 @@ class App extends React.Component {
 			imgURL: '',
 			copyright: '',
 			date: '',
-			explanation: ''
+			explanation: '',
+			fileURL: 'http://images-assets.nasa.gov/video/Apollo%2011%20Overview/Apollo%2011%20Overview~preview.mp4',
+			nasaID: '',
+			fileSize: '',
+			fileFormat: '',
+			center: '',
+			imagecb: true,
+			videocb: true,
+			audiocb: true,
+			page: 1,
+			newestURL: 'https://images-assets.nasa.gov/recent.json',
+			newestResults: [],
+			popularURL: 'https://images-assets.nasa.gov/popular.json',
+			popularResults: [],
+			results: []
 		};
 	}
+
+	getFileSize = url => {
+		let fileInfo = new Blob([url], { type: 'video/mp4' });
+		this.setState({ fileSize: fileInfo.size });
+		console.log(fileInfo.size);
+	};
 
 	componentDidMount = () => {
 		var minYear = 2000;
@@ -31,10 +55,6 @@ class App extends React.Component {
 		var maxDay = 28;
 		var randomDay = minDay + Math.round(Math.random() * (maxDay - minDay));
 		var randomDate = randomYear + '-' + randomMonth + '-' + randomDay;
-		console.log(randomDate);
-		console.log(
-			'https://api.nasa.gov/planetary/apod?date=' + randomDate + '&api_key=' + process.env.REACT_APP_API_KEY
-		);
 		axios
 			.get('https://api.nasa.gov/planetary/apod?date=' + randomDate + '&api_key=' + process.env.REACT_APP_API_KEY)
 			.then(response => {
@@ -42,21 +62,147 @@ class App extends React.Component {
 				this.setState({ copyright: response.data.copyright });
 				this.setState({ date: response.data.date });
 				this.setState({ explanation: response.data.explanation });
-				console.log('done contacting NASA');
+				console.log('done contacting NASA apod');
+			})
+			.catch(error => {
+				console.log(error);
+			});
+		this.getNewestNASALibrary();
+	};
+	/*
+
+				let fileInfo = new Blob([response.data.hdurl]);
+				this.getFileSize(response.data.hdurl);
+				this.setState({ fileSize: fileInfo.size });
+				this.setState({ fileFormat: fileInfo.type });
+
+
+*/
+	changeSearchTerm = event => {
+		console.log('search term being set');
+		this.setState({ searchTerm: event.target.value });
+		/*
+
+			useEffect(() => {
+				if (props.tickets !== null) {
+				const results = props.tickets.filter(ticket =>
+					ticket.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+					ticket.status.toLowerCase().includes(searchTerm.toLowerCase()) ||
+					ticket.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+					ticket.category.toLowerCase().includes(searchTerm.toLowerCase())  ||
+					ticket.date.toLowerCase().includes(searchTerm.toLowerCase()) 
+				);
+				console.log("useEffect Search Results = " + results);
+				setSearchResults([...results]);
+				}
+			}, [searchTerm, props.tickets]);
+		*/
+	};
+
+	toggleMediaFormatBoolean = () => {
+		let videoCBElement = document.getElementById('videocb');
+		let audioCBElement = document.getElementById('audiocb');
+		let imageCBElement = document.getElementById('imagecb');
+		if (!videoCBElement.checked) {
+			this.setState({ videocb: false });
+		}
+		if (!audioCBElement.checked) {
+			this.setState({ audiocb: false });
+		}
+		if (!imageCBElement.checked) {
+			this.setState({ imagecb: false });
+		}
+	};
+
+	searchNASALibrary = event => {
+		event.preventDefault();
+		this.toggleMediaFormatBoolean();
+		console.log(this.state.searchTerm);
+		let mediaFormats = '';
+		if (this.state.imagecb === true) {
+			mediaFormats += 'image,';
+		}
+		if (this.state.videocb === true) {
+			mediaFormats += 'video,';
+		}
+		if (this.state.audiocb === true) {
+			mediaFormats += 'audio';
+		}
+		if (mediaFormats.slice(-1) === ',') {
+			mediaFormats.substring(0, mediaFormats.length - 1);
+		}
+		console.log(
+			'https://images-api.nasa.gov/search' +
+				'?q=' +
+				this.state.searchTerm +
+				'&page=' +
+				this.state.page +
+				'&media=' +
+				mediaFormats
+		);
+		axios
+			.get(
+				'https://images-api.nasa.gov/search' +
+					'?q=' +
+					this.state.searchTerm +
+					'&page=' +
+					this.state.page +
+					'&media_type=' +
+					mediaFormats
+			)
+			.then(response => {
+				this.setState({ searchResults: response.data.collection.items });
+				console.log(this.state.searchResults);
+				this.setState({ nasaID: response.data.collection.items[0].data[0].nasa_id });
+				console.log('nasa id = ' + this.state.nasaID);
+				console.log('done contacting NASA images library');
 			})
 			.catch(error => {
 				console.log(error);
 			});
 	};
 
-	changeSearchTerm = () => {};
+	getNewestNASALibrary = () => {
+		console.log('running newestNASALibrary');
+		axios
+			.get(this.state.newestURL)
+			.then(response => {
+				this.setState({ newestResults: response.data.collection.items });
+				console.log('newest results = ' + this.state.newestResults);
+				// thumbnail link = response.data.collection.items[x].data.links[0].href;
+				this.setState({ results: this.state.newestResults });
+				console.log('results = ' + this.state.results);
+				console.log('done getting newest NASA images');
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
+	getPopularNASALibrary = event => {
+		event.preventDefault();
+		console.log('running popularNASALibrary');
+		axios
+			.get(this.state.popularURL)
+			.then(response => {
+				this.setState({ popularResults: response.data.collection.items });
+				// thumbnail link = response.data.collection.items[x].data.links[0].href;
+				console.log('popular results = ' + this.state.popularResults);
+				console.log('done getting popular NASA images');
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
 
 	render() {
 		return (
 			<div className="App">
-				<Header />
+				<Header searchNASALibrary={this.searchNASALibrary} changeSearchTerm={this.changeSearchTerm} />
 				<header className="App-header">
 					<p>search containers will go here.</p>
+					<div className="wrapperNewest" id="wrapperNewest">
+						<Sorted newestResults={this.state.newestResults} />
+					</div>
 					<APOD
 						imgURL={this.state.imgURL}
 						copyright={this.state.copyright}
