@@ -19,9 +19,19 @@ class App extends React.Component {
 			copyright: '',
 			date: '',
 			explanation: '',
-			fileURL: 'http://images-assets.nasa.gov/video/Apollo 11 Overview/Apollo 11 Overview~preview.mp4'
+			fileURL: 'http://images-assets.nasa.gov/video/Apollo 11 Overview/Apollo 11 Overview~preview.mp4',
+			nasaID: '',
+			fileSize: '',
+			fileFormat: '',
+			center: ''
 		};
 	}
+
+	getFileSize = url => {
+		let fileInfo = new Blob([url], { type: 'video/mp4' });
+		this.setState({ fileSize: fileInfo.size });
+		console.log(fileInfo.size);
+	};
 
 	componentDidMount = () => {
 		var minYear = 2000;
@@ -45,6 +55,12 @@ class App extends React.Component {
 				this.setState({ copyright: response.data.copyright });
 				this.setState({ date: response.data.date });
 				this.setState({ explanation: response.data.explanation });
+				let fileInfo = new Blob([response.data.hdurl], { type: 'video/mp4' });
+				this.getFileSize(response.data.hdurl);
+				this.setState({ fileSize: fileInfo.size });
+				this.setState({ fileFormat: fileInfo.type });
+				console.log(fileInfo.size);
+				console.log(fileInfo.type);
 				console.log('done contacting NASA');
 			})
 			.catch(error => {
