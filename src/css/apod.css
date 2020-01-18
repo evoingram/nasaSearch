@@ -1,0 +1,36 @@
+.nasa {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.nasa1 {
+    width: 50%;
+    justify-content: left;
+}
+
+.wrapper1 {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding-bottom: 2%;
+    width: 100%;
+}
+
+.explanation {
+    font-size: 1rem;
+    padding-left: 1%;
+}
+
+.wrapper2 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.wrapper {
+    margin: 2%;
+    justify-content: center;
+    align-self: center;
+}
