@@ -19,11 +19,14 @@ class App extends React.Component {
 			copyright: '',
 			date: '',
 			explanation: '',
-			fileURL: 'http://images-assets.nasa.gov/video/Apollo 11 Overview/Apollo 11 Overview~preview.mp4',
+			fileURL: 'http://images-assets.nasa.gov/video/Apollo%2011%20Overview/Apollo%2011%20Overview~preview.mp4',
 			nasaID: '',
 			fileSize: '',
 			fileFormat: '',
-			center: ''
+			center: '',
+			imagecb: true,
+			videocb: true,
+			audiocb: true
 		};
 	}
 
@@ -61,19 +64,67 @@ class App extends React.Component {
 				this.setState({ fileFormat: fileInfo.type });
 				console.log(fileInfo.size);
 				console.log(fileInfo.type);
-				console.log('done contacting NASA');
+				console.log('done contacting NASA apod');
 			})
 			.catch(error => {
 				console.log(error);
 			});
 	};
 
-	changeSearchTerm = () => {};
+	changeSearchTerm = event => {
+		console.log('search term being set');
+		this.setState({ searchTerm: event.target.value });
+	};
+
+	toggleMediaFormatBoolean = () => {
+		let videoCBElement = document.getElementById('videocb');
+		let audioCBElement = document.getElementById('audiocb');
+		let imageCBElement = document.getElementById('imagecb');
+		if (!videoCBElement.checked) {
+			this.setState({ videocb: false });
+		}
+		if (!audioCBElement.checked) {
+			this.setState({ audiocb: false });
+		}
+		if (!imageCBElement.checked) {
+			this.setState({ imagecb: false });
+		}
+	};
+
+	searchNASALibrary = event => {
+		event.preventDefault();
+		this.toggleMediaFormatBoolean();
+		console.log(this.state.searchTerm);
+		let mediaFormats = '';
+		if (this.state.imagecb === true) {
+			mediaFormats += 'image,';
+		}
+		if (this.state.videocb === true) {
+			mediaFormats += 'video,';
+		}
+		if (this.state.audiocb === true) {
+			mediaFormats += 'audio';
+		}
+		if (mediaFormats.slice(-1) === ',') {
+			mediaFormats.substring(0, mediaFormats.length - 1);
+		}
+		console.log('https://images-api.nasa.gov/search' + '?q=' + this.state.searchTerm + '&media=' + mediaFormats);
+		axios
+			.get('https://images-api.nasa.gov/search' + '?q=' + this.state.searchTerm + '&media_type=' + mediaFormats)
+			.then(response => {
+				this.setState({ searchResults: response.data });
+				console.log(this.state.searchResults);
+				console.log('done contacting NASA images library');
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
 
 	render() {
 		return (
 			<div className="App">
-				<Header />
+				<Header searchNASALibrary={this.searchNASALibrary} changeSearchTerm={this.changeSearchTerm} />
 				<header className="App-header">
 					<PlayerC fileURL={this.state.fileURL} />
 					<p>search containers will go here.</p>
