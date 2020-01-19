@@ -20,7 +20,7 @@ single search result rectangle detail
 single search result square detail
 
 #### Sorted (Newest) (MostPopular)
-thumbnail sized images/audio/video sorted by newest component
+thumbnail sized images/audio/video sorted by newest component<br>
 thumbnail sized images/audio/video sorted by most popular component
 
 ### Single (Image) (Audio) (Video)
