@@ -126,24 +126,10 @@ https://images.nasa.gov/
 				<div>
 					<Switch>
 						<Route exact path="/">
-							<SearchResult currentLoad={this.props.currentLoad} />
+							<SearchResult currentLoad={this.props.currentLoad} getSingleResult={this.getSingleResult} />
 						</Route>
 						<Route exact path="/details-:nasaID">
-							<Single
-								thumbnailURL={this.props.thumbnailURL}
-								fileURL={this.props.fileURL}
-								title={this.props.title}
-								fileSize={this.props.fileSize}
-								fileFormat={this.props.fileFormat}
-								captionsFileURL={this.props.captionsFileURL}
-								nasaID={this.props.nasaID}
-								keywords={this.props.keywords}
-								center={this.props.center}
-								secondaryC={this.props.secondaryC}
-								date={this.props.date}
-								centerURL={this.props.centerURL}
-								explanation={this.props.explanation}
-							/>
+							<Single nasaID={this.props.nasaID} getSingleResult={this.getSingleResult} />
 						</Route>
 					</Switch>
 				</div>

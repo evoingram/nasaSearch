@@ -35,7 +35,7 @@ class App extends React.Component {
 			copyright: '',
 			date: '',
 			explanation: '',
-			fileURL: 'http://images-assets.nasa.gov/video/Apollo%2011%20Overview/Apollo%2011%20Overview~preview.mp4',
+			fileURL: '',
 			nasaID: '',
 			fileSize: '',
 			fileFormat: '',
@@ -67,6 +67,7 @@ class App extends React.Component {
 	};
 
 	componentDidMount = () => {
+		/*
 		var minYear = 2000;
 		var maxYear = 2019;
 		var randomYear = minYear + Math.round(Math.random() * (maxYear - minYear));
@@ -77,6 +78,7 @@ class App extends React.Component {
 		var maxDay = 28;
 		var randomDay = minDay + Math.round(Math.random() * (maxDay - minDay));
 		var randomDate = randomYear + '-' + randomMonth + '-' + randomDay;
+
 		axios
 			.get('https://api.nasa.gov/planetary/apod?date=' + randomDate + '&api_key=' + process.env.REACT_APP_API_KEY)
 			.then(response => {
@@ -89,8 +91,10 @@ class App extends React.Component {
 			.catch(error => {
 				console.log(error);
 			});
-		this.getNewestNASALibrary();
+		*/
+
 		this.getPopularNASALibrary();
+		this.getNewestNASALibrary();
 	};
 	componentDidUpdate = () => {};
 	/*
@@ -188,14 +192,16 @@ class App extends React.Component {
 
 	getNewestNASALibrary = () => {
 		console.log('running newestNASALibrary');
+		console.log(this.state.newestURL);
 		axios
 			.get(this.state.newestURL)
 			.then(response => {
+				console.log(response);
 				this.setState({ newestResults: response.data.collection.items });
 				console.log('newest results = ' + this.state.newestResults);
 				// thumbnail link = response.data.collection.items[x].data.links[0].href;
-				this.setState({ results: this.state.newestResults });
-				console.log('results = ' + this.state.results);
+				// this.setState({ results: this.state.newestResults });
+				// console.log('results = ' + this.state.results);
 				console.log('done getting newest NASA images');
 			})
 			.catch(error => {
@@ -236,6 +242,7 @@ class App extends React.Component {
 			</Route>
 		);
 	};
+
 	/*
 
 	newestResults={this.state.newestResults}
@@ -259,7 +266,11 @@ class App extends React.Component {
 						</Button>
 					</Link>
 					<div className="wrapperNewest" id="wrapperNewest">
-						<Sorted currentLoad={this.state.currentLoad} currentResults={this.state.currentResults} />
+						<Sorted
+							currentLoad={this.state.currentLoad}
+							currentResults={this.state.currentResults}
+							getSingleResult={this.state.getSingleResult}
+						/>
 					</div>
 				</header>
 				<Footer />

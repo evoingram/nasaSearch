@@ -1,5 +1,4 @@
 import React from 'react';
-import ColumnNewestPopular from './ColumnNewestPopular.js';
 import RowNewestPopular from './RowNewestPopular.js';
 
 const wrapper = {
