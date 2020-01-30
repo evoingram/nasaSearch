@@ -128,7 +128,7 @@ https://images.nasa.gov/
 						<Route exact path="/">
 							<SearchResult currentLoad={this.props.currentLoad} getSingleResult={this.getSingleResult} />
 						</Route>
-						<Route exact path="/details-:nasaID">
+						<Route exact path="/details-:nasaID" onClick={this.getSingleResult}>
 							<Single nasaID={this.props.nasaID} getSingleResult={this.getSingleResult} />
 						</Route>
 					</Switch>
