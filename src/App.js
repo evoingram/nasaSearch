@@ -10,7 +10,18 @@ import Sorted from './components/containers/Sorted.js';
 import APOD from './components/singles/APOD.js';
 import PlayerC from './components/singles/Player.js';
 import axios from 'axios';
+import styled from 'styled-components';
 
+const Button = styled.button`
+	margin-top: 2%;
+	margin-bottom: 2%;
+	background-color: #15418c;
+	color: white;
+	font-family: 'Audiowide', cursive;
+	border: none;
+	padding-top: 2%;
+	padding-bottom: 2%;
+`;
 class App extends React.Component {
 	constructor() {
 		super();
@@ -34,6 +45,8 @@ class App extends React.Component {
 			newestResults: [],
 			popularURL: 'https://images-assets.nasa.gov/popular.json',
 			popularResults: [],
+			currentResults: true,
+			currentLoad: [],
 			results: []
 		};
 	}
@@ -68,7 +81,9 @@ class App extends React.Component {
 				console.log(error);
 			});
 		this.getNewestNASALibrary();
+		this.getPopularNASALibrary();
 	};
+	componentDidUpdate = () => {};
 	/*
 
 				let fileInfo = new Blob([response.data.hdurl]);
@@ -178,8 +193,7 @@ class App extends React.Component {
 				console.log(error);
 			});
 	};
-	getPopularNASALibrary = event => {
-		event.preventDefault();
+	getPopularNASALibrary = () => {
 		console.log('running popularNASALibrary');
 		axios
 			.get(this.state.popularURL)
@@ -193,15 +207,37 @@ class App extends React.Component {
 				console.log(error);
 			});
 	};
+	toggleResults = () => {
+		let toggleButton = document.getElementById('MostRecentPopular');
+		if (this.state.currentResults === true) {
+			//newest results
+			toggleButton.textContent = 'Click to See Most Popular';
+			this.setState({ currentResults: false });
+			this.setState({ currentLoad: this.state.newestResults });
+		} else {
+			//most popular results
+			toggleButton.textContent = 'Click to See Most Recent';
+			this.setState({ currentResults: true });
+			this.setState({ currentLoad: this.state.popularResults });
+		}
+		console.log('current results boolean = ' + this.state.currentResults);
+	};
+	/*
 
+	newestResults={this.state.newestResults}
+	popularResults={this.state.popularResults}
+
+*/
 	render() {
 		return (
 			<div className="App">
 				<Header searchNASALibrary={this.searchNASALibrary} changeSearchTerm={this.changeSearchTerm} />
 				<header className="App-header">
-					<p>search containers will go here.</p>
+					<Button id="MostRecentPopular" onClick={this.toggleResults}>
+						Click to See Most Popular
+					</Button>
 					<div className="wrapperNewest" id="wrapperNewest">
-						<Sorted newestResults={this.state.newestResults} />
+						<Sorted currentLoad={this.state.currentLoad} currentResults={this.state.currentResults} />
 					</div>
 					<APOD
 						imgURL={this.state.imgURL}

@@ -1,5 +1,16 @@
 import React from 'react';
+import styled from 'styled-components';
 
+const Button = styled.button`
+	margin-top: 2%;
+	margin-bottom: 2%;
+	background-color: #15418c;
+	color: white;
+	font-family: 'Audiowide', cursive;
+	border: none;
+	padding-top: 2%;
+	padding-bottom: 2%;
+`;
 class Sorted extends React.Component {
 	constructor(props) {
 		super(props);
@@ -12,11 +23,12 @@ https://images-api.nasa.gov/search?q=apollo%2011&description=moon%20landing&medi
 https://images.nasa.gov/
 
 */
+
 	componentDidUpdate() {
 		if (
-			this.props.newestResults !== '' ||
-			this.props.newestResults !== 'undefined' ||
-			this.props.newestResults != null
+			this.props.currentLoad !== [] ||
+			this.props.currentLoad !== 'undefined' ||
+			this.props.currentLoad !== null
 		) {
 			let resultContainer = document.getElementById('wrapperNewest');
 			resultContainer.textContent = '';
@@ -32,7 +44,9 @@ https://images.nasa.gov/
 			rowDiv.className = 'row';
 			resultContainer.appendChild(rowDiv);
 			let y = 1;
-			this.props.newestResults.map(newResult => {
+			console.log('current results DidUpdate = ' + this.props.currentResults);
+			console.log('current load DidUpdate = ' + this.props.currentLoad);
+			this.props.currentLoad.map(newResult => {
 				console.log('thumbnail link = ' + newResult.links[0].href);
 				detailsURL = '/details-' + newResult.data[0].nasa_id;
 				console.log('nasa id = ' + newResult.data[0].nasa_id);
@@ -41,16 +55,17 @@ https://images.nasa.gov/
 				if (searchDescription === undefined) {
 					searchDescription = newResult.data[0].description;
 				}
+				if (searchDescription === 'undefined') {
+					searchDescription = '';
+				}
 				if (searchDescription.length > 50) {
 					shortDescription = searchDescription.substring(0, 50) + '...';
 				} else {
-					searchDescription = newResult.data[0].description;
 					if (searchDescription.length > 50) {
 						shortDescription = searchDescription.substring(0, 50) + '...';
 					}
 					shortDescription = searchDescription;
 				}
-
 				if (y <= 5) {
 					columnDiv = document.createElement('div');
 					columnDiv.className = 'column';
