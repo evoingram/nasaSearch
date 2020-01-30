@@ -1,5 +1,6 @@
 import React from 'react';
 import ColumnNewestPopular from './ColumnNewestPopular.js';
+import { connect } from 'react-redux';
 
 // todo: function that keeps track of how many columns in 1 row and resets to new row at 6
 
@@ -42,6 +43,7 @@ class RowNewestPopular extends React.Component {
 						nasaID={this.props.nasaID}
 						imgURL={this.props.imgURL}
 						explanation={this.props.explanation}
+						fetchActivity={this.props.fetchActivity}
 					/>
 				)}
 			</div>

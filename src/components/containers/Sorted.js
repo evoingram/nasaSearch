@@ -128,14 +128,10 @@ https://images.nasa.gov/
 				<div>
 					<Switch>
 						<Route exact path="/">
-							<SearchResult
-								currentLoad={this.props.currentLoad}
-								getSingleResult={this.getSingleResult}
-								fetchActivity={fetchActivity}
-							/>
+							<SearchResult currentLoad={this.props.currentLoad} />
 						</Route>
-						<Route exact path="/details-:nasaID" onClick={fetchActivity}>
-							<Single nasaID={this.props.nasaID} fetchActivity={fetchActivity} />
+						<Route exact path="/details-:nasaID">
+							<Single nasaID={this.props.nasaID} singleResult={this.props.singleResult} />
 						</Route>
 					</Switch>
 				</div>
@@ -149,21 +145,11 @@ const mapStateToProps = state => {
 	return {
 		isLoading: state.isLoading,
 		error: state.error,
-		title: state.title,
-		imgURL: state.imgURL,
-		copyright: state.copyright,
-		date: state.date,
-		explanation: state.explanation,
-		fileURL: state.fileURL,
-		fileSize: state.fileSize,
-		fileFormat: state.fileFormat,
-		captionsFileURL: state.captionsFileURL,
-		center: state.center,
-		keywords: state.keywords,
-		secondaryC: state.secondaryC,
-		mediaType: state.mediaType,
-		thumbnailURL: state.thumbnailURL,
-		singleResult: state.singleResult
+		singleResult: state.singleResult,
+		newestResults: state.newestResults,
+		popularResults: state.popularResults,
+		currentLoad: state.currentLoad,
+		results: state.results
 	};
 };
 

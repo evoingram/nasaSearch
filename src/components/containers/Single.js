@@ -59,8 +59,8 @@ const Single = props => {
 */
 	return (
 		<div className="App">
-			{!props.fileURL && !props.isLoading && <p>Loading...</p>}
-			{props.fileURL && !props.isLoading && (
+			{!props.singleResult && !props.isLoading && <p>Loading...</p>}
+			{props.singleResult && !props.isLoading && (
 				<div className="App-header">
 					<Div className="firstColumn">
 						<PlayerC thumbnailURL={props.singleResult.links[0].href} fileURL={props.fileURL} />

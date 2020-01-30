@@ -16,12 +16,12 @@ export const FETCHING_POPULAR_START = 'FETCHING_POPULAR_START';
 export const FETCHING_POPULAR_SUCCESS = 'FETCHING_POPULAR_SUCCESS';
 export const FETCHING_POPULAR_FAILURE = 'FETCHING_POPULAR_FAILURE';
 
-const fetchFileURL = () => dispatch => {
+const fetchFileURL = (mediaType, nasaID) => dispatch => {
 	dispatch({ type: FETCHING_FILEURL_START });
 	console.log('running fetchFileURL');
 	// https://images-assets.nasa.gov/image/as11-40-5874/collection.json
 	axios
-		.get(`https://images-assets.nasa.gov/${this.props.mediaType}/${this.props.nasaID}/collection.json`)
+		.get(`https://images-assets.nasa.gov/${mediaType}/${nasaID}/collection.json`)
 		.then(response => {
 			console.log('fetchFileURL response.data = ' + response.data[0]);
 			dispatch({ type: FETCHING_FILEURL_SUCCESS, payload: response.data[0] });
@@ -33,12 +33,12 @@ const fetchFileURL = () => dispatch => {
 		});
 };
 
-const fetchFileFormat = () => dispatch => {
+const fetchFileFormat = (mediaType, nasaID) => dispatch => {
 	dispatch({ type: FETCHING_FILEFORMAT_START });
 	console.log('running fetchFileFormat');
 	//https://images-assets.nasa.gov/image/as11-40-5874/metadata.json
 	axios
-		.get(`https://images-assets.nasa.gov/${this.props.mediaType}/${this.props.nasaID}/metadata.json`)
+		.get(`https://images-assets.nasa.gov/${mediaType}/${nasaID}/metadata.json`)
 		.then(response => {
 			console.log('fetchFileFormat response = ' + [response]);
 			console.log('fetchFileFormat metadata response stringify = ' + JSON.stringify(response));
@@ -53,18 +53,45 @@ const fetchFileFormat = () => dispatch => {
 		});
 };
 
-export const fetchActivity = () => dispatch => {
-	console.log(`running fetchActivity on ${this.props.nasaID}`);
+export const fetchActivity = props => dispatch => {
+	console.log(`running fetchActivity on ${props.nasaID}`);
 	dispatch({ type: FETCHING_ACTIVITY_START });
 	axios
-		.get(`https://images-api.nasa.gov/search?q=${this.props.nasaID}`)
+		.get(`https://images-api.nasa.gov/search?q=${props.nasaID}`)
 		.then(response => {
 			console.log('fetchActivity single detail = ' + response.data.collection.items[0].data[0]);
 			// thumbnail link = response.data.collection.items[x].data.links[0].href;
 			dispatch({ type: FETCHING_ACTIVITY_SUCCESS, payload: response.data.collection.items[0] });
-			console.log('done getting single Q NASA details');
-			fetchFileURL();
-			fetchFileFormat();
+
+			axios
+				.get(
+					`https://images-assets.nasa.gov/${response.data.collection.items[0].data[0].media_type}/${response.data.collection.items[0].data[0].nasa_id}/collection.json`
+				)
+				.then(response => {
+					console.log('fetchFileURL response.data = ' + response.data[0]);
+					dispatch({ type: FETCHING_FILEURL_SUCCESS, payload: response.data[0] });
+					console.log('done getting single NASA collection file URL');
+				})
+				.catch(error => {
+					dispatch({ type: FETCHING_FILEURL_FAILURE, payload: error.response });
+					console.log(error);
+				});
+
+			axios
+				.get(
+					`https://images-assets.nasa.gov/${response.data.collection.items[0].data[0].media_type}/${response.data.collection.items[0].data[0].nasa_id}/metadata.json`
+				)
+				.then(response => {
+					console.log('fetchFileFormat response = ' + [response]);
+					console.log('fetchFileFormat metadata response stringify = ' + JSON.stringify(response));
+					console.log('fetchFileFormat FS = ' + response.data['File:FileSize']);
+					dispatch({ type: FETCHING_FILEFORMAT_SUCCESS, payload: response });
+				})
+				.catch(error => {
+					dispatch({ type: FETCHING_FILEFORMAT_FAILURE, payload: error.response });
+					console.log(error);
+				});
+			console.log('done running fetchActivity');
 		})
 		.catch(error => {
 			dispatch({ type: FETCHING_ACTIVITY_FAILURE, payload: error.response });

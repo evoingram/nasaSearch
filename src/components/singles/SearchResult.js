@@ -1,6 +1,7 @@
 import React from 'react';
 import RowNewestPopular from './RowNewestPopular.js';
 import { fetchActivity } from '../../actions';
+import { connect } from 'react-redux';
 
 const wrapper = {
 	display: 'flex',
@@ -20,6 +21,7 @@ class SearchResult extends React.Component {
 	}
 
 	render() {
+		console.log('currentLoad in SearchResult = ' + JSON.stringify(this.props.currentLoad));
 		return (
 			<div className="App">
 				<div className="App-header" style={wrapper}>
@@ -46,4 +48,12 @@ class SearchResult extends React.Component {
 	}
 }
 
-export default SearchResult;
+const mapStateToProps = state => {
+	return {
+		isLoading: state.isLoading,
+		error: state.error,
+		currentLoad: state.currentLoad
+	};
+};
+
+export default connect(mapStateToProps, { fetchActivity })(SearchResult);

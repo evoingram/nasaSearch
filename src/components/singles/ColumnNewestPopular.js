@@ -95,14 +95,19 @@ class ColumnNewestPopular extends React.Component {
 		return (
 			<div className="column1" style={column}>
 				<Link to={`/details-${this.props.nasaID}`} style={linkStyle} onClick={this.props.fetchActivity}>
-					<img src={this.props.imgURL} style={image} alt="NASA single detail" onClick={fetchActivity} />
-					<div onClick={fetchActivity}>{this.props.explanation}</div>
+					<img
+						src={this.props.imgURL}
+						style={image}
+						alt="NASA single detail"
+						onClick={this.props.fetchActivity}
+					/>
+					<div onClick={this.props.fetchActivity}>{this.props.explanation}</div>
 				</Link>
 			</div>
 		);
 	}
 }
-
+/*
 const mapStateToProps = state => {
 	return {
 		isLoading: state.isLoading,
@@ -126,3 +131,5 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, { fetchActivity })(ColumnNewestPopular);
+*/
+export default ColumnNewestPopular;

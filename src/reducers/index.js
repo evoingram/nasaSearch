@@ -31,7 +31,11 @@ const initialState = {
 	secondaryC: '',
 	mediaType: '',
 	thumbnailURL: '',
-	singleResult: null
+	singleResult: null,
+	newestResults: [],
+	popularResults: [],
+	currentLoad: [],
+	results: []
 };
 
 export const reducer = (state = initialState, action) => {
@@ -85,7 +89,6 @@ export const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				isLoading: false,
-				newestResults: action.payload,
 				currentLoad: action.payload
 			};
 		case FETCHING_POPULAR_START:
@@ -97,7 +100,6 @@ export const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				isLoading: false,
-				popularResults: action.payload,
 				currentLoad: action.payload
 			};
 

@@ -295,11 +295,10 @@ class App extends React.Component {
 						</Button>
 					</Link>
 					<div className="wrapperNewest" id="wrapperNewest">
-						{!this.state.currentLoad && !this.props.isLoading && <p>Loading...</p>}
-						{this.state.currentLoad && !this.props.isLoading && (
+						{!this.props.currentLoad && this.props.isLoading && <p>Loading...</p>}
+						{this.props.currentLoad && !this.props.isLoading && (
 							<Sorted
-								currentLoad={this.state.currentLoad}
-								currentResults={this.state.currentResults}
+								currentLoad={this.props.currentLoad}
 								getSingleResult={this.getSingleResult}
 								fetchActivity={this.props.fetchActivity}
 							/>
@@ -316,8 +315,6 @@ const mapStateToProps = state => {
 	return {
 		isLoading: state.isLoading,
 		error: state.error,
-		newestResults: state.newestResults,
-		popularResults: state.popularResults,
 		currentLoad: state.currentLoad
 	};
 };
