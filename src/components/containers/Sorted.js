@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import SearchResult from '../singles/SearchResult';
 
 const Button = styled.button`
 	margin-top: 2%;
@@ -27,7 +28,7 @@ https://images-api.nasa.gov/search?q=apollo%2011&description=moon%20landing&medi
 https://images.nasa.gov/
 
 */
-
+	/*	
 	componentDidUpdate() {
 		if (
 			this.props.currentLoad !== [] ||
@@ -110,10 +111,18 @@ https://images.nasa.gov/
 			});
 		}
 	}
-
+*/
 	// mapped to display below
 	// response.data.collection.items[x].data.links[0].href = link to preview image
 	render() {
+		if (
+			this.props.currentLoad !== [] ||
+			this.props.currentLoad !== 'undefined' ||
+			this.props.currentLoad !== null
+		) {
+			return <SearchResult currentLoad={this.props.currentLoad} />;
+		}
+
 		return <p>This is loading.</p>;
 	}
 }

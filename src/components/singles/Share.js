@@ -21,7 +21,6 @@ class Share extends React.Component {
 		return (
 			<div className="App">
 				<header className="App-header">
-					<img src={logo} className="App-logo" alt="logo" />
 					<p>Share this media:</p>
 					<EmailShareButton url={this.props.fileURL} />
 					<FacebookShareButton url={this.props.fileURL} />

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PlayerC from './Player.js';
 
 const Div = styled.Div`
 	width: 50%;
@@ -47,7 +48,7 @@ this.state = {
 			<div className="App">
 				<header className="App-header">
 					<Div class="firstColumn">
-						<Player thumbnailURL={this.props.thumbnailURL} fileURL={this.props.fileURL} />
+						<PlayerC thumbnailURL={this.props.thumbnailURL} fileURL={this.props.fileURL} />
 						<Share fileURL={this.props.fileURL} />
 					</Div>
 					<Div class="secondColumn">
