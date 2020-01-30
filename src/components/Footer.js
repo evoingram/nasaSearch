@@ -1,5 +1,6 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
+// , { keyframes }
 import spaceBanner from './../img/space-banner.jpg';
 
 const ImgHeader = styled.header`

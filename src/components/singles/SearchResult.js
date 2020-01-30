@@ -1,5 +1,6 @@
 import React from 'react';
 import RowNewestPopular from './RowNewestPopular.js';
+import { fetchActivity } from '../../actions';
 
 const wrapper = {
 	display: 'flex',
@@ -24,6 +25,7 @@ class SearchResult extends React.Component {
 				<div className="App-header" style={wrapper}>
 					{this.props.currentLoad.map(newResult => (
 						<RowNewestPopular
+							key={newResult.data[0].nasa_id}
 							className="row"
 							newResult={newResult}
 							numberOfColumns={this.state.numberOfColumns}
@@ -34,6 +36,8 @@ class SearchResult extends React.Component {
 									? newResult.data[0].description.substring(0, 50)
 									: newResult.data[0].description_508.substring(0, 50)) + '...'
 							}
+							fetchActivity={this.props.fetchActivity}
+							onClick={this.props.fetchActivity}
 						/>
 					))}
 				</div>

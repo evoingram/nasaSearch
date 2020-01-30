@@ -1,7 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import Single from '../containers/Single';
+import { Link } from 'react-router-dom';
+// import Single from '../containers/Single';
 import axios from 'axios';
+import { fetchActivity } from '../../actions';
+import { connect } from 'react-redux';
 
 const column = {
 	flexBasis: '100%',
@@ -92,13 +94,35 @@ class ColumnNewestPopular extends React.Component {
 	render() {
 		return (
 			<div className="column1" style={column}>
-				<Link to={`/details-${this.props.nasaID}`} style={linkStyle} onClick={this.handleSingleDetailLoad}>
-					<img src={this.props.imgURL} style={image} />
-					<div>{this.props.explanation}</div>
+				<Link to={`/details-${this.props.nasaID}`} style={linkStyle} onClick={this.props.fetchActivity}>
+					<img src={this.props.imgURL} style={image} alt="NASA single detail" onClick={fetchActivity} />
+					<div onClick={fetchActivity}>{this.props.explanation}</div>
 				</Link>
 			</div>
 		);
 	}
 }
 
-export default ColumnNewestPopular;
+const mapStateToProps = state => {
+	return {
+		isLoading: state.isLoading,
+		error: state.error,
+		title: state.title,
+		imgURL: state.imgURL,
+		copyright: state.copyright,
+		date: state.date,
+		explanation: state.explanation,
+		fileURL: state.fileURL,
+		fileSize: state.fileSize,
+		fileFormat: state.fileFormat,
+		captionsFileURL: state.captionsFileURL,
+		center: state.center,
+		keywords: state.keywords,
+		secondaryC: state.secondaryC,
+		mediaType: state.mediaType,
+		thumbnailURL: state.thumbnailURL,
+		singleResult: state.singleResult
+	};
+};
+
+export default connect(mapStateToProps, { fetchActivity })(ColumnNewestPopular);

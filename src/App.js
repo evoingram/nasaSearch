@@ -7,12 +7,14 @@ import './css/tiledSearchResults.css';
 import Header from './components/Header.js';
 import Footer from './components/Footer.js';
 import Sorted from './components/containers/Sorted.js';
-import APOD from './components/singles/APOD.js';
-import PlayerC from './components/singles/Player.js';
+// import APOD from './components/singles/APOD.js';
+// import PlayerC from './components/singles/Player.js';
 import SearchResult from './components/singles/SearchResult';
 import axios from 'axios';
 import styled from 'styled-components';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
+import { fetchActivity, fetchNewest, fetchPopular } from './actions';
+import { connect } from 'react-redux';
 
 const Button = styled.button`
 	margin-top: 2%;
@@ -40,7 +42,9 @@ class App extends React.Component {
 			popularResults: [],
 			currentResults: true,
 			currentLoad: [],
-			results: [],
+			results: []
+		};
+		/*
 			title: '',
 			imgURL: '',
 			copyright: '',
@@ -58,7 +62,9 @@ class App extends React.Component {
 			mediaType: '',
 			thumbnailURL: '',
 			isLoading: false
-		};
+
+
+		*/
 	}
 
 	getFileSize = url => {
@@ -68,32 +74,6 @@ class App extends React.Component {
 	};
 
 	componentDidMount = () => {
-		/*
-		var minYear = 2000;
-		var maxYear = 2019;
-		var randomYear = minYear + Math.round(Math.random() * (maxYear - minYear));
-		var minMonth = 1;
-		var maxMonth = 12;
-		var randomMonth = minMonth + Math.round(Math.random() * (maxMonth - minMonth));
-		var minDay = 1;
-		var maxDay = 28;
-		var randomDay = minDay + Math.round(Math.random() * (maxDay - minDay));
-		var randomDate = randomYear + '-' + randomMonth + '-' + randomDay;
-
-		axios
-			.get('https://api.nasa.gov/planetary/apod?date=' + randomDate + '&api_key=' + process.env.REACT_APP_API_KEY)
-			.then(response => {
-				this.setState({ imgURL: response.data.hdurl });
-				this.setState({ copyright: response.data.copyright });
-				this.setState({ date: response.data.date });
-				this.setState({ explanation: response.data.explanation });
-				console.log('done contacting NASA apod');
-			})
-			.catch(error => {
-				console.log(error);
-			});
-		*/
-
 		this.getPopularNASALibrary();
 		this.getNewestNASALibrary();
 	};
@@ -203,7 +183,7 @@ class App extends React.Component {
 				// thumbnail link = response.data.collection.items[x].data.links[0].href;
 				// this.setState({ results: this.state.newestResults });
 				// console.log('results = ' + this.state.results);
-				console.log('done getting newest NASA images');
+				console.log('done getting newest NASA images app function');
 			})
 			.catch(error => {
 				console.log(error);
@@ -217,7 +197,7 @@ class App extends React.Component {
 				this.setState({ popularResults: response.data.collection.items });
 				// thumbnail link = response.data.collection.items[x].data.links[0].href;
 				console.log('popular results = ' + this.state.popularResults);
-				console.log('done getting popular NASA images');
+				console.log('done getting popular NASA images app function');
 			})
 			.catch(error => {
 				console.log(error);
@@ -228,13 +208,15 @@ class App extends React.Component {
 		if (this.state.currentResults === true) {
 			//newest results
 			toggleButton.textContent = 'Click to See Most Popular';
+			this.props.fetchNewest();
 			this.setState({ currentResults: false });
-			this.setState({ currentLoad: this.state.newestResults });
+			// this.setState({ currentLoad: this.state.newestResults });
 		} else {
 			//most popular results
 			toggleButton.textContent = 'Click to See Most Recent';
+			this.props.fetchPopular();
 			this.setState({ currentResults: true });
-			this.setState({ currentLoad: this.state.popularResults });
+			// this.setState({ currentLoad: this.state.popularResults });
 		}
 		console.log('current results boolean = ' + this.state.currentResults);
 		return (
@@ -243,19 +225,6 @@ class App extends React.Component {
 			</Route>
 		);
 	};
-
-	/*
-
-	newestResults={this.state.newestResults}
-	popularResults={this.state.popularResults}
-
-					<APOD
-						imgURL={this.state.imgURL}
-						copyright={this.state.copyright}
-						date={this.state.date}
-						explanation={this.state.explanation}
-					/>
-*/
 
 	getSingleResult() {
 		console.log('running single detail axios get');
@@ -326,11 +295,15 @@ class App extends React.Component {
 						</Button>
 					</Link>
 					<div className="wrapperNewest" id="wrapperNewest">
-						<Sorted
-							currentLoad={this.state.currentLoad}
-							currentResults={this.state.currentResults}
-							getSingleResult={this.getSingleResult}
-						/>
+						{!this.state.currentLoad && !this.props.isLoading && <p>Loading...</p>}
+						{this.state.currentLoad && !this.props.isLoading && (
+							<Sorted
+								currentLoad={this.state.currentLoad}
+								currentResults={this.state.currentResults}
+								getSingleResult={this.getSingleResult}
+								fetchActivity={this.props.fetchActivity}
+							/>
+						)}
 					</div>
 				</header>
 				<Footer />
@@ -339,4 +312,52 @@ class App extends React.Component {
 	}
 }
 
-export default App;
+const mapStateToProps = state => {
+	return {
+		isLoading: state.isLoading,
+		error: state.error,
+		newestResults: state.newestResults,
+		popularResults: state.popularResults,
+		currentLoad: state.currentLoad
+	};
+};
+
+export default connect(mapStateToProps, { fetchActivity, fetchNewest, fetchPopular })(App);
+
+/*
+		var minYear = 2000;
+		var maxYear = 2019;
+		var randomYear = minYear + Math.round(Math.random() * (maxYear - minYear));
+		var minMonth = 1;
+		var maxMonth = 12;
+		var randomMonth = minMonth + Math.round(Math.random() * (maxMonth - minMonth));
+		var minDay = 1;
+		var maxDay = 28;
+		var randomDay = minDay + Math.round(Math.random() * (maxDay - minDay));
+		var randomDate = randomYear + '-' + randomMonth + '-' + randomDay;
+
+		axios
+			.get('https://api.nasa.gov/planetary/apod?date=' + randomDate + '&api_key=' + process.env.REACT_APP_API_KEY)
+			.then(response => {
+				this.setState({ imgURL: response.data.hdurl });
+				this.setState({ copyright: response.data.copyright });
+				this.setState({ date: response.data.date });
+				this.setState({ explanation: response.data.explanation });
+				console.log('done contacting NASA apod');
+			})
+			.catch(error => {
+				console.log(error);
+			});
+		*/
+/*
+
+	newestResults={this.state.newestResults}
+	popularResults={this.state.popularResults}
+
+					<APOD
+						imgURL={this.state.imgURL}
+						copyright={this.state.copyright}
+						date={this.state.date}
+						explanation={this.state.explanation}
+					/>
+*/

@@ -4,8 +4,10 @@ import PlayerC from '../singles/Player.js';
 import Share from '../singles/Share.js';
 import FilePath from '../singles/FilePath.js';
 import FileInfo from '../singles/FileInfo.js';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { fetchActivity } from '../../actions';
+// import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+// import axios from 'axios';
 
 const Div = styled.div`
 	width: 50%;
@@ -14,8 +16,7 @@ const Div = styled.div`
 `;
 
 const Single = props => {
-	/*
-this.state = {
+	/*		this.state = {
 			searchResults: [],
 			searchTerm: '',
 			imgURL: '',
@@ -44,33 +45,56 @@ this.state = {
 
 	*/
 
+	/*
+	singleResult.data[0].media_type
+	isLoading: false,
+	title: singleResult.data[0].title,
+	date: singleResult.data[0].date_created,
+	explanation: singleResult.data[0].description,
+	center: singleResult.data[0].center,
+	keywords: singleResult.data[0].keywords,
+	mediaType: singleResult.data[0].media_type,
+	thumbnailURL: singleResult.links[0].href,
+	singleResult: singleResult
+*/
 	return (
 		<div className="App">
-			<header className="App-header">
-				<Div className="firstColumn">
-					<PlayerC thumbnailURL={props.thumbnailURL} fileURL={props.fileURL} />
-					<Share fileURL={props.fileURL} />
-				</Div>
-				<Div className="secondColumn">
-					<FilePath
-						title={props.title}
-						fileURL={props.fileURL}
-						fileSize={props.fileSize}
-						fileFormat={props.fileFormat}
-					/>
-					<FileInfo
-						nasaID={props.nasaID}
-						fileURL={props.fileURL}
-						keywords={props.keywords}
-						center={props.center}
-						date={props.date}
-						centerURL={props.centerURL}
-						explanation={props.explanation}
-					/>
-				</Div>
-			</header>
+			{!props.fileURL && !props.isLoading && <p>Loading...</p>}
+			{props.fileURL && !props.isLoading && (
+				<div className="App-header">
+					<Div className="firstColumn">
+						<PlayerC thumbnailURL={props.singleResult.links[0].href} fileURL={props.fileURL} />
+						<Share fileURL={props.fileURL} />
+					</Div>
+					<Div className="secondColumn">
+						<FilePath
+							title={props.singleResult.data[0].title}
+							fileURL={props.fileURL}
+							fileSize={props.fileSize}
+							fileFormat={props.singleResult.data[0].media_type}
+						/>
+						<FileInfo
+							nasaID={props.nasaID}
+							fileURL={props.fileURL}
+							keywords={props.singleResult.data[0].keywords}
+							center={props.singleResult.data[0].center}
+							date={props.singleResult.data[0].date_created}
+							centerURL={props.centerURL}
+							explanation={props.singleResult.data[0].description}
+						/>
+					</Div>
+				</div>
+			)}
 		</div>
 	);
 };
 
-export default Single;
+const mapStateToProps = state => {
+	return {
+		isLoading: state.isLoading,
+		error: state.error,
+		singleResult: state.singleResult
+	};
+};
+
+export default connect(mapStateToProps, { fetchActivity })(Single);

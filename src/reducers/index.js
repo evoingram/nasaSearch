@@ -7,7 +7,11 @@ import {
 	FETCHING_FILEURL_FAILURE,
 	FETCHING_FILEFORMAT_START,
 	FETCHING_FILEFORMAT_SUCCESS,
-	FETCHING_FILEFORMAT_FAILURE
+	FETCHING_FILEFORMAT_FAILURE,
+	FETCHING_NEWEST_START,
+	FETCHING_NEWEST_SUCCESS,
+	FETCHING_POPULAR_START,
+	FETCHING_POPULAR_SUCCESS
 } from '../actions';
 
 const initialState = {
@@ -26,7 +30,8 @@ const initialState = {
 	keywords: [],
 	secondaryC: '',
 	mediaType: '',
-	thumbnailURL: ''
+	thumbnailURL: '',
+	singleResult: null
 };
 
 export const reducer = (state = initialState, action) => {
@@ -46,7 +51,8 @@ export const reducer = (state = initialState, action) => {
 				center: action.payload.data[0].center,
 				keywords: action.payload.data[0].keywords,
 				mediaType: action.payload.data[0].media_type,
-				thumbnailURL: action.payload.links[0].href
+				thumbnailURL: action.payload.links[0].href,
+				singleResult: action.payload
 			};
 		case FETCHING_FILEURL_START:
 			return {
@@ -68,9 +74,33 @@ export const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				isLoading: false,
-				fileSize: action.payload.data['File:FileSize'],
-				fileFormat: action.payload.data['File:MIMEType'].substring(0, 5)
+				fileSize: action.payload.data['File:FileSize']
 			};
+		case FETCHING_NEWEST_START:
+			return {
+				...state,
+				isLoading: true
+			};
+		case FETCHING_NEWEST_SUCCESS:
+			return {
+				...state,
+				isLoading: false,
+				newestResults: action.payload,
+				currentLoad: action.payload
+			};
+		case FETCHING_POPULAR_START:
+			return {
+				...state,
+				isLoading: true
+			};
+		case FETCHING_POPULAR_SUCCESS:
+			return {
+				...state,
+				isLoading: false,
+				popularResults: action.payload,
+				currentLoad: action.payload
+			};
+
 		default:
 			return state;
 	}

@@ -1,9 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import SearchResult from '../singles/SearchResult';
 import Single from '../containers/Single';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchActivity } from '../../actions';
 
+class Sorted extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {};
+	}
+	/*
 const Button = styled.button`
 	margin-top: 2%;
 	margin-bottom: 2%;
@@ -18,12 +26,6 @@ const ALink = styled.a`
 	color: white;
 	text-decoration: none;
 `;
-class Sorted extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {};
-	}
-	/*
 https://images-assets.nasa.gov/recent.json
 https://images-assets.nasa.gov/video/Apollo%2011%20Overview/collection.json
 https://images-api.nasa.gov/search?q=apollo%2011&description=moon%20landing&media_type=video
@@ -126,10 +128,14 @@ https://images.nasa.gov/
 				<div>
 					<Switch>
 						<Route exact path="/">
-							<SearchResult currentLoad={this.props.currentLoad} getSingleResult={this.getSingleResult} />
+							<SearchResult
+								currentLoad={this.props.currentLoad}
+								getSingleResult={this.getSingleResult}
+								fetchActivity={fetchActivity}
+							/>
 						</Route>
-						<Route exact path="/details-:nasaID" onClick={this.getSingleResult}>
-							<Single nasaID={this.props.nasaID} getSingleResult={this.getSingleResult} />
+						<Route exact path="/details-:nasaID" onClick={fetchActivity}>
+							<Single nasaID={this.props.nasaID} fetchActivity={fetchActivity} />
 						</Route>
 					</Switch>
 				</div>
@@ -139,4 +145,28 @@ https://images.nasa.gov/
 	}
 }
 
-export default Sorted;
+const mapStateToProps = state => {
+	return {
+		isLoading: state.isLoading,
+		error: state.error,
+		title: state.title,
+		imgURL: state.imgURL,
+		copyright: state.copyright,
+		date: state.date,
+		explanation: state.explanation,
+		fileURL: state.fileURL,
+		fileSize: state.fileSize,
+		fileFormat: state.fileFormat,
+		captionsFileURL: state.captionsFileURL,
+		center: state.center,
+		keywords: state.keywords,
+		secondaryC: state.secondaryC,
+		mediaType: state.mediaType,
+		thumbnailURL: state.thumbnailURL,
+		singleResult: state.singleResult
+	};
+};
+
+export default connect(mapStateToProps, { fetchActivity })(Sorted);
+
+// export default Sorted;
