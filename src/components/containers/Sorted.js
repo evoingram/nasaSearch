@@ -23,20 +23,46 @@ https://images.nasa.gov/
 			let rowDiv;
 			let columnDiv;
 			let imgDiv;
+			let shortDescriptionDiv;
+			let shortDescription;
+			let searchDescription;
+			let detailsURL;
+			let detailsLinkDiv;
 			rowDiv = document.createElement('div');
 			rowDiv.className = 'row';
 			resultContainer.appendChild(rowDiv);
 			let y = 1;
 			this.props.newestResults.map(newResult => {
 				console.log('thumbnail link = ' + newResult.links[0].href);
+				detailsURL = '/details-' + newResult.data[0].nasa_id;
 				console.log('nasa id = ' + newResult.data[0].nasa_id);
+				console.log('nasa description = ' + newResult.data[0].description_508);
+				searchDescription = newResult.data[0].description_508;
+				if (searchDescription === undefined) {
+					searchDescription = newResult.data[0].description;
+				}
+				if (searchDescription.length > 50) {
+					shortDescription = searchDescription.substring(0, 50) + '...';
+				} else {
+					searchDescription = newResult.data[0].description;
+					if (searchDescription.length > 50) {
+						shortDescription = searchDescription.substring(0, 50) + '...';
+					}
+					shortDescription = searchDescription;
+				}
+
 				if (y <= 5) {
 					columnDiv = document.createElement('div');
 					columnDiv.className = 'column';
 					columnDiv.id = 'column' + y;
 					rowDiv.appendChild(columnDiv);
-					imgDiv = columnDiv.appendChild(document.createElement('img'));
+					detailsLinkDiv = columnDiv.appendChild(document.createElement('a'));
+					detailsLinkDiv.href = detailsURL;
+					imgDiv = detailsLinkDiv.appendChild(document.createElement('img'));
 					imgDiv.src = newResult.links[0].href;
+					shortDescriptionDiv = detailsLinkDiv.appendChild(document.createElement('div'));
+					shortDescriptionDiv.textContent = shortDescription;
+					shortDescriptionDiv.style.fontSize = '1rem';
 					y += 1;
 				}
 				if (y === 6) {
@@ -49,8 +75,15 @@ https://images.nasa.gov/
 					columnDiv.className = 'column';
 					columnDiv.id = 'column' + y;
 					rowDiv.appendChild(columnDiv);
-					imgDiv = columnDiv.appendChild(document.createElement('img'));
+					detailsLinkDiv = columnDiv.appendChild(document.createElement('a'));
+					detailsLinkDiv.href = detailsURL;
+					imgDiv = detailsLinkDiv.appendChild(document.createElement('img'));
 					imgDiv.src = newResult.links[0].href;
+					shortDescriptionDiv = detailsLinkDiv.appendChild(document.createElement('div'));
+					shortDescription = newResult.data[0].description;
+					shortDescription = shortDescription.substring(0, 50);
+					shortDescriptionDiv.textContent = shortDescription;
+					shortDescriptionDiv.style.fontSize = '1rem';
 					y += 1;
 				}
 				console.log('y = ' + y);
