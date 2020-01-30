@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Single from '../containers/Single';
 
 const column = {
 	flexBasis: '100%',

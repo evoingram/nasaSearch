@@ -22,11 +22,15 @@ class RowNewestPopular extends React.Component {
     
 
     */
+	getMediaType = newResult => {
+		this.setState({ mediaType: newResult.data[0].media_type });
+	};
 
 	componentDidMount() {
 		if (this.props.numberOfColumns === 6) {
 			this.setState({ numberOfColumns: 1 });
 		}
+		this.getMediaType(this.props.newResult);
 	}
 
 	render() {

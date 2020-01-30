@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import SearchResult from '../singles/SearchResult';
+import Single from '../containers/Single';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
 const Button = styled.button`
 	margin-top: 2%;
@@ -120,9 +122,33 @@ https://images.nasa.gov/
 			this.props.currentLoad !== 'undefined' ||
 			this.props.currentLoad !== null
 		) {
-			return <SearchResult currentLoad={this.props.currentLoad} />;
+			return (
+				<div>
+					<Switch>
+						<Route exact path="/">
+							<SearchResult currentLoad={this.props.currentLoad} />
+						</Route>
+						<Route exact path="/details-:nasaID">
+							<Single
+								thumbnailURL={this.props.thumbnailURL}
+								fileURL={this.props.fileURL}
+								title={this.props.title}
+								fileSize={this.props.fileSize}
+								fileFormat={this.props.fileFormat}
+								captionsFileURL={this.props.captionsFileURL}
+								nasaID={this.props.nasaID}
+								keywords={this.props.keywords}
+								center={this.props.center}
+								secondaryC={this.props.secondaryC}
+								date={this.props.date}
+								centerURL={this.props.centerURL}
+								explanation={this.props.explanation}
+							/>
+						</Route>
+					</Switch>
+				</div>
+			);
 		}
-
 		return <p>This is loading.</p>;
 	}
 }

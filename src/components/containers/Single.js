@@ -1,12 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import PlayerC from './Player.js';
+import PlayerC from '../singles/Player.js';
+import Share from '../singles/Share.js';
+import FilePath from '../singles/FilePath.js';
+import FileInfo from '../singles/FileInfo.js';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-const Div = styled.Div`
+const Div = styled.div`
 	width: 50%;
 	margin: 0%;
 	padding: 0%;
 `;
+
 class Single extends React.Component {
 	constructor(props) {
 		super(props);

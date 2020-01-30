@@ -9,8 +9,10 @@ import Footer from './components/Footer.js';
 import Sorted from './components/containers/Sorted.js';
 import APOD from './components/singles/APOD.js';
 import PlayerC from './components/singles/Player.js';
+import SearchResult from './components/singles/SearchResult';
 import axios from 'axios';
 import styled from 'styled-components';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 const Button = styled.button`
 	margin-top: 2%;
@@ -19,8 +21,8 @@ const Button = styled.button`
 	color: white;
 	font-family: 'Audiowide', cursive;
 	border: none;
-	padding-top: 2%;
-	padding-bottom: 2%;
+	padding-top: 6%;
+	padding-bottom: 6%;
 `;
 class App extends React.Component {
 	constructor() {
@@ -53,6 +55,7 @@ class App extends React.Component {
 			results: [],
 			keywords: [],
 			secondaryC: '',
+			mediaType: '',
 			thumbnailURL: ''
 		};
 	}
@@ -227,30 +230,37 @@ class App extends React.Component {
 			this.setState({ currentLoad: this.state.popularResults });
 		}
 		console.log('current results boolean = ' + this.state.currentResults);
+		return (
+			<Route exact path="/">
+				<SearchResult currentLoad={this.props.currentLoad} />
+			</Route>
+		);
 	};
 	/*
 
 	newestResults={this.state.newestResults}
 	popularResults={this.state.popularResults}
 
-*/
-	render() {
-		return (
-			<div className="App">
-				<Header searchNASALibrary={this.searchNASALibrary} changeSearchTerm={this.changeSearchTerm} />
-				<header className="App-header">
-					<Button id="MostRecentPopular" onClick={this.toggleResults}>
-						Click to See Newest Images
-					</Button>
-					<div className="wrapperNewest" id="wrapperNewest">
-						<Sorted currentLoad={this.state.currentLoad} currentResults={this.state.currentResults} />
-					</div>
 					<APOD
 						imgURL={this.state.imgURL}
 						copyright={this.state.copyright}
 						date={this.state.date}
 						explanation={this.state.explanation}
 					/>
+*/
+	render() {
+		return (
+			<div className="App">
+				<Header searchNASALibrary={this.searchNASALibrary} changeSearchTerm={this.changeSearchTerm} />
+				<header className="App-header">
+					<Link to="/">
+						<Button id="MostRecentPopular" onClick={this.toggleResults}>
+							Click to See Newest Images
+						</Button>
+					</Link>
+					<div className="wrapperNewest" id="wrapperNewest">
+						<Sorted currentLoad={this.state.currentLoad} currentResults={this.state.currentResults} />
+					</div>
 				</header>
 				<Footer />
 			</div>

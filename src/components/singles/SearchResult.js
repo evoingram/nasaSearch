@@ -26,6 +26,7 @@ class SearchResult extends React.Component {
 					{this.props.currentLoad.map(newResult => (
 						<RowNewestPopular
 							className="row"
+							newResult={newResult}
 							numberOfColumns={this.state.numberOfColumns}
 							nasaID={newResult.data[0].nasa_id}
 							imgURL={newResult.links[0].href}

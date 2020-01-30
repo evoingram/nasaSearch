@@ -1,24 +1,15 @@
 import React from 'react';
 
-function Header() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function FilePath() {
+	return (
+		<div className="App">
+			<header className="App-header">
+				<p>
+					<h2>FILE PATH COMPONENT</h2>
+				</p>
+			</header>
+		</div>
+	);
 }
 
-export default Header;
+export default FilePath;
