@@ -1,22 +1,74 @@
 import React from 'react';
+import styled from 'styled-components';
 
+const Div = styled.Div`
+	width: 50%;
+	margin: 0%;
+	padding: 0%;
+`;
 class Single extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
 	}
 
+	/*
+this.state = {
+			searchResults: [],
+			searchTerm: '',
+			imgURL: '',
+			copyright: '',
+			date: '',
+			explanation: '',
+			fileURL: 'http://images-assets.nasa.gov/video/Apollo%2011%20Overview/Apollo%2011%20Overview~preview.mp4',
+			nasaID: '',
+			fileSize: '',
+			fileFormat: '',
+			center: '',
+			imagecb: true,
+			videocb: true,
+			audiocb: true,
+			page: 1,
+			newestURL: 'https://images-assets.nasa.gov/recent.json',
+			newestResults: [],
+			popularURL: 'https://images-assets.nasa.gov/popular.json',
+			popularResults: [],
+			currentResults: true,
+			currentLoad: [],
+			results: []
+			thumbnailURL: ''
+			images-assets.nasa.gov/video/ESPACIO A TIERRA Jan-24-20/ESPACIO A TIERRA Jan-24-20~orig.mp4
+		};
+
+	*/
+
 	render() {
 		return (
 			<div className="App">
 				<header className="App-header">
-					<img src={logo} className="App-logo" alt="logo" />
-					<p>
-						Edit <code>src/App.js</code> and save to reload.
-					</p>
-					<a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-						Learn React
-					</a>
+					<Div class="firstColumn">
+						<Player thumbnailURL={this.props.thumbnailURL} fileURL={this.props.fileURL} />
+						<Share fileURL={this.props.fileURL} />
+					</Div>
+					<Div class="secondColumn">
+						<FilePath
+							title={this.props.title}
+							fileURL={this.props.fileURL}
+							fileSize={this.props.fileSize}
+							fileFormat={this.props.fileFormat}
+							captionsFileURL={this.props.captionsFileURL}
+						/>
+						<FileInfo
+							nasaID={this.props.nasaID}
+							fileURL={this.props.fileURL}
+							keywords={this.props.keywords}
+							center={this.props.center}
+							secondaryC={this.props.secondaryC}
+							date={this.props.date}
+							centerURL={this.props.centerURL}
+							explanation={this.props.explanation}
+						/>
+					</Div>
 				</header>
 			</div>
 		);

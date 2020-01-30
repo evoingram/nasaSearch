@@ -11,6 +11,10 @@ const Button = styled.button`
 	padding-top: 2%;
 	padding-bottom: 2%;
 `;
+const ALink = styled.a`
+	color: white;
+	text-decoration: none;
+`;
 class Sorted extends React.Component {
 	constructor(props) {
 		super(props);
@@ -61,10 +65,7 @@ https://images.nasa.gov/
 				if (searchDescription.length > 50) {
 					shortDescription = searchDescription.substring(0, 50) + '...';
 				} else {
-					if (searchDescription.length > 50) {
-						shortDescription = searchDescription.substring(0, 50) + '...';
-					}
-					shortDescription = searchDescription;
+					shortDescription = searchDescription + '...';
 				}
 				if (y <= 5) {
 					columnDiv = document.createElement('div');
@@ -73,6 +74,8 @@ https://images.nasa.gov/
 					rowDiv.appendChild(columnDiv);
 					detailsLinkDiv = columnDiv.appendChild(document.createElement('a'));
 					detailsLinkDiv.href = detailsURL;
+					detailsLinkDiv.style.color = 'white';
+					detailsLinkDiv.style.textDecoration = 'none';
 					imgDiv = detailsLinkDiv.appendChild(document.createElement('img'));
 					imgDiv.src = newResult.links[0].href;
 					shortDescriptionDiv = detailsLinkDiv.appendChild(document.createElement('div'));
@@ -91,6 +94,8 @@ https://images.nasa.gov/
 					columnDiv.id = 'column' + y;
 					rowDiv.appendChild(columnDiv);
 					detailsLinkDiv = columnDiv.appendChild(document.createElement('a'));
+					detailsLinkDiv.style.color = 'white';
+					detailsLinkDiv.style.textDecoration = 'none';
 					detailsLinkDiv.href = detailsURL;
 					imgDiv = detailsLinkDiv.appendChild(document.createElement('img'));
 					imgDiv.src = newResult.links[0].href;

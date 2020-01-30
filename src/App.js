@@ -28,6 +28,7 @@ class App extends React.Component {
 		this.state = {
 			searchResults: [],
 			searchTerm: '',
+			title: '',
 			imgURL: '',
 			copyright: '',
 			date: '',
@@ -36,7 +37,9 @@ class App extends React.Component {
 			nasaID: '',
 			fileSize: '',
 			fileFormat: '',
+			captionsFileURL: '',
 			center: '',
+			centerURL: '',
 			imagecb: true,
 			videocb: true,
 			audiocb: true,
@@ -47,7 +50,10 @@ class App extends React.Component {
 			popularResults: [],
 			currentResults: true,
 			currentLoad: [],
-			results: []
+			results: [],
+			keywords: [],
+			secondaryC: '',
+			thumbnailURL: ''
 		};
 	}
 
@@ -234,7 +240,7 @@ class App extends React.Component {
 				<Header searchNASALibrary={this.searchNASALibrary} changeSearchTerm={this.changeSearchTerm} />
 				<header className="App-header">
 					<Button id="MostRecentPopular" onClick={this.toggleResults}>
-						Click to See Most Popular
+						Click to See Newest Images
 					</Button>
 					<div className="wrapperNewest" id="wrapperNewest">
 						<Sorted currentLoad={this.state.currentLoad} currentResults={this.state.currentResults} />
