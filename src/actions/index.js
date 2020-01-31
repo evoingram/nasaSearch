@@ -15,46 +15,11 @@ export const FETCHING_NEWEST_FAILURE = 'FETCHING_NEWEST_FAILURE';
 export const FETCHING_POPULAR_START = 'FETCHING_POPULAR_START';
 export const FETCHING_POPULAR_SUCCESS = 'FETCHING_POPULAR_SUCCESS';
 export const FETCHING_POPULAR_FAILURE = 'FETCHING_POPULAR_FAILURE';
-
-const fetchFileURL = (mediaType, nasaID) => dispatch => {
-	dispatch({ type: FETCHING_FILEURL_START });
-	console.log('running fetchFileURL');
-	// https://images-assets.nasa.gov/image/as11-40-5874/collection.json
-	axios
-		.get(`https://images-assets.nasa.gov/${mediaType}/${nasaID}/collection.json`)
-		.then(response => {
-			console.log('fetchFileURL response.data = ' + response.data[0]);
-			dispatch({ type: FETCHING_FILEURL_SUCCESS, payload: response.data[0] });
-			console.log('done getting single NASA collection file URL');
-		})
-		.catch(error => {
-			dispatch({ type: FETCHING_FILEURL_FAILURE, payload: error.response });
-			console.log(error);
-		});
-};
-
-const fetchFileFormat = (mediaType, nasaID) => dispatch => {
-	dispatch({ type: FETCHING_FILEFORMAT_START });
-	console.log('running fetchFileFormat');
-	//https://images-assets.nasa.gov/image/as11-40-5874/metadata.json
-	axios
-		.get(`https://images-assets.nasa.gov/${mediaType}/${nasaID}/metadata.json`)
-		.then(response => {
-			console.log('fetchFileFormat response = ' + [response]);
-			console.log('fetchFileFormat metadata response stringify = ' + JSON.stringify(response));
-			console.log('fetchFileFormat FS = ' + response.data['File:FileSize']);
-
-			dispatch({ type: FETCHING_FILEFORMAT_SUCCESS, payload: response });
-			console.log('done getting metadata');
-		})
-		.catch(error => {
-			dispatch({ type: FETCHING_FILEFORMAT_FAILURE, payload: error.response });
-			console.log(error);
-		});
-};
+export const UPDATE_NIDMT = 'UPDATE_NIDMT';
 
 export const fetchActivity = props => dispatch => {
 	console.log(`running fetchActivity on ${props.nasaID}`);
+	console.log('props ' + props);
 	dispatch({ type: FETCHING_ACTIVITY_START });
 	axios
 		.get(`https://images-api.nasa.gov/search?q=${props.nasaID}`)
@@ -62,10 +27,11 @@ export const fetchActivity = props => dispatch => {
 			console.log('fetchActivity single detail = ' + response.data.collection.items[0].data[0]);
 			// thumbnail link = response.data.collection.items[x].data.links[0].href;
 			dispatch({ type: FETCHING_ACTIVITY_SUCCESS, payload: response.data.collection.items[0] });
+			console.log(`nasa ID + media type = ${props.mediaType} ${props.nasaID}`);
 
 			axios
 				.get(
-					`https://images-assets.nasa.gov/${response.data.collection.items[0].data[0].media_type}/${response.data.collection.items[0].data[0].nasa_id}/collection.json`
+					`https://images-assets.nasa.gov/${props.mediaType}/${response.data.collection.items[0].props.nasaID}/collection.json`
 				)
 				.then(response => {
 					console.log('fetchFileURL response.data = ' + response.data[0]);
@@ -78,9 +44,7 @@ export const fetchActivity = props => dispatch => {
 				});
 
 			axios
-				.get(
-					`https://images-assets.nasa.gov/${response.data.collection.items[0].data[0].media_type}/${response.data.collection.items[0].data[0].nasa_id}/metadata.json`
-				)
+				.get(`https://images-assets.nasa.gov/${props.mediaType}/${props.nasaID}/metadata.json`)
 				.then(response => {
 					console.log('fetchFileFormat response = ' + [response]);
 					console.log('fetchFileFormat metadata response stringify = ' + JSON.stringify(response));

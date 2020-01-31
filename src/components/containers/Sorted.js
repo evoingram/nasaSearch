@@ -1,16 +1,29 @@
 import React from 'react';
 // import styled from 'styled-components';
 import SearchResult from '../singles/SearchResult';
+import RowNewestPopular from '../singles/RowNewestPopular.js';
 import Single from '../containers/Single';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchActivity } from '../../actions';
 
+const row = {
+	display: 'flex',
+	flex: '1',
+	flexWrap: 'wrap',
+	flexDirection: 'row',
+	flexBasis: '19%',
+	padding: '0%',
+	margin: '0%'
+};
 class Sorted extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			numberOfColumns: 1
+		};
 	}
+
 	/*
 const Button = styled.button`
 	margin-top: 2%;
@@ -118,7 +131,9 @@ https://images.nasa.gov/
 */
 	// mapped to display below
 	// response.data.collection.items[x].data.links[0].href = link to preview image
+
 	render() {
+		console.log('currentLoad in SearchResult = ' + JSON.stringify(this.props.currentLoad));
 		if (
 			this.props.currentLoad !== [] ||
 			this.props.currentLoad !== 'undefined' ||
@@ -128,10 +143,32 @@ https://images.nasa.gov/
 				<div>
 					<Switch>
 						<Route exact path="/">
-							<SearchResult currentLoad={this.props.currentLoad} />
+							<div className="row" style={row}>
+								{this.props.currentLoad.map(newResult => (
+									<RowNewestPopular
+										key={newResult.data[0].nasa_id}
+										className="row"
+										newResult={newResult}
+										numberOfColumns={this.state.numberOfColumns}
+										nasaID={newResult.data[0].nasa_id}
+										imgURL={newResult.links[0].href}
+										mediaType={newResult.data[0].mediaType}
+										explanation={
+											(newResult.data[0].description
+												? newResult.data[0].description.substring(0, 50)
+												: newResult.data[0].description_508.substring(0, 50)) + '...'
+										}
+										fetchActivity={this.props.fetchActivity}
+									/>
+								))}
+							</div>
 						</Route>
-						<Route exact path="/details-:nasaID">
-							<Single nasaID={this.props.nasaID} singleResult={this.props.singleResult} />
+						<Route path="/details/:nasaID">
+							<Single
+								nasaID={this.props.nasaID}
+								singleResult={this.props.singleResult}
+								mediaType={this.props.mediaType}
+							/>
 						</Route>
 					</Switch>
 				</div>
@@ -141,18 +178,18 @@ https://images.nasa.gov/
 	}
 }
 
+// infinite loop if you pass into fetchActivity  ([newResult.data[0].nasa_id,newResult.data[0].mediaType])
+
 const mapStateToProps = state => {
 	return {
 		isLoading: state.isLoading,
 		error: state.error,
 		singleResult: state.singleResult,
-		newestResults: state.newestResults,
-		popularResults: state.popularResults,
 		currentLoad: state.currentLoad,
-		results: state.results
+		results: state.results,
+		nasaID: state.nasaID,
+		mediaType: state.mediaType
 	};
 };
 
 export default connect(mapStateToProps, { fetchActivity })(Sorted);
-
-// export default Sorted;

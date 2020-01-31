@@ -1,6 +1,7 @@
 import React from 'react';
 import ColumnNewestPopular from './ColumnNewestPopular.js';
 import { connect } from 'react-redux';
+import { fetchActivity } from '../../actions';
 
 // todo: function that keeps track of how many columns in 1 row and resets to new row at 6
 
@@ -19,19 +20,10 @@ class RowNewestPopular extends React.Component {
 		super(props);
 		this.state = {};
 	}
-	/*
-    
-
-    */
-	getMediaType = newResult => {
-		this.setState({ mediaType: newResult.data[0].media_type });
-	};
-
 	componentDidMount() {
 		if (this.props.numberOfColumns === 6) {
 			this.setState({ numberOfColumns: 1 });
 		}
-		this.getMediaType(this.props.newResult);
 	}
 
 	render() {
@@ -39,8 +31,10 @@ class RowNewestPopular extends React.Component {
 			<div className="row" style={row}>
 				{this.props.numberOfColumns <= 5 && (
 					<ColumnNewestPopular
+						newResult={this.props.newResult}
 						numberOfColumns={this.props.numberOfColumns}
 						nasaID={this.props.nasaID}
+						mediaType={this.props.mediaType}
 						imgURL={this.props.imgURL}
 						explanation={this.props.explanation}
 						fetchActivity={this.props.fetchActivity}

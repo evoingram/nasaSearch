@@ -11,7 +11,8 @@ import {
 	FETCHING_NEWEST_START,
 	FETCHING_NEWEST_SUCCESS,
 	FETCHING_POPULAR_START,
-	FETCHING_POPULAR_SUCCESS
+	FETCHING_POPULAR_SUCCESS,
+	UPDATE_NIDMT
 } from '../actions';
 
 const initialState = {
@@ -55,6 +56,7 @@ export const reducer = (state = initialState, action) => {
 				center: action.payload.data[0].center,
 				keywords: action.payload.data[0].keywords,
 				mediaType: action.payload.data[0].media_type,
+				nasaID: action.payload.data[0].nasa_id,
 				thumbnailURL: action.payload.links[0].href,
 				singleResult: action.payload
 			};
@@ -101,6 +103,13 @@ export const reducer = (state = initialState, action) => {
 				...state,
 				isLoading: false,
 				currentLoad: action.payload
+			};
+		case UPDATE_NIDMT:
+			return {
+				...state,
+				isLoading: false,
+				nasaID: action.payload[0],
+				mediaType: action.payload[1]
 			};
 
 		default:

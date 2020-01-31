@@ -59,7 +59,7 @@ class Header extends React.Component {
 						<Rocket src={rocket} />
 					</div>
 					<h2>Welcome to Erica Ingram's</h2>
-					<h2>NASA Multimedia Library Search React Clone</h2>
+					<h2>NASA Multimedia Library Search React Redux Clone</h2>
 					<SearchForm
 						searchNASALibrary={this.props.searchNASALibrary}
 						changeSearchTerm={this.props.changeSearchTerm}

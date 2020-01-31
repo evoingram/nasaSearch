@@ -19,7 +19,6 @@ class SearchResult extends React.Component {
 			numberOfColumns: 1
 		};
 	}
-
 	render() {
 		console.log('currentLoad in SearchResult = ' + JSON.stringify(this.props.currentLoad));
 		return (
@@ -52,7 +51,9 @@ const mapStateToProps = state => {
 	return {
 		isLoading: state.isLoading,
 		error: state.error,
-		currentLoad: state.currentLoad
+		currentLoad: state.currentLoad,
+		nasaID: state.nasaID,
+		mediaType: state.mediaType
 	};
 };
 

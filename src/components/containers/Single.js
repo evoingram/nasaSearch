@@ -15,8 +15,63 @@ const Div = styled.div`
 	padding: 0%;
 `;
 
-const Single = props => {
-	/*		this.state = {
+class Single extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {};
+	}
+	render() {
+		return (
+			this.props.nasaID !== '' &&
+			this.props.mediaType !== '' && (
+				<div className="App">
+					{!this.props.singleResult && !this.props.isLoading && <p>Loading...</p>}
+					{this.props.singleResult && !this.props.isLoading && (
+						<div className="App-header">
+							<Div className="firstColumn">
+								<PlayerC
+									thumbnailURL={this.props.singleResult.links[0].href}
+									fileURL={this.props.fileURL}
+								/>
+								<Share fileURL={this.props.fileURL} />
+							</Div>
+							<Div className="secondColumn">
+								<FilePath
+									title={this.props.singleResult.data[0].title}
+									fileURL={this.props.fileURL}
+									fileSize={this.props.fileSize}
+									fileFormat={this.props.singleResult.data[0].media_type}
+								/>
+								<FileInfo
+									nasaID={this.props.singleResult.data[0].nasa_id}
+									fileURL={this.props.fileURL}
+									keywords={this.props.singleResult.data[0].keywords}
+									center={this.props.singleResult.data[0].center}
+									date={this.props.singleResult.data[0].date_created}
+									centerURL={this.props.centerURL}
+									explanation={this.props.singleResult.data[0].description}
+								/>
+							</Div>
+						</div>
+					)}
+				</div>
+			)
+		);
+	}
+}
+const mapStateToProps = state => {
+	return {
+		isLoading: state.isLoading,
+		error: state.error,
+		singleResult: state.singleResult,
+		nasaID: state.nasaID,
+		mediaType: state.mediaType
+	};
+};
+
+export default connect(mapStateToProps, { fetchActivity })(Single);
+
+/*		this.state = {
 			searchResults: [],
 			searchTerm: '',
 			imgURL: '',
@@ -45,7 +100,7 @@ const Single = props => {
 
 	*/
 
-	/*
+/*
 	singleResult.data[0].media_type
 	isLoading: false,
 	title: singleResult.data[0].title,
@@ -57,44 +112,3 @@ const Single = props => {
 	thumbnailURL: singleResult.links[0].href,
 	singleResult: singleResult
 */
-	return (
-		<div className="App">
-			{!props.singleResult && !props.isLoading && <p>Loading...</p>}
-			{props.singleResult && !props.isLoading && (
-				<div className="App-header">
-					<Div className="firstColumn">
-						<PlayerC thumbnailURL={props.singleResult.links[0].href} fileURL={props.fileURL} />
-						<Share fileURL={props.fileURL} />
-					</Div>
-					<Div className="secondColumn">
-						<FilePath
-							title={props.singleResult.data[0].title}
-							fileURL={props.fileURL}
-							fileSize={props.fileSize}
-							fileFormat={props.singleResult.data[0].media_type}
-						/>
-						<FileInfo
-							nasaID={props.nasaID}
-							fileURL={props.fileURL}
-							keywords={props.singleResult.data[0].keywords}
-							center={props.singleResult.data[0].center}
-							date={props.singleResult.data[0].date_created}
-							centerURL={props.centerURL}
-							explanation={props.singleResult.data[0].description}
-						/>
-					</Div>
-				</div>
-			)}
-		</div>
-	);
-};
-
-const mapStateToProps = state => {
-	return {
-		isLoading: state.isLoading,
-		error: state.error,
-		singleResult: state.singleResult
-	};
-};
-
-export default connect(mapStateToProps, { fetchActivity })(Single);

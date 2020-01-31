@@ -283,7 +283,6 @@ class App extends React.Component {
 				console.log(error);
 			});
 	}
-
 	render() {
 		return (
 			<div className="App">
@@ -301,6 +300,7 @@ class App extends React.Component {
 								currentLoad={this.props.currentLoad}
 								getSingleResult={this.getSingleResult}
 								fetchActivity={this.props.fetchActivity}
+								saveNIDMT={this.saveNIDMT}
 							/>
 						)}
 					</div>
