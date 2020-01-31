@@ -30,7 +30,8 @@ class ColumnNewestPopular extends React.Component {
 
 	handleSingleDetailLoad = e => {
 		console.log('e = ' + e.target.value);
-		this.props.fetchActivity();
+		// This is the other place where we call this, again without data!
+		this.props.fetchActivity(/*data*/);
 	};
 
 	render() {

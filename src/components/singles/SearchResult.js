@@ -38,7 +38,8 @@ class SearchResult extends React.Component {
 									: newResult.data[0].description_508.substring(0, 50)) + '...'
 							}
 							fetchActivity={this.props.fetchActivity}
-							onClick={this.props.fetchActivity}
+							//Here is a place to pass data along!
+							onClick={this.props.fetchActivity(/*data*/)}
 						/>
 					))}
 				</div>

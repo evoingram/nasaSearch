@@ -16,7 +16,7 @@ export const FETCHING_POPULAR_START = 'FETCHING_POPULAR_START';
 export const FETCHING_POPULAR_SUCCESS = 'FETCHING_POPULAR_SUCCESS';
 export const FETCHING_POPULAR_FAILURE = 'FETCHING_POPULAR_FAILURE';
 export const UPDATE_NIDMT = 'UPDATE_NIDMT';
-
+	// Where does props come from? We never passed anything in!
 export const fetchActivity = props => dispatch => {
 	console.log(`running fetchActivity on ${props.nasaID}`);
 	console.log('props ' + props);
