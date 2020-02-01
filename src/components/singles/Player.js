@@ -18,7 +18,7 @@ class PlayerC extends React.Component {
 
 	render() {
 		return (
-			<Player poster="http://images-assets.nasa.gov/video/Apollo 11 Overview/Apollo 11 Overview~thumb.jpg">
+			<Player poster={this.props.thumbnailURL}>
 				<source src={this.props.fileURL} />
 				<ControlBar>
 					<ReplayControl seconds={10} order={1.1} />

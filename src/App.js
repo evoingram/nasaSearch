@@ -7,25 +7,31 @@ import './css/tiledSearchResults.css';
 import Header from './components/Header.js';
 import Footer from './components/Footer.js';
 import Sorted from './components/containers/Sorted.js';
-import APOD from './components/singles/APOD.js';
-import PlayerC from './components/singles/Player.js';
+// import APOD from './components/singles/APOD.js';
+// import PlayerC from './components/singles/Player.js';
+import SearchResult from './components/singles/SearchResult';
 import axios from 'axios';
+import styled from 'styled-components';
+import { Route, Link } from 'react-router-dom';
+import { fetchActivity, fetchNewest, fetchPopular } from './actions';
+import { connect } from 'react-redux';
 
+const Button = styled.button`
+	margin-top: 2%;
+	margin-bottom: 2%;
+	background-color: #15418c;
+	color: white;
+	font-family: 'Audiowide', cursive;
+	border: none;
+	padding-top: 6%;
+	padding-bottom: 6%;
+`;
 class App extends React.Component {
 	constructor() {
 		super();
 		this.state = {
 			searchResults: [],
 			searchTerm: '',
-			imgURL: '',
-			copyright: '',
-			date: '',
-			explanation: '',
-			fileURL: 'http://images-assets.nasa.gov/video/Apollo%2011%20Overview/Apollo%2011%20Overview~preview.mp4',
-			nasaID: '',
-			fileSize: '',
-			fileFormat: '',
-			center: '',
 			imagecb: true,
 			videocb: true,
 			audiocb: true,
@@ -34,8 +40,31 @@ class App extends React.Component {
 			newestResults: [],
 			popularURL: 'https://images-assets.nasa.gov/popular.json',
 			popularResults: [],
+			currentResults: true,
+			currentLoad: [],
 			results: []
 		};
+		/*
+			title: '',
+			imgURL: '',
+			copyright: '',
+			date: '',
+			explanation: '',
+			fileURL: '',
+			nasaID: '',
+			fileSize: '',
+			fileFormat: '',
+			captionsFileURL: '',
+			center: '',
+			centerURL: '',
+			keywords: [],
+			secondaryC: '',
+			mediaType: '',
+			thumbnailURL: '',
+			isLoading: false
+
+
+		*/
 	}
 
 	getFileSize = url => {
@@ -45,30 +74,10 @@ class App extends React.Component {
 	};
 
 	componentDidMount = () => {
-		var minYear = 2000;
-		var maxYear = 2019;
-		var randomYear = minYear + Math.round(Math.random() * (maxYear - minYear));
-		var minMonth = 1;
-		var maxMonth = 12;
-		var randomMonth = minMonth + Math.round(Math.random() * (maxMonth - minMonth));
-		var minDay = 1;
-		var maxDay = 28;
-		var randomDay = minDay + Math.round(Math.random() * (maxDay - minDay));
-		var randomDate = randomYear + '-' + randomMonth + '-' + randomDay;
-		axios
-			.get('https://api.nasa.gov/planetary/apod?date=' + randomDate + '&api_key=' + process.env.REACT_APP_API_KEY)
-			.then(response => {
-				this.setState({ imgURL: response.data.hdurl });
-				this.setState({ copyright: response.data.copyright });
-				this.setState({ date: response.data.date });
-				this.setState({ explanation: response.data.explanation });
-				console.log('done contacting NASA apod');
-			})
-			.catch(error => {
-				console.log(error);
-			});
+		this.getPopularNASALibrary();
 		this.getNewestNASALibrary();
 	};
+	componentDidUpdate = () => {};
 	/*
 
 				let fileInfo = new Blob([response.data.hdurl]);
@@ -164,22 +173,23 @@ class App extends React.Component {
 
 	getNewestNASALibrary = () => {
 		console.log('running newestNASALibrary');
+		console.log(this.state.newestURL);
 		axios
 			.get(this.state.newestURL)
 			.then(response => {
+				console.log(response);
 				this.setState({ newestResults: response.data.collection.items });
 				console.log('newest results = ' + this.state.newestResults);
 				// thumbnail link = response.data.collection.items[x].data.links[0].href;
-				this.setState({ results: this.state.newestResults });
-				console.log('results = ' + this.state.results);
-				console.log('done getting newest NASA images');
+				// this.setState({ results: this.state.newestResults });
+				// console.log('results = ' + this.state.results);
+				console.log('done getting newest NASA images app function');
 			})
 			.catch(error => {
 				console.log(error);
 			});
 	};
-	getPopularNASALibrary = event => {
-		event.preventDefault();
+	getPopularNASALibrary = () => {
 		console.log('running popularNASALibrary');
 		axios
 			.get(this.state.popularURL)
@@ -187,28 +197,113 @@ class App extends React.Component {
 				this.setState({ popularResults: response.data.collection.items });
 				// thumbnail link = response.data.collection.items[x].data.links[0].href;
 				console.log('popular results = ' + this.state.popularResults);
-				console.log('done getting popular NASA images');
+				console.log('done getting popular NASA images app function');
 			})
 			.catch(error => {
 				console.log(error);
 			});
 	};
+	toggleResults = () => {
+		let toggleButton = document.getElementById('MostRecentPopular');
+		if (this.state.currentResults === true) {
+			//newest results
+			toggleButton.textContent = 'Click to See Most Popular';
+			this.props.fetchNewest();
+			this.setState({ currentResults: false });
+			// this.setState({ currentLoad: this.state.newestResults });
+		} else {
+			//most popular results
+			toggleButton.textContent = 'Click to See Most Recent';
+			this.props.fetchPopular();
+			this.setState({ currentResults: true });
+			// this.setState({ currentLoad: this.state.popularResults });
+		}
+		console.log('current results boolean = ' + this.state.currentResults);
+		return (
+			<Route exact path="/">
+				<SearchResult currentLoad={this.props.currentLoad} />
+			</Route>
+		);
+	};
 
+	getSingleResult() {
+		console.log('running single detail axios get');
+		axios
+			.get(`https://images-api.nasa.gov/search?q=${this.props.nasaID}`)
+			.then(response => {
+				console.log('single detail = ' + response.data.collection.items[0].data[0]);
+				// thumbnail link = response.data.collection.items[x].data.links[0].href;
+				this.setState({
+					title: response.data.collection.items[0].data[0].title,
+					date: response.data.collection.items[0].data[0].date_created,
+					explanation: response.data.collection.items[0].data[0].description,
+					center: response.data.collection.items[0].data[0].center,
+					keywords: response.data.collection.items[0].data[0].keywords,
+					mediaType: response.data.collection.items[0].data[0].media_type,
+					thumbnailURL: response.data.collection.items[0].links[0].href
+				});
+				console.log('done getting single Q NASA details');
+			})
+			.catch(error => {
+				console.log(error);
+			});
+		// https://images-assets.nasa.gov/image/as11-40-5874/collection.json
+		axios
+			.get(`https://images-assets.nasa.gov/image/${this.props.nasaID}/collection.json`)
+			.then(response => {
+				console.log('single detail collection = ' + response.data[0]);
+				this.setState({
+					fileURL: response.data[0]
+				});
+
+				console.log('done getting single NASA collection file URL');
+			})
+			.catch(error => {
+				console.log(error);
+			});
+
+		//https://images-assets.nasa.gov/image/as11-40-5874/metadata.json
+		axios
+			.get(`https://images-assets.nasa.gov/image/${this.props.nasaID}/metadata.json`)
+			.then(response => {
+				console.log('single detail metadata r = ' + [response]);
+				console.log('single detail metadata d = ' + JSON.stringify(response));
+				console.log('single detail metadata FS = ' + response.data['File:FileSize']);
+				console.log('single detail metadata FF = ' + response.data['File:MIMEType']);
+				let fileFormat = response.data['File:MIMEType'];
+				let fileFormatString = toString(fileFormat).substring(0, 5);
+				this.setState({
+					fileSize: response.data['File:FileSize'],
+					fileFormat: fileFormatString
+				});
+
+				console.log('done getting metadata');
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	}
 	render() {
 		return (
 			<div className="App">
 				<Header searchNASALibrary={this.searchNASALibrary} changeSearchTerm={this.changeSearchTerm} />
 				<header className="App-header">
-					<p>search containers will go here.</p>
+					<Link to="/">
+						<Button id="MostRecentPopular" onClick={this.toggleResults}>
+							Click to See Newest Images
+						</Button>
+					</Link>
 					<div className="wrapperNewest" id="wrapperNewest">
-						<Sorted newestResults={this.state.newestResults} />
+						{!this.props.currentLoad && this.props.isLoading && <p>Loading...</p>}
+						{this.props.currentLoad && !this.props.isLoading && (
+							<Sorted
+								currentLoad={this.props.currentLoad}
+								getSingleResult={this.getSingleResult}
+								fetchActivity={this.props.fetchActivity}
+								saveNIDMT={this.saveNIDMT}
+							/>
+						)}
 					</div>
-					<APOD
-						imgURL={this.state.imgURL}
-						copyright={this.state.copyright}
-						date={this.state.date}
-						explanation={this.state.explanation}
-					/>
 				</header>
 				<Footer />
 			</div>
@@ -216,4 +311,50 @@ class App extends React.Component {
 	}
 }
 
-export default App;
+const mapStateToProps = state => {
+	return {
+		isLoading: state.isLoading,
+		error: state.error,
+		currentLoad: state.currentLoad
+	};
+};
+
+export default connect(mapStateToProps, { fetchActivity, fetchNewest, fetchPopular })(App);
+
+/*
+		var minYear = 2000;
+		var maxYear = 2019;
+		var randomYear = minYear + Math.round(Math.random() * (maxYear - minYear));
+		var minMonth = 1;
+		var maxMonth = 12;
+		var randomMonth = minMonth + Math.round(Math.random() * (maxMonth - minMonth));
+		var minDay = 1;
+		var maxDay = 28;
+		var randomDay = minDay + Math.round(Math.random() * (maxDay - minDay));
+		var randomDate = randomYear + '-' + randomMonth + '-' + randomDay;
+
+		axios
+			.get('https://api.nasa.gov/planetary/apod?date=' + randomDate + '&api_key=' + process.env.REACT_APP_API_KEY)
+			.then(response => {
+				this.setState({ imgURL: response.data.hdurl });
+				this.setState({ copyright: response.data.copyright });
+				this.setState({ date: response.data.date });
+				this.setState({ explanation: response.data.explanation });
+				console.log('done contacting NASA apod');
+			})
+			.catch(error => {
+				console.log(error);
+			});
+		*/
+/*
+
+	newestResults={this.state.newestResults}
+	popularResults={this.state.popularResults}
+
+					<APOD
+						imgURL={this.state.imgURL}
+						copyright={this.state.copyright}
+						date={this.state.date}
+						explanation={this.state.explanation}
+					/>
+*/

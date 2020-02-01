@@ -1,24 +1,30 @@
 import React from 'react';
 
-function Header() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const FilePath = props => {
+	return (
+		<div className="App">
+			<header className="App-header">
+				<h2>FILE PATH COMPONENT:</h2>
+				<div>
+					<p>
+						<b>{props.nasaID}:</b> <button onClick={props.fileURL}>Download</button>{' '}
+					</p>
+					<p>
+						<b>full-resolution Title:</b> {props.title}
+					</p>
 
-export default Header;
+					<p>
+						<b>full-resolution URL:</b> {props.fileURL}
+					</p>
+					<p>
+						<b>file size:</b> {props.fileSize}
+					</p>
+					<p>
+						<b>file format:</b> {props.fileFormat}
+					</p>
+				</div>
+			</header>
+		</div>
+	);
+};
+export default FilePath;
