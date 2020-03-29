@@ -1,5 +1,11 @@
 work in progress
 
+# NASA Images Search Clone
+
+## Clone of images.NASA.gov image/audio/video library in React & Redux
+
+## Components
+
 ### Header
 header component
 
