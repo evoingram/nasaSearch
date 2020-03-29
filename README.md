@@ -1,46 +1,77 @@
 work in progress
 
-## Main
-Main container
-
 ### Header
 header component
 
 ### FilterSearchResults
 filter search results component
+- [ ] same as searchform checkboxes
+- [ ] narrow by year/other?
 
 ### SearchForm
 search form component
+- [ ] make checkboxes work
 
 ### SearchResultsSL
 search results square view list component
+- [ ] use column/row newestpopular as example
+- [ ] style appropriately
 
 ### SearchResultSL
 single search result square component
+- [ ] need tooltip
+- [ ] add info to below thumbnail, same as column/row newest/most popular component
+- [ ] style appropriately
 
 ### SearchResultsLL
 search results list view component
+- [ ] use column/row newestpopular as example
+- [ ] style appropriately
 
 ### SearchResultLL
 single search result list component
+- [ ] thumbnail/date created/description 
+- [ ] style appropriately
+- [ ] need tooltip
 
-### SortedNewest
-thumbnail sized images/audio/video sorted by newest component
+### ColumnNewestPopular
+thumbnail sized images/audio/video sorted by newest/most popular component
+- [ ] need tooltip
+- [ ] add info to below thumbnail
+
+### RowNewestPopular
+thumbnail sized images/audio/video sorted by newest/most popular component
 - [ ] tooltip
+- [ ] add info to below thumbnail
 
-### SortedMostPopular
-thumbnail sized images/audio/video sorted by most popular component
-- [ ] tooltip
+### FilePath
+file path section component
+- [ ] make sure info matches original
 
-### SingleImage
-single image component
+### FileInfo
+file info section component
+- [ ] make sure info matches original
 
-### SingleAudio
-single piece of audio component
+### Single
+single item component
+- [ ] style so components are shaped correctly
 
-### SingleVideo
-single video component
+### Share
+share item component
+- [ ] style so components are all in one line
+
+### Player
+video/audio player
 
 ### Footer
 footer
+- [ ] link to FOIA
 
+### APIData
+component
+
+### APIInfo
+component
+
+### APOD, Main
+not implemented, APOD previously astronomy photo of the day component, Main is create-react-app default
