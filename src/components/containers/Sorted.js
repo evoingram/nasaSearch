@@ -168,6 +168,7 @@ https://images.nasa.gov/
 								nasaID={this.props.nasaID}
 								singleResult={this.props.singleResult}
 								mediaType={this.props.mediaType}
+								getSingleResult={this.props.getSingleResult}
 							/>
 						</Route>
 					</Switch>

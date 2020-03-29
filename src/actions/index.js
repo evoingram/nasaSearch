@@ -26,15 +26,16 @@ export const fetchActivity = (nasaID, mediaType) => dispatch => {
 			console.log('fetchActivity single detail = ' + response.data.collection.items[0].data[0]);
 			// thumbnail link = response.data.collection.items[x].data.links[0].href;
 			dispatch({ type: FETCHING_ACTIVITY_SUCCESS, payload: response.data.collection.items[0] });
-			console.log(`nasa ID + media type = ${mediaType} ${nasaID}`);
+			console.log(`nasa ID + media type = ${response.data.collection.items[0].data[0].media_type} ${nasaID}`);
 
 			axios
 				.get(
-					`https://images-assets.nasa.gov/${mediaType}/${response.data.collection.items[0].nasaID}/collection.json`
+					`https://images-assets.nasa.gov/${response.data.collection.items[0].data[0].media_type}/${nasaID}/collection.json`
 				)
 				.then(response => {
 					console.log('fetchFileURL response.data = ' + response.data[0]);
 					dispatch({ type: FETCHING_FILEURL_SUCCESS, payload: response.data[0] });
+
 					console.log('done getting single NASA collection file URL');
 				})
 				.catch(error => {
@@ -43,7 +44,9 @@ export const fetchActivity = (nasaID, mediaType) => dispatch => {
 				});
 
 			axios
-				.get(`https://images-assets.nasa.gov/${mediaType}/${nasaID}/metadata.json`)
+				.get(
+					`https://images-assets.nasa.gov/${response.data.collection.items[0].data[0].media_type}/${nasaID}/metadata.json`
+				)
 				.then(response => {
 					console.log('fetchFileFormat response = ' + [response]);
 					console.log('fetchFileFormat metadata response stringify = ' + JSON.stringify(response));
