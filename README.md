@@ -21,9 +21,11 @@ single search result list component
 
 ### SortedNewest
 thumbnail sized images/audio/video sorted by newest component
+- [ ] tooltip
 
 ### SortedMostPopular
 thumbnail sized images/audio/video sorted by most popular component
+- [ ] tooltip
 
 ### SingleImage
 single image component

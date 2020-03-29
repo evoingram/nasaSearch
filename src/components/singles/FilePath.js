@@ -1,5 +1,5 @@
 import React from 'react';
-
+// do new api call to get proper file paths
 const FilePath = props => {
 	return (
 		<div className="App">

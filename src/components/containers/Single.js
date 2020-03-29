@@ -32,6 +32,7 @@ class Single extends React.Component {
 								<PlayerC
 									thumbnailURL={this.props.singleResult.links[0].href}
 									fileURL={this.props.fileURL}
+									mediaType={this.props.mediaType}
 								/>
 								<Share fileURL={this.props.fileURL} />
 							</Div>
