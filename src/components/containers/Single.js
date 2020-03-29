@@ -20,6 +20,9 @@ class Single extends React.Component {
 		super(props);
 		this.state = {};
 	}
+	componentDidMount() {
+		this.props.getSingleResult();
+	}
 	render() {
 		return (
 			this.props.nasaID !== '' &&
@@ -32,11 +35,13 @@ class Single extends React.Component {
 								<PlayerC
 									thumbnailURL={this.props.singleResult.links[0].href}
 									fileURL={this.props.fileURL}
+									mediaType={this.props.mediaType}
 								/>
 								<Share fileURL={this.props.fileURL} />
 							</Div>
 							<Div className="secondColumn">
 								<FilePath
+									nasaID={this.props.singleResult.data[0].nasa_id}
 									title={this.props.singleResult.data[0].title}
 									fileURL={this.props.fileURL}
 									fileSize={this.props.fileSize}
@@ -65,7 +70,9 @@ const mapStateToProps = state => {
 		error: state.error,
 		singleResult: state.singleResult,
 		nasaID: state.nasaID,
-		mediaType: state.mediaType
+		mediaType: state.mediaType,
+		fileSize: state.fileSize,
+		fileURL: state.fileURL
 	};
 };
 

@@ -1,4 +1,5 @@
 import React from 'react';
+// do new api call to get proper file paths
 
 class FileInfo extends React.Component {
 	constructor(props) {
@@ -9,18 +10,24 @@ class FileInfo extends React.Component {
 	render() {
 		return (
 			<div>
+				<h2>FILE INFO COMPONENT:</h2>
 				<p>
-					<b>{this.props.nasaID}:</b> <button onClick={this.props.fileURL}>Download</button>{' '}
+					<b>{this.props.nasaID}:</b>{' '}
+					<a href={this.props.fileURL} download>
+						<button>Download</button>
+					</a>
 				</p>
 
 				<p>
-					<b>full-resolution URL:</b> {this.props.fileURL}
+					<b>
+						<a href={this.props.fileURL}>full-resolution file</a>
+					</b>
 				</p>
 				<p>
-					<b>file size:</b> {this.props.fileSize}
+					<b>center:</b> {this.props.center}
 				</p>
 				<p>
-					<b>file format:</b> {this.props.fileFormat}
+					<b>explanation:</b> {this.props.explanation}
 				</p>
 			</div>
 		);

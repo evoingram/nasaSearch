@@ -4,27 +4,42 @@ work in progress
 Main container
 
 ### Header
-header
+header component
+
+### FilterSearchResults
+filter search results component
 
 ### SearchForm
-search form
+search form component
 
-### SearchResults
-search results list container
+### SearchResultsSL
+search results square view list component
 
-#### FilterSearchResults
-filter search results
+### SearchResultSL
+single search result square component
 
-#### SearchResult (rectangle) (square)
-single search result rectangle detail
-single search result square detail
+### SearchResultsLL
+search results list view component
 
-#### Sorted (Newest) (MostPopular)
-thumbnail sized images/audio/video sorted by newest component<br>
+### SearchResultLL
+single search result list component
+
+### SortedNewest
+thumbnail sized images/audio/video sorted by newest component
+- [ ] tooltip
+
+### SortedMostPopular
 thumbnail sized images/audio/video sorted by most popular component
+- [ ] tooltip
 
-### Single (Image) (Audio) (Video)
-single file component
+### SingleImage
+single image component
+
+### SingleAudio
+single piece of audio component
+
+### SingleVideo
+single video component
 
 ### Footer
 footer

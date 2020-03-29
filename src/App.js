@@ -229,7 +229,7 @@ class App extends React.Component {
 	getSingleResult() {
 		console.log('running single detail axios get');
 		axios
-			.get(`https://images-api.nasa.gov/search?q=${this.props.nasaID}`)
+			.get(`https://images-api.nasa.gov/search?q=${this.nasaID}`)
 			.then(response => {
 				console.log('single detail = ' + response.data.collection.items[0].data[0]);
 				// thumbnail link = response.data.collection.items[x].data.links[0].href;
@@ -249,7 +249,7 @@ class App extends React.Component {
 			});
 		// https://images-assets.nasa.gov/image/as11-40-5874/collection.json
 		axios
-			.get(`https://images-assets.nasa.gov/image/${this.props.nasaID}/collection.json`)
+			.get(`https://images-assets.nasa.gov/image/${this.nasaID}/collection.json`)
 			.then(response => {
 				console.log('single detail collection = ' + response.data[0]);
 				this.setState({
@@ -264,7 +264,7 @@ class App extends React.Component {
 
 		//https://images-assets.nasa.gov/image/as11-40-5874/metadata.json
 		axios
-			.get(`https://images-assets.nasa.gov/image/${this.props.nasaID}/metadata.json`)
+			.get(`https://images-assets.nasa.gov/image/${this.nasaID}/metadata.json`)
 			.then(response => {
 				console.log('single detail metadata r = ' + [response]);
 				console.log('single detail metadata d = ' + JSON.stringify(response));
@@ -322,6 +322,19 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, { fetchActivity, fetchNewest, fetchPopular })(App);
 
 /*
+
+
+		prisonList: state.prisonList,
+		error: state.error,
+    prisonerList: state.prisonerList,
+      allPrisonLocations: state.allPrisonLocations,
+		allPrisonerList: state.allPrisonerList,
+	finalList: state.finalList
+	
+
+
+
+
 		var minYear = 2000;
 		var maxYear = 2019;
 		var randomYear = minYear + Math.round(Math.random() * (maxYear - minYear));
