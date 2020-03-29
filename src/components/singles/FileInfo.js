@@ -9,6 +9,7 @@ class FileInfo extends React.Component {
 	render() {
 		return (
 			<div>
+				<h2>FILE INFO COMPONENT:</h2>
 				<p>
 					<b>{this.props.nasaID}:</b> <button onClick={this.props.fileURL}>Download</button>{' '}
 				</p>

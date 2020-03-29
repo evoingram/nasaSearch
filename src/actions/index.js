@@ -16,22 +16,21 @@ export const FETCHING_POPULAR_START = 'FETCHING_POPULAR_START';
 export const FETCHING_POPULAR_SUCCESS = 'FETCHING_POPULAR_SUCCESS';
 export const FETCHING_POPULAR_FAILURE = 'FETCHING_POPULAR_FAILURE';
 export const UPDATE_NIDMT = 'UPDATE_NIDMT';
-	// Where does props come from? We never passed anything in!
-export const fetchActivity = props => dispatch => {
-	console.log(`running fetchActivity on ${props.nasaID}`);
-	console.log('props ' + props);
+// Where does props come from? We never passed anything in!
+export const fetchActivity = (nasaID, mediaType) => dispatch => {
+	console.log(`running fetchActivity on ${nasaID} ${mediaType}`);
 	dispatch({ type: FETCHING_ACTIVITY_START });
 	axios
-		.get(`https://images-api.nasa.gov/search?q=${props.nasaID}`)
+		.get(`https://images-api.nasa.gov/search?q=${nasaID}`)
 		.then(response => {
 			console.log('fetchActivity single detail = ' + response.data.collection.items[0].data[0]);
 			// thumbnail link = response.data.collection.items[x].data.links[0].href;
 			dispatch({ type: FETCHING_ACTIVITY_SUCCESS, payload: response.data.collection.items[0] });
-			console.log(`nasa ID + media type = ${props.mediaType} ${props.nasaID}`);
+			console.log(`nasa ID + media type = ${mediaType} ${nasaID}`);
 
 			axios
 				.get(
-					`https://images-assets.nasa.gov/${props.mediaType}/${response.data.collection.items[0].props.nasaID}/collection.json`
+					`https://images-assets.nasa.gov/${mediaType}/${response.data.collection.items[0].nasaID}/collection.json`
 				)
 				.then(response => {
 					console.log('fetchFileURL response.data = ' + response.data[0]);
@@ -44,7 +43,7 @@ export const fetchActivity = props => dispatch => {
 				});
 
 			axios
-				.get(`https://images-assets.nasa.gov/${props.mediaType}/${props.nasaID}/metadata.json`)
+				.get(`https://images-assets.nasa.gov/${mediaType}/${nasaID}/metadata.json`)
 				.then(response => {
 					console.log('fetchFileFormat response = ' + [response]);
 					console.log('fetchFileFormat metadata response stringify = ' + JSON.stringify(response));

@@ -31,6 +31,7 @@ class ColumnNewestPopular extends React.Component {
 	handleSingleDetailLoad = e => {
 		console.log('e = ' + e.target.value);
 		// This is the other place where we call this, again without data!
+		// newResult.data[0].nasa_id, newResult.data[0].media_type;
 		this.props.fetchActivity(/*data*/);
 	};
 

@@ -322,6 +322,19 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, { fetchActivity, fetchNewest, fetchPopular })(App);
 
 /*
+
+
+		prisonList: state.prisonList,
+		error: state.error,
+    prisonerList: state.prisonerList,
+      allPrisonLocations: state.allPrisonLocations,
+		allPrisonerList: state.allPrisonerList,
+	finalList: state.finalList
+	
+
+
+
+
 		var minYear = 2000;
 		var maxYear = 2019;
 		var randomYear = minYear + Math.round(Math.random() * (maxYear - minYear));

@@ -3,8 +3,6 @@ import ColumnNewestPopular from './ColumnNewestPopular.js';
 import { connect } from 'react-redux';
 import { fetchActivity } from '../../actions';
 
-// todo: function that keeps track of how many columns in 1 row and resets to new row at 6
-
 const row = {
 	display: 'flex',
 	flex: '1',

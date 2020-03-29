@@ -39,7 +39,11 @@ class SearchResult extends React.Component {
 							}
 							fetchActivity={this.props.fetchActivity}
 							//Here is a place to pass data along!
-							onClick={this.props.fetchActivity(/*data*/)}
+							onClick={this.props.fetchActivity(
+								/*data*/
+								newResult.data[0].nasa_id,
+								newResult.data[0].media_type
+							)}
 						/>
 					))}
 				</div>
