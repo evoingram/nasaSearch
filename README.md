@@ -11,21 +11,21 @@ header component
 
 ### FilterSearchResults
 filter search results component
-- [ ] same as searchform checkboxes
+- [X] same as searchform checkboxes
 - [ ] narrow by year/other?
 
 ### SearchForm
 search form component
-- [ ] make checkboxes work
+- [X] make checkboxes work
 
 ### SearchResultsSL
 search results square view list component
-- [ ] use column/row newestpopular as example
+- [X] use column/row newestpopular as example
 - [ ] style appropriately
 
 ### SearchResultSL
 single search result square component
-- [ ] add info to below thumbnail, same as column/row newest/most popular component
+- [X] add info to below thumbnail, same as column/row newest/most popular component
 - [ ] style appropriately
 
 ### SearchResultsLL
