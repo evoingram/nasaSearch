@@ -7,7 +7,8 @@ import {
 	CurrentTimeDisplay,
 	TimeDivider,
 	PlaybackRateMenuButton,
-	VolumeMenuButton
+	VolumeMenuButton,
+	ClosedCaptionButton
 } from 'video-react';
 
 class PlayerC extends React.Component {
@@ -23,6 +24,7 @@ class PlayerC extends React.Component {
 					<h2>PLAYER COMPONENT:</h2>
 					<Player poster={this.props.thumbnailURL}>
 						<source src={this.props.fileURL} />
+						<track kind="captions" src={this.props.captionsURL} srcLang="en" label="English" default />
 						<ControlBar>
 							<ReplayControl seconds={10} order={1.1} />
 							<ForwardControl seconds={30} order={1.2} />

@@ -15,6 +15,10 @@ export const FETCHING_NEWEST_FAILURE = 'FETCHING_NEWEST_FAILURE';
 export const FETCHING_POPULAR_START = 'FETCHING_POPULAR_START';
 export const FETCHING_POPULAR_SUCCESS = 'FETCHING_POPULAR_SUCCESS';
 export const FETCHING_POPULAR_FAILURE = 'FETCHING_POPULAR_FAILURE';
+export const FETCHING_SEARCHRESULTS_SUCCESS = 'FETCHING_SEARCHRESULTS_SUCCESS';
+export const FETCHING_SEARCHRESULTS_START = 'FETCHING_SEARCHRESULTS_START';
+export const FETCHING_SEARCHRESULTS_FAILURE = 'FETCHING_SEARCHRESULTS_FAILURE';
+export const LISTVIEW = 'LISTVIEW';
 export const UPDATE_NIDMT = 'UPDATE_NIDMT';
 // Where does props come from? We never passed anything in!
 export const fetchActivity = (nasaID, mediaType) => dispatch => {
@@ -97,4 +101,37 @@ export const fetchPopular = () => dispatch => {
 			dispatch({ type: FETCHING_POPULAR_FAILURE, payload: error.response });
 			console.log(error);
 		});
+};
+
+export const fetchSearchResults = (mediaFormats, searchTerm, page) => dispatch => {
+	console.log('----------------ACTION searchResults-----------------------');
+	console.log('mediaFormats = ' + mediaFormats);
+	console.log(
+		'searchResults from https://images-api.nasa.gov/search' +
+			'?q=' +
+			searchTerm +
+			'&page=' +
+			page +
+			'&media_type=' +
+			mediaFormats
+	);
+	axios
+		.get(
+			'https://images-api.nasa.gov/search' + '?q=' + searchTerm + '&page=' + page + '&media_type=' + mediaFormats
+		)
+		.then(response => {
+			dispatch({ type: FETCHING_SEARCHRESULTS_SUCCESS, payload: response.data.collection.items });
+			console.log('searchResults = ' + response.data.collection.items);
+			console.log('done searching NASA images library searchResults');
+		})
+		.catch(error => {
+			dispatch({ type: FETCHING_SEARCHRESULTS_FAILURE, payload: error.response });
+			console.log(error);
+		});
+	console.log('------------------searchResults---------------------');
+};
+
+export const toggleListView = listView => dispatch => {
+	console.log('toggleListView Action = ' + listView);
+	dispatch({ type: LISTVIEW, payload: listView });
 };

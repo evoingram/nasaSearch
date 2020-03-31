@@ -1,7 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
-// , { keyframes }
+import styled, { keyframes } from 'styled-components';
 import spaceBanner from './../img/space-banner.jpg';
+import astronaut from './../img/astronaut.svg';
 
 const ImgHeader = styled.header`
 	background-image: url(${spaceBanner});
@@ -22,13 +22,52 @@ const Link = styled.a`
 		text-decoration: none;
 	}
 `;
+const paddingTop = {
+	paddingTop: '5%',
+	paddingBottom: '5%'
+};
+const paddingBottom = {
+	marginBottom: '-10%'
+};
 
+const wobble3 = keyframes`
+	0% {
+        transform: rotate(-45deg) translateX(35vh) translateY(20vh);
+	}
+    25% {
+        transform: rotate(-35deg) translateX(25vh) translateY(10vh);
+    }
+    50% {
+        transform: rotate(-45deg) translateX(35vh) translateY(5vh);
+    }
+    75% {
+        transform: rotate(-35deg) translateX(25vh) translateY(10vh);
+    }
+    100% {
+        transform: rotate(-45deg) translateX(35vh) translateY(20vh);
+    }
+`;
+const Astronaut = styled.img`
+	src: url(${astronaut});
+	justify-content: right;
+	align-self: right;
+	width: 10%;
+	padding-top: 2%;
+	color: #ffffff;
+	transform: translate(-2vh, -30vh);
+	animation: ${wobble3};
+	animation-duration: 7s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	z-index: 99000;
+	overflow: hidden;
+`;
 function Footer() {
 	return (
 		<div>
 			<ImgHeader>
-				<h2>
-					<div>
+				<h2 style={paddingBottom}>
+					<div style={paddingTop}>
 						{' '}
 						<Link href="https://www.ericaingram.com/" target="_blank">
 							See more of Erica's work in her portfolio.
@@ -45,11 +84,20 @@ function Footer() {
 					</div>
 					<div>
 						{' '}
+						|{' '}
+						<Link href="http://www.nasa.gov/FOIA/index.html" target="_blank">
+							FOIA
+						</Link>{' '}
+						|{' '}
 						<Link href="https://www.nasa.gov/about/contact/index.html" target="_blank">
 							Contact NASA
-						</Link>
+						</Link>{' '}
+						|
 					</div>
 				</h2>
+				<div id="astronaut" className="astronaut">
+					<Astronaut src={astronaut} />
+				</div>
 			</ImgHeader>
 		</div>
 	);

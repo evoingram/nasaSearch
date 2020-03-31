@@ -36,6 +36,7 @@ class ColumnNewestPopular extends React.Component {
 	};
 
 	render() {
+		console.log('listView in ColumnNewestPopular = ' + this.props.listView);
 		return (
 			<div className="column1" style={column}>
 				<Link
@@ -52,6 +53,10 @@ class ColumnNewestPopular extends React.Component {
 						value={(this.props.nasaID, this.props.mediaType)}
 					/>
 					<div value={[this.props.nasaID, this.props.mediaType]} onClick={this.handleSingleDetailLoad}>
+						date created: {this.props.dateCreated}
+						<br />
+						title: {this.props.title}
+						<br />
 						{this.props.explanation}
 					</div>
 				</Link>
@@ -68,21 +73,10 @@ const mapStateToProps = state => {
 	return {
 		isLoading: state.isLoading,
 		error: state.error,
-		title: state.title,
 		imgURL: state.imgURL,
-		copyright: state.copyright,
-		date: state.date,
 		explanation: state.explanation,
 		fileURL: state.fileURL,
-		fileSize: state.fileSize,
-		fileFormat: state.fileFormat,
-		captionsFileURL: state.captionsFileURL,
-		center: state.center,
-		keywords: state.keywords,
-		secondaryC: state.secondaryC,
-		mediaType: state.mediaType,
-		thumbnailURL: state.thumbnailURL,
-		singleResult: state.singleResult
+		mediaType: state.mediaType
 	};
 };
 

@@ -12,11 +12,17 @@ import {
 	FETCHING_NEWEST_SUCCESS,
 	FETCHING_POPULAR_START,
 	FETCHING_POPULAR_SUCCESS,
+	FETCHING_SEARCHRESULTS_START,
+	FETCHING_SEARCHRESULTS_SUCCESS,
+	FETCHING_SEARCHRESULTS_FAILURE,
+	LISTVIEW,
 	UPDATE_NIDMT
 } from '../actions';
 
 const initialState = {
 	isLoading: false,
+	areSearchResults: false,
+	listView: false,
 	title: '',
 	imgURL: '',
 	copyright: '',
@@ -36,6 +42,7 @@ const initialState = {
 	newestResults: [],
 	popularResults: [],
 	currentLoad: [],
+	searchResults: [],
 	results: []
 };
 
@@ -44,12 +51,15 @@ export const reducer = (state = initialState, action) => {
 		case FETCHING_ACTIVITY_START:
 			return {
 				...state,
-				isLoading: true
+				areSearchResults: false,
+				isLoading: true,
+				searchResults: []
 			};
 		case FETCHING_ACTIVITY_SUCCESS:
 			return {
 				...state,
 				isLoading: false,
+				areSearchResults: false,
 				title: action.payload.data[0].title,
 				date: action.payload.data[0].date_created,
 				explanation: action.payload.data[0].description,
@@ -58,51 +68,89 @@ export const reducer = (state = initialState, action) => {
 				mediaType: action.payload.data[0].media_type,
 				nasaID: action.payload.data[0].nasa_id,
 				thumbnailURL: action.payload.links[0].href,
-				singleResult: action.payload
+				singleResult: action.payload,
+				searchResults: []
 			};
 		case FETCHING_FILEURL_START:
 			return {
 				...state,
-				isLoading: true
+				areSearchResults: false,
+				isLoading: true,
+				searchResults: []
 			};
 		case FETCHING_FILEURL_SUCCESS:
 			return {
 				...state,
+				areSearchResults: false,
 				isLoading: false,
-				fileURL: action.payload
+				fileURL: action.payload,
+				searchResults: []
 			};
 		case FETCHING_FILEFORMAT_START:
 			return {
 				...state,
-				isLoading: true
+				areSearchResults: false,
+				isLoading: true,
+				searchResults: []
 			};
 		case FETCHING_FILEFORMAT_SUCCESS:
 			return {
 				...state,
+				areSearchResults: false,
 				isLoading: false,
-				fileSize: action.payload.data['File:FileSize']
+				fileSize: action.payload.data['File:FileSize'],
+				searchResults: []
 			};
 		case FETCHING_NEWEST_START:
 			return {
 				...state,
-				isLoading: true
+				areSearchResults: false,
+				isLoading: true,
+				searchResults: []
 			};
 		case FETCHING_NEWEST_SUCCESS:
 			return {
 				...state,
 				isLoading: false,
+				areSearchResults: false,
+				searchResults: [],
 				currentLoad: action.payload
 			};
 		case FETCHING_POPULAR_START:
 			return {
 				...state,
-				isLoading: true
+				isLoading: true,
+				searchResults: [],
+				areSearchResults: false
 			};
 		case FETCHING_POPULAR_SUCCESS:
 			return {
 				...state,
 				isLoading: false,
+				areSearchResults: false,
+				searchResults: [],
 				currentLoad: action.payload
+			};
+		case FETCHING_SEARCHRESULTS_START:
+			return {
+				...state,
+				areSearchResults: false,
+				isLoading: true,
+				currentLoad: [],
+				searchResults: []
+			};
+		case FETCHING_SEARCHRESULTS_SUCCESS:
+			return {
+				...state,
+				areSearchResults: true,
+				isLoading: false,
+				searchResults: action.payload,
+				currentLoad: action.payload
+			};
+		case LISTVIEW:
+			return {
+				...state,
+				listView: !action.payload
 			};
 		case UPDATE_NIDMT:
 			return {

@@ -36,6 +36,7 @@ class Single extends React.Component {
 									thumbnailURL={this.props.singleResult.links[0].href}
 									fileURL={this.props.fileURL}
 									mediaType={this.props.mediaType}
+									captionsURL={this.props.captionsURL}
 								/>
 								<Share fileURL={this.props.fileURL} />
 							</Div>

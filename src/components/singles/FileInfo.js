@@ -1,5 +1,4 @@
 import React from 'react';
-// do new api call to get proper file paths
 
 class FileInfo extends React.Component {
 	constructor(props) {
@@ -24,7 +23,16 @@ class FileInfo extends React.Component {
 					</b>
 				</p>
 				<p>
+					<b>nasa id:</b> {this.props.nasaID}
+				</p>
+				<p>
+					<b>keywords:</b> {this.props.keywords}
+				</p>
+				<p>
 					<b>center:</b> {this.props.center}
+				</p>
+				<p>
+					<b>date created:</b> {this.props.center}
 				</p>
 				<p>
 					<b>explanation:</b> {this.props.explanation}
