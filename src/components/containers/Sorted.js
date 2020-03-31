@@ -3,9 +3,10 @@ import React from 'react';
 import SearchResult from '../singles/SearchResult';
 import RowNewestPopular from '../singles/RowNewestPopular.js';
 import Single from '../containers/Single';
+import SearchResults from '../containers/SearchResults';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchActivity } from '../../actions';
+import { fetchActivity, fetchSearchResults } from '../../actions';
 
 const row = {
 	display: 'flex',
@@ -192,8 +193,9 @@ const mapStateToProps = state => {
 		currentLoad: state.currentLoad,
 		results: state.results,
 		nasaID: state.nasaID,
+		searchResults: state.searchResults,
 		mediaType: state.mediaType
 	};
 };
 
-export default connect(mapStateToProps, { fetchActivity })(Sorted);
+export default connect(mapStateToProps, { fetchActivity, fetchSearchResults })(Sorted);

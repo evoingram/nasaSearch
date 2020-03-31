@@ -12,6 +12,9 @@ import {
 	FETCHING_NEWEST_SUCCESS,
 	FETCHING_POPULAR_START,
 	FETCHING_POPULAR_SUCCESS,
+	FETCHING_SEARCHRESULTS_START,
+	FETCHING_SEARCHRESULTS_SUCCESS,
+	FETCHING_SEARCHRESULTS_FAILURE,
 	UPDATE_NIDMT
 } from '../actions';
 
@@ -36,6 +39,7 @@ const initialState = {
 	newestResults: [],
 	popularResults: [],
 	currentLoad: [],
+	searchResults: [],
 	results: []
 };
 
@@ -103,6 +107,17 @@ export const reducer = (state = initialState, action) => {
 				...state,
 				isLoading: false,
 				currentLoad: action.payload
+			};
+		case FETCHING_SEARCHRESULTS_START:
+			return {
+				...state,
+				isLoading: true
+			};
+		case FETCHING_SEARCHRESULTS_SUCCESS:
+			return {
+				...state,
+				isLoading: false,
+				searchResults: action.payload
 			};
 		case UPDATE_NIDMT:
 			return {

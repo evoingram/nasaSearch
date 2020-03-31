@@ -161,7 +161,7 @@ class App extends React.Component {
 			)
 			.then(response => {
 				this.setState({ searchResults: response.data.collection.items });
-				console.log(this.state.searchResults);
+				console.log('searchResults = ' + this.state.searchResults);
 				this.setState({ nasaID: response.data.collection.items[0].data[0].nasa_id });
 				console.log('nasa id = ' + this.state.nasaID);
 				console.log('done contacting NASA images library');
