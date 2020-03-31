@@ -6,9 +6,22 @@ class SearchResults extends React.Component {
 		this.state = {};
 	}
 
+	toggleResults = () => {
+		let toggleButton = document.getElementById('searchView');
+		if (toggleButton.textContent === 'Click for List View') {
+			// display list view
+		} else {
+			// display default view
+		}
+	};
 	render() {
 		return (
 			this.props.searchResults && (
+				<Link to="/search">
+					<Button id="searchView" onClick={this.toggleView}>
+						Click to See ListView
+					</Button>
+				</Link>
 				<div className="App">
 					<header className="App-header">
 						<p>
