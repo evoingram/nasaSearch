@@ -52,6 +52,8 @@ class ColumnNewestPopular extends React.Component {
 						value={(this.props.nasaID, this.props.mediaType)}
 					/>
 					<div value={[this.props.nasaID, this.props.mediaType]} onClick={this.handleSingleDetailLoad}>
+						{this.props.title}
+						<br />
 						{this.props.explanation}
 					</div>
 				</Link>

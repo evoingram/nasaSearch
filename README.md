@@ -25,7 +25,6 @@ search results square view list component
 
 ### SearchResultSL
 single search result square component
-- [ ] need tooltip
 - [ ] add info to below thumbnail, same as column/row newest/most popular component
 - [ ] style appropriately
 
@@ -38,25 +37,22 @@ search results list view component
 single search result list component
 - [ ] thumbnail/date created/description 
 - [ ] style appropriately
-- [ ] need tooltip
 
 ### ColumnNewestPopular
 thumbnail sized images/audio/video sorted by newest/most popular component
-- [ ] need tooltip
-- [ ] add info to below thumbnail
+- [X] add info to below thumbnail
 
 ### RowNewestPopular
 thumbnail sized images/audio/video sorted by newest/most popular component
-- [ ] tooltip
-- [ ] add info to below thumbnail
+- [X] add info to below thumbnail
 
 ### FilePath
 file path section component
-- [ ] make sure info matches original
+- [X] make sure info matches original
 
 ### FileInfo
 file info section component
-- [ ] make sure info matches original
+- [X] make sure info matches original
 
 ### Single
 single item component
@@ -68,6 +64,7 @@ share item component
 
 ### Player
 video/audio player
+- [ ] captions
 
 ### Footer
 footer
