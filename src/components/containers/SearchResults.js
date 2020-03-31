@@ -10,8 +10,8 @@ const Button = styled.button`
 	color: white;
 	font-family: 'Audiowide', cursive;
 	border: none;
-	padding-top: 6%;
-	padding-bottom: 6%;
+	padding-top: 20px;
+	padding-bottom: 20px;
 `;
 const row = {
 	display: 'flex',
