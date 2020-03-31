@@ -282,6 +282,20 @@ class App extends React.Component {
 			.catch(error => {
 				console.log(error);
 			});
+		// captionsURL: response.data.collection.items[0].data[0].location
+		axios
+			.get(`https://images-api.nasa.gov/captions/${this.nasaID}`)
+			.then(response => {
+				console.log('captions URL = ' + response.location);
+				this.setState({
+					captionsURL: response.location
+				});
+
+				console.log('done getting single NASA collection file URL');
+			})
+			.catch(error => {
+				console.log(error);
+			});
 	}
 	render() {
 		return (

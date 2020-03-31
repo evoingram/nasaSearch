@@ -68,7 +68,7 @@ video/audio player
 
 ### Footer
 footer
-- [ ] link to FOIA
+- [X] link to FOIA
 
 ### APIData
 component

@@ -45,9 +45,15 @@ function Footer() {
 					</div>
 					<div>
 						{' '}
+						||
+						<Link href="http://www.nasa.gov/FOIA/index.html" target="_blank">
+							FOIA
+						</Link>{' '}
+						||{' '}
 						<Link href="https://www.nasa.gov/about/contact/index.html" target="_blank">
 							Contact NASA
-						</Link>
+						</Link>{' '}
+						||
 					</div>
 				</h2>
 			</ImgHeader>
