@@ -1,5 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Route, Link } from 'react-router-dom';
+import { fetchSearchResults } from '../../actions';
+import Sorted from '../containers/Sorted.js';
+import { connect } from 'react-redux';
 
 // - search github users with `componentDidUpdate`
 
@@ -45,14 +49,14 @@ const SearchDiv = styled.div`
 	align-items: top;
 `;
 const Button = styled.button`
-	margin-top: 2%;
-	margin-bottom: 2%;
+	margin-top: 7%;
+	margin-bottom: 7%;
 	background-color: #15418c;
 	color: white;
 	font-family: 'Audiowide', cursive;
 	border: none;
-	padding-top: 2%;
-	padding-bottom: 2%;
+	padding-top: 7%;
+	padding-bottom: 7%;
 `;
 const Checks = styled.div`
 	display: flex;
@@ -126,7 +130,9 @@ class SearchForm extends React.Component {
 								</label>
 							</div>
 						</Checks>
-						<Button onClick={this.props.searchNASALibrary}>Search NASA's multimedia library</Button>
+						<Link to="/search">
+							<Button>Search NASA's multimedia library</Button>
+						</Link>
 					</Form>
 				</Div1>
 			</Center>
@@ -134,4 +140,14 @@ class SearchForm extends React.Component {
 	}
 }
 
-export default SearchForm;
+const mapStateToProps = state => {
+	return {
+		isLoading: state.isLoading,
+		error: state.error,
+		searchResults: state.searchResults,
+		mediaType: state.mediaType,
+		areSearchResults: state.areSearchResults
+	};
+};
+
+export default connect(mapStateToProps, { fetchSearchResults })(SearchForm);

@@ -10,10 +10,11 @@ import Sorted from './components/containers/Sorted.js';
 // import APOD from './components/singles/APOD.js';
 // import PlayerC from './components/singles/Player.js';
 import SearchResult from './components/singles/SearchResult';
+import SearchResults from './components/containers/SearchResults';
 import axios from 'axios';
 import styled from 'styled-components';
 import { Route, Link } from 'react-router-dom';
-import { fetchActivity, fetchNewest, fetchPopular } from './actions';
+import { fetchActivity, fetchNewest, fetchPopular, fetchSearchResults } from './actions';
 import { connect } from 'react-redux';
 
 const Button = styled.button`
@@ -35,10 +36,12 @@ class App extends React.Component {
 		super();
 		this.state = {
 			searchResults: [],
+			areSearchResults: false,
 			searchTerm: '',
-			imagecb: true,
-			videocb: true,
-			audiocb: true,
+			mediaFormats: '',
+			imagecb: false,
+			videocb: false,
+			audiocb: false,
 			page: 1,
 			newestURL: 'https://images-assets.nasa.gov/recent.json',
 			newestResults: [],
@@ -116,45 +119,92 @@ class App extends React.Component {
 		let videoCBElement = document.getElementById('videocb');
 		let audioCBElement = document.getElementById('audiocb');
 		let imageCBElement = document.getElementById('imagecb');
-		if (!videoCBElement.checked) {
-			this.setState({ videocb: false });
-		}
-		if (!audioCBElement.checked) {
-			this.setState({ audiocb: false });
-		}
-		if (!imageCBElement.checked) {
-			this.setState({ imagecb: false });
+
+		let mediaFormats = '';
+		if (document.getElementById('videocb')) {
+			if (videoCBElement.checked === true) {
+				this.setState({ videocb: true });
+				mediaFormats += 'video,';
+			}
+			if (imageCBElement.checked === true) {
+				this.setState({ imagecb: true });
+				mediaFormats += 'image,';
+			}
+			if (audioCBElement.checked === true) {
+				this.setState({ audiocb: true });
+				mediaFormats += 'audio';
+			}
+			console.log(`image checked: ${imageCBElement.checked}`);
+			if (mediaFormats.slice(-1) === ',') {
+				mediaFormats.substring(0, mediaFormats.length - 1);
+			}
+			console.log(`searchTerm: ${this.state.searchTerm}`);
+			console.log(`page: ${this.state.page}`);
+			console.log(`local mediaFormats: ${mediaFormats}`);
+			this.setState({ mediaFormats: mediaFormats });
+			console.log(`mediaFormats: ${this.state.mediaFormats}`);
 		}
 	};
-
 	searchNASALibrary = event => {
-		event.preventDefault();
-		this.toggleMediaFormatBoolean();
-		console.log(this.state.searchTerm);
-		let mediaFormats = '';
-		if (this.state.imagecb === true) {
-			mediaFormats += 'image,';
+		console.log('running searchNASALibrary');
+		if (this.state.searchTerm !== '' && this.state.searchTerm !== 'undefined' && this.state.searchTerm !== null) {
+			let videoCBElement = document.getElementById('videocb');
+			let audioCBElement = document.getElementById('audiocb');
+			let imageCBElement = document.getElementById('imagecb');
+
+			let mediaFormats = '';
+			if (document.getElementById('videocb')) {
+				if (videoCBElement.checked === true) {
+					this.setState({ videocb: true });
+					mediaFormats += 'video,';
+				}
+				if (imageCBElement.checked === true) {
+					this.setState({ imagecb: true });
+					mediaFormats += 'image,';
+				}
+				if (audioCBElement.checked === true) {
+					this.setState({ audiocb: true });
+					mediaFormats += 'audio';
+				}
+				console.log(`image checked: ${imageCBElement.checked}`);
+				if (mediaFormats.slice(-1) === ',') {
+					mediaFormats.substring(0, mediaFormats.length - 1);
+				}
+				console.log(`searchTerm: ${this.state.searchTerm}`);
+				console.log(`page: ${this.state.page}`);
+				console.log(`local mediaFormats: ${mediaFormats}`);
+				this.setState({ mediaFormats: mediaFormats });
+				console.log(`mediaFormats: ${this.state.mediaFormats}`);
+			}
+			console.log(`props mediaFormats: ${this.state.mediaFormats}`);
+			console.log(`state mediaFormats: ${this.props.mediaFormats}`);
+			this.props.fetchSearchResults(mediaFormats, this.state.searchTerm, this.state.page);
+			this.setState({ areSearchResults: true });
 		}
-		if (this.state.videocb === true) {
-			mediaFormats += 'video,';
-		}
-		if (this.state.audiocb === true) {
-			mediaFormats += 'audio';
-		}
-		if (mediaFormats.slice(-1) === ',') {
-			mediaFormats.substring(0, mediaFormats.length - 1);
-		}
-		console.log(
-			'https://images-api.nasa.gov/search' +
-				'?q=' +
-				this.state.searchTerm +
-				'&page=' +
-				this.state.page +
-				'&media=' +
-				mediaFormats
-		);
-		axios
-			.get(
+	};
+	/* 
+		
+
+
+		rest of action
+
+			event.preventDefault();
+			this.toggleMediaFormatBoolean();
+			console.log(this.state.searchTerm);
+			let mediaFormats = '';
+			if (this.state.imagecb === true) {
+				mediaFormats += 'image,';
+			}
+			if (this.state.videocb === true) {
+				mediaFormats += 'video,';
+			}
+			if (this.state.audiocb === true) {
+				mediaFormats += 'audio';
+			}
+			if (mediaFormats.slice(-1) === ',') {
+				mediaFormats.substring(0, mediaFormats.length - 1);
+			}
+			console.log(
 				'https://images-api.nasa.gov/search' +
 					'?q=' +
 					this.state.searchTerm +
@@ -162,19 +212,28 @@ class App extends React.Component {
 					this.state.page +
 					'&media_type=' +
 					mediaFormats
-			)
-			.then(response => {
-				this.setState({ searchResults: response.data.collection.items });
-				console.log('searchResults = ' + this.state.searchResults);
-				this.setState({ nasaID: response.data.collection.items[0].data[0].nasa_id });
-				console.log('nasa id = ' + this.state.nasaID);
-				console.log('done contacting NASA images library');
-			})
-			.catch(error => {
-				console.log(error);
-			});
-	};
-
+			);
+			axios
+				.get(
+					'https://images-api.nasa.gov/search' +
+						'?q=' +
+						this.state.searchTerm +
+						'&page=' +
+						this.state.page +
+						'&media_type=' +
+						mediaFormats
+				)
+				.then(response => {
+					this.setState({ searchResults: response.data.collection.items });
+					console.log('searchResults = ' + this.state.searchResults);
+					this.setState({ nasaID: response.data.collection.items[0].data[0].nasa_id });
+					console.log('nasa id = ' + this.state.nasaID);
+					console.log('done searching NASA images library');
+				})
+				.catch(error => {
+					console.log(error);
+				});
+		*/
 	getNewestNASALibrary = () => {
 		console.log('running newestNASALibrary');
 		console.log(this.state.newestURL);
@@ -319,6 +378,8 @@ class App extends React.Component {
 								getSingleResult={this.getSingleResult}
 								fetchActivity={this.props.fetchActivity}
 								saveNIDMT={this.saveNIDMT}
+								searchResults={this.props.searchResults}
+								searchNASALibrary={this.searchNASALibrary}
 							/>
 						)}
 					</div>
@@ -333,11 +394,17 @@ const mapStateToProps = state => {
 	return {
 		isLoading: state.isLoading,
 		error: state.error,
-		currentLoad: state.currentLoad
+		currentLoad: state.currentLoad,
+		imagecb: state.imagecb,
+		videocb: state.videocb,
+		audiocb: state.audiocb,
+		mediaFormats: state.mediaFormats,
+		searchResults: state.searchResults,
+		areSearchResults: state.areSearchResults
 	};
 };
 
-export default connect(mapStateToProps, { fetchActivity, fetchNewest, fetchPopular })(App);
+export default connect(mapStateToProps, { fetchActivity, fetchNewest, fetchPopular, fetchSearchResults })(App);
 
 /*
 

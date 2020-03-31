@@ -17,6 +17,7 @@ const row = {
 	padding: '0%',
 	margin: '0%'
 };
+
 class Sorted extends React.Component {
 	constructor(props) {
 		super(props);
@@ -136,8 +137,8 @@ https://images.nasa.gov/
 	render() {
 		console.log('currentLoad in SearchResult = ' + JSON.stringify(this.props.currentLoad));
 		if (
-			this.props.currentLoad !== [] ||
-			this.props.currentLoad !== 'undefined' ||
+			this.props.currentLoad !== [] &&
+			this.props.currentLoad !== 'undefined' &&
 			this.props.currentLoad !== null
 		) {
 			return (
@@ -160,6 +161,9 @@ https://images.nasa.gov/
 												: newResult.data[0].description_508.substring(0, 50)) + '...'
 										}
 										fetchActivity={this.props.fetchActivity}
+										searchResults={this.props.searchResults}
+										fetchSearchResults={this.props.fetchSearchResults}
+										searchNASALibrary={this.props.searchNASALibrary}
 									/>
 								))}
 							</div>
@@ -173,9 +177,26 @@ https://images.nasa.gov/
 							/>
 						</Route>
 						<Route path="/search">
-							<SearchResults searchResults={this.props.searchResults} />
+							<SearchResults
+								searchResults={this.props.searchResults}
+								fetchSearchResults={this.props.fetchSearchResults}
+								searchNASALibrary={this.props.searchNASALibrary}
+								currentLoad={this.props.currentLoad}
+							/>
 						</Route>
 					</Switch>
+				</div>
+			);
+		} else if (this.props.searchResults !== '') {
+			return (
+				<div>
+					<Route path="/search">
+						<SearchResults
+							searchResults={this.props.searchResults}
+							fetchSearchResults={this.props.fetchSearchResults}
+							searchNASALibrary={this.props.searchNASALibrary}
+						/>
+					</Route>
 				</div>
 			);
 		}
@@ -194,7 +215,8 @@ const mapStateToProps = state => {
 		results: state.results,
 		nasaID: state.nasaID,
 		searchResults: state.searchResults,
-		mediaType: state.mediaType
+		mediaType: state.mediaType,
+		areSearchResults: state.areSearchResults
 	};
 };
 
