@@ -386,6 +386,7 @@ class App extends React.Component {
 								searchNASALibrary={this.searchNASALibrary}
 								listView={this.props.listView}
 								toggleView={this.toggleView}
+								dateCreated={this.state.dateCreated}
 							/>
 						)}
 					</div>

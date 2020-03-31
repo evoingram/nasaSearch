@@ -57,6 +57,7 @@ class SearchResults extends React.Component {
 						nasaID={newResult.data[0].nasa_id}
 						imgURL={newResult.links[0].href}
 						mediaType={newResult.data[0].mediaType}
+						dateCreated={newResult.data[0].date_created}
 						explanation={
 							(newResult.data[0].description
 								? newResult.data[0].description.substring(0, 50)
@@ -78,6 +79,7 @@ class SearchResults extends React.Component {
 								fetchActivity={this.props.fetchActivity}
 								nasaID={newResult.data[0].nasa_id}
 								imgURL={newResult.links[0].href}
+								dateCreated={newResult.data[0].date_created}
 								mediaType={newResult.data[0].mediaType}
 								explanation={
 									(newResult.data[0].description

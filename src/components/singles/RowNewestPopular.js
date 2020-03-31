@@ -38,6 +38,7 @@ class RowNewestPopular extends React.Component {
 						explanation={this.props.explanation}
 						fetchActivity={this.props.fetchActivity}
 						listView={this.props.listView}
+						dateCreated={this.props.dateCreated}
 					/>
 				)}
 			</div>

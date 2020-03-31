@@ -30,12 +30,12 @@ single search result square component
 
 ### SearchResultsLL
 search results list view component
-- [ ] use column/row newestpopular as example
+- [X] use column/row newestpopular as example
 - [ ] style appropriately
 
 ### SearchResultLL
 single search result list component
-- [ ] thumbnail/date created/description 
+- [X] thumbnail/date created/description 
 - [ ] style appropriately
 
 ### ColumnNewestPopular

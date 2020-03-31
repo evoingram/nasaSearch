@@ -159,6 +159,7 @@ https://images.nasa.gov/
 										numberOfColumns={this.state.numberOfColumns}
 										nasaID={newResult.data[0].nasa_id}
 										imgURL={newResult.links[0].href}
+										dateCreated={newResult.data[0].date_created}
 										mediaType={newResult.data[0].mediaType}
 										explanation={
 											(newResult.data[0].description
