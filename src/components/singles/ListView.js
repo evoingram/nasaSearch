@@ -1,7 +1,7 @@
 import React from 'react';
 import ColumnNewestPopular from './ColumnNewestPopular.js';
-import { connect } from 'react-redux';
-import { toggleListView } from '../../actions';
+// import { connect } from 'react-redux';
+// import { fetchActivity } from '../../actions';
 
 const row = {
 	display: 'flex',
@@ -13,22 +13,24 @@ const row = {
 	margin: '0%'
 };
 
-class RowNewestPopular extends React.Component {
+class ListView extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
 	}
 	componentDidMount() {
-		if (this.props.numberOfColumns === 6) {
+		console.log('listView mounted!!');
+		if (this.props.numberOfColumns > 1) {
 			this.setState({ numberOfColumns: 1 });
 		}
 	}
 
 	render() {
-		console.log('listView in RowNewestPopular = ' + this.props.listView);
+		console.log('listView in ListView = ' + this.props.listView);
+		console.log('number of columns = ' + this.props.numberOfColumns);
 		return (
 			<div className="row" style={row}>
-				{this.props.numberOfColumns <= 5 && (
+				{this.props.numberOfColumns < 2 && (
 					<ColumnNewestPopular
 						newResult={this.props.newResult}
 						numberOfColumns={this.props.numberOfColumns}
@@ -37,6 +39,7 @@ class RowNewestPopular extends React.Component {
 						imgURL={this.props.imgURL}
 						explanation={this.props.explanation}
 						fetchActivity={this.props.fetchActivity}
+						dateCreated={this.props.dateCreated}
 						listView={this.props.listView}
 					/>
 				)}
@@ -44,13 +47,19 @@ class RowNewestPopular extends React.Component {
 		);
 	}
 }
+export default ListView;
 /*
-export default RowNewestPopular;
-*/
 const mapStateToProps = state => {
 	return {
-		listView: state.listView
+		isLoading: state.isLoading,
+		error: state.error,
+		currentLoad: state.currentLoad,
+		nasaID: state.nasaID,
+		mediaType: state.mediaType
 	};
 };
 
-export default connect(mapStateToProps, { toggleListView })(RowNewestPopular);
+export default connect(mapStateToProps, { fetchActivity })(ListView);
+
+
+*/

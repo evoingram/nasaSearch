@@ -14,7 +14,7 @@ import SearchResults from './components/containers/SearchResults';
 import axios from 'axios';
 import styled from 'styled-components';
 import { Route, Link } from 'react-router-dom';
-import { fetchActivity, fetchNewest, fetchPopular, fetchSearchResults } from './actions';
+import { fetchActivity, fetchNewest, fetchPopular, fetchSearchResults, toggleListView } from './actions';
 import { connect } from 'react-redux';
 
 const Button = styled.button`
@@ -37,6 +37,8 @@ class App extends React.Component {
 		this.state = {
 			searchResults: [],
 			areSearchResults: false,
+			listView: false,
+			dateCreated: '',
 			searchTerm: '',
 			mediaFormats: '',
 			imagecb: false,
@@ -51,27 +53,6 @@ class App extends React.Component {
 			currentLoad: [],
 			results: []
 		};
-		/*
-			title: '',
-			imgURL: '',
-			copyright: '',
-			date: '',
-			explanation: '',
-			fileURL: '',
-			nasaID: '',
-			fileSize: '',
-			fileFormat: '',
-			captionsFileURL: '',
-			center: '',
-			centerURL: '',
-			keywords: [],
-			secondaryC: '',
-			mediaType: '',
-			thumbnailURL: '',
-			isLoading: false
-
-
-		*/
 	}
 
 	getFileSize = url => {
@@ -84,6 +65,7 @@ class App extends React.Component {
 		this.getPopularNASALibrary();
 		this.getNewestNASALibrary();
 	};
+
 	componentDidUpdate = () => {};
 	/*
 
@@ -289,6 +271,28 @@ class App extends React.Component {
 		);
 	};
 
+	toggleView = () => {
+		console.log('toggleView running');
+		console.log('listView at beginning of toggleView toggleListView action = ' + this.props.listView);
+		let toggleButton = document.getElementById('searchView');
+		if (this.props.listView === true) {
+			// display default view
+			if (toggleButton) {
+				toggleButton.textContent = 'Click for List View';
+				console.log('toggleButton text content = ' + toggleButton.textContent);
+			}
+		} else {
+			// display list view
+			if (toggleButton) {
+				toggleButton.textContent = 'Click for Squares View';
+				console.log('toggleButton text content = ' + toggleButton.textContent);
+			}
+		}
+		this.props.toggleListView(this.props.listView);
+		this.setState({ listView: !this.props.listView });
+		console.log('listView at end of toggleView toggleListView action = ' + this.props.listView);
+	};
+
 	getSingleResult() {
 		console.log('running single detail axios get');
 		axios
@@ -380,6 +384,8 @@ class App extends React.Component {
 								saveNIDMT={this.saveNIDMT}
 								searchResults={this.props.searchResults}
 								searchNASALibrary={this.searchNASALibrary}
+								listView={this.props.listView}
+								toggleView={this.toggleView}
 							/>
 						)}
 					</div>
@@ -398,27 +404,23 @@ const mapStateToProps = state => {
 		imagecb: state.imagecb,
 		videocb: state.videocb,
 		audiocb: state.audiocb,
+		dateCreated: state.dateCreated,
+		listView: state.listView,
 		mediaFormats: state.mediaFormats,
 		searchResults: state.searchResults,
 		areSearchResults: state.areSearchResults
 	};
 };
 
-export default connect(mapStateToProps, { fetchActivity, fetchNewest, fetchPopular, fetchSearchResults })(App);
+export default connect(mapStateToProps, {
+	fetchActivity,
+	fetchNewest,
+	fetchPopular,
+	fetchSearchResults,
+	toggleListView
+})(App);
 
 /*
-
-
-		prisonList: state.prisonList,
-		error: state.error,
-    prisonerList: state.prisonerList,
-      allPrisonLocations: state.allPrisonLocations,
-		allPrisonerList: state.allPrisonerList,
-	finalList: state.finalList
-	
-
-
-
 
 		var minYear = 2000;
 		var maxYear = 2019;
@@ -430,24 +432,6 @@ export default connect(mapStateToProps, { fetchActivity, fetchNewest, fetchPopul
 		var maxDay = 28;
 		var randomDay = minDay + Math.round(Math.random() * (maxDay - minDay));
 		var randomDate = randomYear + '-' + randomMonth + '-' + randomDay;
-
-		axios
-			.get('https://api.nasa.gov/planetary/apod?date=' + randomDate + '&api_key=' + process.env.REACT_APP_API_KEY)
-			.then(response => {
-				this.setState({ imgURL: response.data.hdurl });
-				this.setState({ copyright: response.data.copyright });
-				this.setState({ date: response.data.date });
-				this.setState({ explanation: response.data.explanation });
-				console.log('done contacting NASA apod');
-			})
-			.catch(error => {
-				console.log(error);
-			});
-		*/
-/*
-
-	newestResults={this.state.newestResults}
-	popularResults={this.state.popularResults}
 
 					<APOD
 						imgURL={this.state.imgURL}

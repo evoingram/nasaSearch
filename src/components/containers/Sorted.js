@@ -4,9 +4,10 @@ import SearchResult from '../singles/SearchResult';
 import RowNewestPopular from '../singles/RowNewestPopular.js';
 import Single from '../containers/Single';
 import SearchResults from '../containers/SearchResults';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchActivity, fetchSearchResults } from '../../actions';
+import { fetchActivity, fetchSearchResults, toggleListView } from '../../actions';
+import styled from 'styled-components';
 
 const row = {
 	display: 'flex',
@@ -18,6 +19,16 @@ const row = {
 	margin: '0%'
 };
 
+const Button = styled.button`
+	margin-top: 2%;
+	margin-bottom: 2%;
+	background-color: #15418c;
+	color: white;
+	font-family: 'Audiowide', cursive;
+	border: none;
+	padding-top: 20px;
+	padding-bottom: 20px;
+`;
 class Sorted extends React.Component {
 	constructor(props) {
 		super(props);
@@ -26,16 +37,10 @@ class Sorted extends React.Component {
 		};
 	}
 
+	componentDidMount = () => {
+		this.props.toggleView();
+	};
 	/*
-const Button = styled.button`
-	margin-top: 2%;
-	margin-bottom: 2%;
-	background-color: #15418c;
-	color: white;
-	font-family: 'Audiowide', cursive;
-	border: none;
-	padding-top: 2%;
-	padding-bottom: 2%;
 `;
 const ALink = styled.a`
 	color: white;
@@ -135,7 +140,7 @@ https://images.nasa.gov/
 	// response.data.collection.items[x].data.links[0].href = link to preview image
 
 	render() {
-		console.log('currentLoad in SearchResult = ' + JSON.stringify(this.props.currentLoad));
+		console.log('listView in Sorted = ' + this.props.listView);
 		if (
 			this.props.currentLoad !== [] &&
 			this.props.currentLoad !== 'undefined' &&
@@ -164,6 +169,8 @@ https://images.nasa.gov/
 										searchResults={this.props.searchResults}
 										fetchSearchResults={this.props.fetchSearchResults}
 										searchNASALibrary={this.props.searchNASALibrary}
+										listView={this.props.listView}
+										toggleView={this.props.toggleView}
 									/>
 								))}
 							</div>
@@ -178,12 +185,18 @@ https://images.nasa.gov/
 							/>
 						</Route>
 						<Route path="/search">
+							<Link to="/search">
+								<Button id="searchView" onClick={this.props.toggleView}></Button>
+							</Link>
 							<SearchResults
 								searchResults={this.props.searchResults}
 								fetchSearchResults={this.props.fetchSearchResults}
 								searchNASALibrary={this.props.searchNASALibrary}
 								currentLoad={this.props.currentLoad}
 								fetchActivity={this.props.fetchActivity}
+								listView={this.props.listView}
+								toggleView={this.props.toggleView}
+								numberOfColumns={this.state.numberOfColumns}
 							/>
 						</Route>
 					</Switch>
@@ -194,6 +207,11 @@ https://images.nasa.gov/
 				<div>
 					<Switch>
 						<Route path="/search">
+							<Link to="/search">
+								<Button id="searchView" onClick={this.props.toggleView}>
+									Click for List View
+								</Button>
+							</Link>
 							<SearchResults
 								nasaID={this.props.nasaID}
 								mediaType={this.props.mediaType}
@@ -201,6 +219,9 @@ https://images.nasa.gov/
 								fetchSearchResults={this.props.fetchSearchResults}
 								searchNASALibrary={this.props.searchNASALibrary}
 								fetchActivity={this.props.fetchActivity}
+								listView={this.props.listView}
+								toggleView={this.props.toggleView}
+								numberOfColumns={this.state.numberOfColumns}
 							/>
 						</Route>
 						<Route path="/details/:nasaID">
@@ -210,6 +231,7 @@ https://images.nasa.gov/
 								mediaType={this.props.mediaType}
 								getSingleResult={this.props.getSingleResult}
 								fetchActivity={this.props.fetchActivity}
+								toggleView={this.props.toggleView}
 							/>
 						</Route>
 					</Switch>
@@ -230,10 +252,11 @@ const mapStateToProps = state => {
 		currentLoad: state.currentLoad,
 		results: state.results,
 		nasaID: state.nasaID,
+		listView: state.listView,
 		searchResults: state.searchResults,
 		mediaType: state.mediaType,
 		areSearchResults: state.areSearchResults
 	};
 };
 
-export default connect(mapStateToProps, { fetchActivity, fetchSearchResults })(Sorted);
+export default connect(mapStateToProps, { fetchActivity, fetchSearchResults, toggleListView })(Sorted);

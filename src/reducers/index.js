@@ -15,12 +15,14 @@ import {
 	FETCHING_SEARCHRESULTS_START,
 	FETCHING_SEARCHRESULTS_SUCCESS,
 	FETCHING_SEARCHRESULTS_FAILURE,
+	LISTVIEW,
 	UPDATE_NIDMT
 } from '../actions';
 
 const initialState = {
 	isLoading: false,
 	areSearchResults: false,
+	listView: false,
 	title: '',
 	imgURL: '',
 	copyright: '',
@@ -144,6 +146,11 @@ export const reducer = (state = initialState, action) => {
 				isLoading: false,
 				searchResults: action.payload,
 				currentLoad: action.payload
+			};
+		case LISTVIEW:
+			return {
+				...state,
+				listView: !action.payload
 			};
 		case UPDATE_NIDMT:
 			return {

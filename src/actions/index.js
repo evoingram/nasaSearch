@@ -18,6 +18,7 @@ export const FETCHING_POPULAR_FAILURE = 'FETCHING_POPULAR_FAILURE';
 export const FETCHING_SEARCHRESULTS_SUCCESS = 'FETCHING_SEARCHRESULTS_SUCCESS';
 export const FETCHING_SEARCHRESULTS_START = 'FETCHING_SEARCHRESULTS_START';
 export const FETCHING_SEARCHRESULTS_FAILURE = 'FETCHING_SEARCHRESULTS_FAILURE';
+export const LISTVIEW = 'LISTVIEW';
 export const UPDATE_NIDMT = 'UPDATE_NIDMT';
 // Where does props come from? We never passed anything in!
 export const fetchActivity = (nasaID, mediaType) => dispatch => {
@@ -128,4 +129,9 @@ export const fetchSearchResults = (mediaFormats, searchTerm, page) => dispatch =
 			console.log(error);
 		});
 	console.log('------------------searchResults---------------------');
+};
+
+export const toggleListView = listView => dispatch => {
+	console.log('toggleListView Action = ' + listView);
+	dispatch({ type: LISTVIEW, payload: listView });
 };
