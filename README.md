@@ -64,7 +64,7 @@ share item component
 
 ### Player
 video/audio player
-- [ ] captions
+- [X] captions
 
 ### Footer
 footer

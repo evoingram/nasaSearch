@@ -171,6 +171,9 @@ https://images.nasa.gov/
 								getSingleResult={this.props.getSingleResult}
 							/>
 						</Route>
+						<Route path="/search">
+							<SearchResults searchResults={this.props.searchResults} />
+						</Route>
 					</Switch>
 				</div>
 			);
