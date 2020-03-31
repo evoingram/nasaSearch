@@ -26,6 +26,10 @@ const Button = styled.button`
 	padding-top: 6%;
 	padding-bottom: 6%;
 `;
+
+const footerWidth = {
+	maxHeight: '50px'
+};
 class App extends React.Component {
 	constructor() {
 		super();
@@ -319,7 +323,7 @@ class App extends React.Component {
 						)}
 					</div>
 				</header>
-				<Footer />
+				<Footer style={footerWidth} />
 			</div>
 		);
 	}

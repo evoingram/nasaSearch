@@ -1,6 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-// , { keyframes }
+import styled, { keyframes } from 'styled-components';
 import spaceBanner from './../img/space-banner.jpg';
 import astronaut from './../img/astronaut.svg';
 
@@ -23,22 +22,29 @@ const Link = styled.a`
 		text-decoration: none;
 	}
 `;
+const paddingTop = {
+	paddingTop: '5%',
+	paddingBottom: '5%'
+};
+const paddingBottom = {
+	marginBottom: '-10%'
+};
 
 const wobble3 = keyframes`
 	0% {
-        transform: rotate(180deg) translateX(90vh) translateY(0%);
+        transform: rotate(-45deg) translateX(35vh) translateY(20vh);
 	}
     25% {
-        transform: rotate(180deg) translateX(50vh) translateY(-20%);
+        transform: rotate(-35deg) translateX(25vh) translateY(10vh);
     }
     50% {
-        transform: rotate(180deg) translateX(90vh) translateY(-10%);
+        transform: rotate(-45deg) translateX(35vh) translateY(5vh);
     }
     75% {
-        transform: rotate(180deg) translateX(50vh) translateY(-20%);
+        transform: rotate(-35deg) translateX(25vh) translateY(10vh);
     }
     100% {
-        transform: rotate(180deg) translateX(90vh) translateY(0%);
+        transform: rotate(-45deg) translateX(35vh) translateY(20vh);
     }
 `;
 const Astronaut = styled.img`
@@ -48,7 +54,7 @@ const Astronaut = styled.img`
 	width: 10%;
 	padding-top: 2%;
 	color: #ffffff;
-	transform: translate(-2vh, -6vh);
+	transform: translate(-2vh, -30vh);
 	animation: ${wobble3};
 	animation-duration: 7s;
 	animation-iteration-count: infinite;
@@ -60,8 +66,8 @@ function Footer() {
 	return (
 		<div>
 			<ImgHeader>
-				<h2>
-					<div>
+				<h2 style={paddingBottom}>
+					<div style={paddingTop}>
 						{' '}
 						<Link href="https://www.ericaingram.com/" target="_blank">
 							See more of Erica's work in her portfolio.
@@ -78,15 +84,15 @@ function Footer() {
 					</div>
 					<div>
 						{' '}
-						||{' '}
+						|{' '}
 						<Link href="http://www.nasa.gov/FOIA/index.html" target="_blank">
 							FOIA
 						</Link>{' '}
-						||{' '}
+						|{' '}
 						<Link href="https://www.nasa.gov/about/contact/index.html" target="_blank">
 							Contact NASA
 						</Link>{' '}
-						||
+						|
 					</div>
 				</h2>
 				<div id="astronaut" className="astronaut">

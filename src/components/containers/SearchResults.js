@@ -1,5 +1,18 @@
 import React from 'react';
+import { Route, Link } from 'react-router-dom';
+import styled from 'styled-components';
+import RowNewestPopular from '../singles/RowNewestPopular.js';
 
+const Button = styled.button`
+	margin-top: 2%;
+	margin-bottom: 2%;
+	background-color: #15418c;
+	color: white;
+	font-family: 'Audiowide', cursive;
+	border: none;
+	padding-top: 6%;
+	padding-bottom: 6%;
+`;
 class SearchResults extends React.Component {
 	constructor(props) {
 		super(props);
@@ -17,20 +30,27 @@ class SearchResults extends React.Component {
 	render() {
 		return (
 			this.props.searchResults && (
-				<Link to="/search">
-					<Button id="searchView" onClick={this.toggleView}>
-						Click to See ListView
-					</Button>
-				</Link>
-				<div className="App">
-					<header className="App-header">
-						<p>
-							Edit <code>src/App.js</code> and save to reload.
-						</p>
-						<a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-							Learn React
-						</a>
-					</header>
+				<div>
+					<Link to="/search">
+						<Button id="searchView" onClick={this.toggleView}>
+							Click to See ListView
+						</Button>
+					</Link>
+					<div className="App">
+						<header className="App-header">
+							<p>
+								Edit <code>src/App.js</code> and save to reload.
+							</p>
+							<a
+								className="App-link"
+								href="https://reactjs.org"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Learn React
+							</a>
+						</header>
+					</div>
 				</div>
 			) &&
 			this.props.searchResults.map(newResult => (
