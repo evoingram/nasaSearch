@@ -188,7 +188,7 @@ https://images.nasa.gov/
 						<Route path="/search">
 							<Link to="/search">
 								<Button id="searchView" onClick={this.props.toggleView}>
-									Click for Squares View
+									Click for List View
 								</Button>
 							</Link>
 							<SearchResults
@@ -212,7 +212,7 @@ https://images.nasa.gov/
 						<Route path="/search">
 							<Link to="/search">
 								<Button id="searchView" onClick={this.props.toggleView}>
-									Click for Squares View
+									Click for List View
 								</Button>
 							</Link>
 							<SearchResults

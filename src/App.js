@@ -284,7 +284,7 @@ class App extends React.Component {
 		} else {
 			// display list view
 			if (toggleButton) {
-				toggleButton.textContent = 'Click for Squares View';
+				toggleButton.textContent = 'Click for Grid View';
 				console.log('toggleButton text content = ' + toggleButton.textContent);
 			}
 		}

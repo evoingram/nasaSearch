@@ -32,19 +32,19 @@ const paddingBottom = {
 
 const wobble3 = keyframes`
 	0% {
-        transform: rotate(-45deg) translateX(35vh) translateY(20vh);
+        transform: rotate(-45deg) translateX(36vh) translateY(24vh);
 	}
     25% {
-        transform: rotate(-35deg) translateX(25vh) translateY(10vh);
+        transform: rotate(-35deg) translateX(32vh) translateY(22vh);
     }
     50% {
-        transform: rotate(-45deg) translateX(35vh) translateY(5vh);
+        transform: rotate(-45deg) translateX(30vh) translateY(21vh);
     }
     75% {
-        transform: rotate(-35deg) translateX(25vh) translateY(10vh);
+        transform: rotate(-35deg) translateX(32vh) translateY(21vh);
     }
     100% {
-        transform: rotate(-45deg) translateX(35vh) translateY(20vh);
+        transform: rotate(-45deg) translateX(36vh) translateY(24vh);
     }
 `;
 const Astronaut = styled.img`

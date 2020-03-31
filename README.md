@@ -16,20 +16,16 @@ filter search results component
 ### SearchForm
 search form component
 
-### SearchResultsSL
+### SearchResults
 search results square view list component
 - [ ] style appropriately
 
-### SearchResultSL
+### SearchResult
 single search result square component
 - [ ] style appropriately
 
-### SearchResultsLL
+### ListView
 search results list view component
-- [ ] style appropriately
-
-### SearchResultLL
-single search result list component
 - [ ] style appropriately
 
 ### ColumnNewestPopular

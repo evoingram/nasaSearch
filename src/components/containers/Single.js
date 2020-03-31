@@ -15,6 +15,32 @@ const Div = styled.div`
 	padding: 0%;
 `;
 
+const firstColumn = {
+	display: 'flex',
+	flexWrap: 'wrap',
+	flexDirection: 'row',
+	maxWidth: '60%',
+	padding: '0%',
+	margin: '0%',
+	left: '-30vh',
+	marginTop: '5vh'
+};
+const secondColumn = {
+	display: 'flex',
+	flexWrap: 'wrap',
+	flexDirection: 'row',
+	maxWidth: '33%',
+	padding: '0%',
+	margin: '0%'
+};
+const container = {
+	display: 'flex',
+	flexWrap: 'nowrap',
+	flexDirection: 'row',
+	flex: '1',
+	width: '100%'
+};
+
 class Single extends React.Component {
 	constructor(props) {
 		super(props);
@@ -27,20 +53,20 @@ class Single extends React.Component {
 		return (
 			this.props.nasaID !== '' &&
 			this.props.mediaType !== '' && (
-				<div className="App">
+				<div style={container}>
 					{!this.props.singleResult && !this.props.isLoading && <p>Loading...</p>}
 					{this.props.singleResult && !this.props.isLoading && (
-						<div className="App-header">
-							<Div className="firstColumn">
+						<div style={container}>
+							<Div className="firstColumn" style={firstColumn}>
 								<PlayerC
 									thumbnailURL={this.props.singleResult.links[0].href}
 									fileURL={this.props.fileURL}
 									mediaType={this.props.mediaType}
 									captionsURL={this.props.captionsURL}
 								/>
-								<Share fileURL={this.props.fileURL} />
+								<Share fileURL={this.props.fileURL} width="100%" />
 							</Div>
-							<Div className="secondColumn">
+							<Div className="secondColumn" style={secondColumn}>
 								<FilePath
 									nasaID={this.props.singleResult.data[0].nasa_id}
 									title={this.props.singleResult.data[0].title}
