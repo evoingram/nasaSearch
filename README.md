@@ -46,7 +46,6 @@ single item component
 
 ### Share
 share item component
-- [ ] style so components are all in one line
 
 ### Player
 video/audio player
