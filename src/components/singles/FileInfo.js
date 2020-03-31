@@ -1,5 +1,16 @@
 import React from 'react';
+import styled from 'styled-components';
 
+const Button = styled.button`
+	margin-top: 2%;
+	margin-bottom: 2%;
+	background-color: #15418c;
+	color: white;
+	font-family: 'Audiowide', cursive;
+	border: none;
+	padding-top: 20px;
+	padding-bottom: 20px;
+`;
 class FileInfo extends React.Component {
 	constructor(props) {
 		super(props);
@@ -9,11 +20,10 @@ class FileInfo extends React.Component {
 	render() {
 		return (
 			<div>
-				<h2>FILE INFO COMPONENT:</h2>
 				<p>
 					<b>{this.props.nasaID}:</b>{' '}
-					<a href={this.props.fileURL} download>
-						<button>Download</button>
+					<a href={this.props.fileURL} target="_blank" download>
+						<Button>Download</Button>
 					</a>
 				</p>
 

@@ -29,7 +29,7 @@ const secondColumn = {
 	display: 'flex',
 	flexWrap: 'wrap',
 	flexDirection: 'row',
-	maxWidth: '33%',
+	maxWidth: '35%',
 	padding: '0%',
 	margin: '0%'
 };
