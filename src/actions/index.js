@@ -104,7 +104,7 @@ export const fetchPopular = () => dispatch => {
 
 export const fetchSearchResults = (mediaFormats, searchTerm, page) => dispatch => {
 	console.log('----------------ACTION searchResults-----------------------');
-	console.log('mediaFormats = ' + JSON.stringify(mediaFormats));
+	console.log('mediaFormats = ' + mediaFormats);
 	console.log(
 		'searchResults from https://images-api.nasa.gov/search' +
 			'?q=' +

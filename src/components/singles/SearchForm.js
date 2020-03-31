@@ -131,7 +131,7 @@ class SearchForm extends React.Component {
 							</div>
 						</Checks>
 						<Link to="/search">
-							<Button>Search NASA's multimedia library</Button>
+							<Button onClick={this.props.searchNASALibrary}>Search NASA's multimedia library</Button>
 						</Link>
 					</Form>
 				</Div1>
