@@ -70,21 +70,10 @@ const mapStateToProps = state => {
 	return {
 		isLoading: state.isLoading,
 		error: state.error,
-		title: state.title,
 		imgURL: state.imgURL,
-		copyright: state.copyright,
-		date: state.date,
 		explanation: state.explanation,
 		fileURL: state.fileURL,
-		fileSize: state.fileSize,
-		fileFormat: state.fileFormat,
-		captionsFileURL: state.captionsFileURL,
-		center: state.center,
-		keywords: state.keywords,
-		secondaryC: state.secondaryC,
-		mediaType: state.mediaType,
-		thumbnailURL: state.thumbnailURL,
-		singleResult: state.singleResult
+		mediaType: state.mediaType
 	};
 };
 

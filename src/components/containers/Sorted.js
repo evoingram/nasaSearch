@@ -170,6 +170,7 @@ https://images.nasa.gov/
 						</Route>
 						<Route path="/details/:nasaID">
 							<Single
+								fetchActivity={this.props.fetchActivity}
 								nasaID={this.props.nasaID}
 								singleResult={this.props.singleResult}
 								mediaType={this.props.mediaType}
@@ -182,6 +183,7 @@ https://images.nasa.gov/
 								fetchSearchResults={this.props.fetchSearchResults}
 								searchNASALibrary={this.props.searchNASALibrary}
 								currentLoad={this.props.currentLoad}
+								fetchActivity={this.props.fetchActivity}
 							/>
 						</Route>
 					</Switch>
@@ -190,13 +192,27 @@ https://images.nasa.gov/
 		} else if (this.props.searchResults !== '') {
 			return (
 				<div>
-					<Route path="/search">
-						<SearchResults
-							searchResults={this.props.searchResults}
-							fetchSearchResults={this.props.fetchSearchResults}
-							searchNASALibrary={this.props.searchNASALibrary}
-						/>
-					</Route>
+					<Switch>
+						<Route path="/search">
+							<SearchResults
+								nasaID={this.props.nasaID}
+								mediaType={this.props.mediaType}
+								searchResults={this.props.searchResults}
+								fetchSearchResults={this.props.fetchSearchResults}
+								searchNASALibrary={this.props.searchNASALibrary}
+								fetchActivity={this.props.fetchActivity}
+							/>
+						</Route>
+						<Route path="/details/:nasaID">
+							<Single
+								nasaID={this.props.nasaID}
+								singleResult={this.props.singleResult}
+								mediaType={this.props.mediaType}
+								getSingleResult={this.props.getSingleResult}
+								fetchActivity={this.props.fetchActivity}
+							/>
+						</Route>
+					</Switch>
 				</div>
 			);
 		}

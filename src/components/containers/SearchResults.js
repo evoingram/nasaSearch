@@ -65,6 +65,7 @@ class SearchResults extends React.Component {
 								className="row"
 								newResult={newResult}
 								numberOfColumns={this.state.numberOfColumns}
+								fetchActivity={this.props.fetchActivity}
 								nasaID={newResult.data[0].nasa_id}
 								imgURL={newResult.links[0].href}
 								mediaType={newResult.data[0].mediaType}
@@ -73,6 +74,7 @@ class SearchResults extends React.Component {
 										? newResult.data[0].description.substring(0, 50)
 										: newResult.data[0].description_508.substring(0, 50)) + '...'
 								}
+								fetchActivity={this.props.fetchActivity}
 							/>
 						))}
 					</div>

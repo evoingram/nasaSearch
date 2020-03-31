@@ -42,5 +42,19 @@ class RowNewestPopular extends React.Component {
 		);
 	}
 }
-
 export default RowNewestPopular;
+/*
+const mapStateToProps = state => {
+	return {
+		isLoading: state.isLoading,
+		error: state.error,
+		currentLoad: state.currentLoad,
+		nasaID: state.nasaID,
+		mediaType: state.mediaType
+	};
+};
+
+export default connect(mapStateToProps, { fetchActivity })(RowNewestPopular);
+
+
+*/
