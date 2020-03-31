@@ -8,7 +8,16 @@ import {
 	RedditShareButton,
 	TumblrShareButton,
 	TwitterShareButton,
-	WhatsappShareButton
+	WhatsappShareButton,
+	EmailIcon,
+	FacebookIcon,
+	LinkedinIcon,
+	PinterestIcon,
+	PocketIcon,
+	RedditIcon,
+	TumblrIcon,
+	TwitterIcon,
+	WhatsappIcon
 } from 'react-share';
 
 class Share extends React.Component {
@@ -18,21 +27,40 @@ class Share extends React.Component {
 	}
 
 	render() {
+		console.log('share component url = ' + this.props.fileURL);
 		return (
-			<div className="App">
-				<header className="App-header">
+			this.props.fileURL && (
+				<div>
 					<p>Share this media:</p>
-					<EmailShareButton url={this.props.fileURL} />
-					<FacebookShareButton url={this.props.fileURL} />
-					<LinkedinShareButton url={this.props.fileURL} />
-					<PinterestShareButton url={this.props.fileURL} />
-					<PocketShareButton url={this.props.fileURL} />
-					<RedditShareButton url={this.props.fileURL} />
-					<TumblrShareButton url={this.props.fileURL} />
-					<TwitterShareButton url={this.props.fileURL} />
-					<WhatsappShareButton url={this.props.fileURL} />
-				</header>
-			</div>
+					<EmailShareButton url={this.props.fileURL}>
+						<EmailIcon size={62} round={true} />
+					</EmailShareButton>
+					<FacebookShareButton url={this.props.fileURL}>
+						<FacebookIcon size={62} round={true} />
+					</FacebookShareButton>{' '}
+					<LinkedinShareButton url={this.props.fileURL}>
+						<LinkedinIcon size={62} round={true} />
+					</LinkedinShareButton>
+					<PinterestShareButton url={this.props.fileURL} media={this.props.fileURL}>
+						<PinterestIcon size={62} round={true} />
+					</PinterestShareButton>
+					<PocketShareButton url={this.props.fileURL}>
+						<PocketIcon size={62} round={true} />
+					</PocketShareButton>
+					<RedditShareButton url={this.props.fileURL}>
+						<RedditIcon size={62} round={true} />
+					</RedditShareButton>{' '}
+					<TumblrShareButton url={this.props.fileURL}>
+						<TumblrIcon size={62} round={true} />
+					</TumblrShareButton>{' '}
+					<TwitterShareButton url={this.props.fileURL}>
+						<TwitterIcon size={62} round={true} />
+					</TwitterShareButton>
+					<WhatsappShareButton url={this.props.fileURL}>
+						<WhatsappIcon size={62} round={true} />
+					</WhatsappShareButton>
+				</div>
+			)
 		);
 	}
 }

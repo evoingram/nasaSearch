@@ -43,57 +43,31 @@ class SearchResults extends React.Component {
 			this.props.searchResults !== null &&
 			this.props.searchResults !== ''
 		) {
-			if (
-				this.props.listView === false ||
-				this.props.listView === 'false' ||
-				(this.props.listView !== true && this.props.listView !== 'true')
-			) {
-				return this.props.searchResults.map(newResult => (
-					<RowNewestPopular
-						key={newResult.data[0].nasa_id}
-						className="row"
-						newResult={newResult}
-						fetchActivity={this.props.fetchActivity}
-						nasaID={newResult.data[0].nasa_id}
-						imgURL={newResult.links[0].href}
-						mediaType={newResult.data[0].mediaType}
-						dateCreated={newResult.data[0].date_created}
-						explanation={
-							(newResult.data[0].description
-								? newResult.data[0].description.substring(0, 50)
-								: newResult.data[0].description_508.substring(0, 50)) + '...'
-						}
-						fetchActivity={this.props.fetchActivity}
-						listView={this.props.listView}
-					/>
-				));
-			} else if (this.props.listView === true) {
-				return (
-					<div>
-						{this.props.searchResults.map(newResult => (
-							<ListView
-								key={newResult.data[0].nasa_id}
-								className="row"
-								newResult={newResult}
-								numberOfColumns={this.props.numberOfColumns}
-								fetchActivity={this.props.fetchActivity}
-								nasaID={newResult.data[0].nasa_id}
-								imgURL={newResult.links[0].href}
-								dateCreated={newResult.data[0].date_created}
-								mediaType={newResult.data[0].mediaType}
-								explanation={
-									(newResult.data[0].description
-										? newResult.data[0].description.substring(0, 50)
-										: newResult.data[0].description_508.substring(0, 50)) + '...'
-								}
-								dateCreated={newResult.data[0].date_created}
-								fetchActivity={this.props.fetchActivity}
-								listView={this.props.listView}
-							/>
-						))}
-					</div>
-				);
-			}
+			return (
+				<div className="row" style={row}>
+					{this.props.searchResults.map(newResult => (
+						<ListView
+							key={newResult.data[0].nasa_id}
+							className="row"
+							newResult={newResult}
+							numberOfColumns={this.props.numberOfColumns}
+							fetchActivity={this.props.fetchActivity}
+							nasaID={newResult.data[0].nasa_id}
+							imgURL={newResult.links[0].href}
+							dateCreated={newResult.data[0].date_created}
+							mediaType={newResult.data[0].mediaType}
+							explanation={
+								(newResult.data[0].description
+									? newResult.data[0].description.substring(0, 50)
+									: newResult.data[0].description_508.substring(0, 50)) + '...'
+							}
+							dateCreated={newResult.data[0].date_created}
+							fetchActivity={this.props.fetchActivity}
+							listView={this.props.listView}
+						/>
+					))}
+				</div>
+			);
 		}
 	}
 }

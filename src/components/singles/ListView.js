@@ -1,9 +1,9 @@
 import React from 'react';
 import ColumnNewestPopular from './ColumnNewestPopular.js';
-// import { connect } from 'react-redux';
-// import { fetchActivity } from '../../actions';
+import { connect } from 'react-redux';
+import { toggleListView } from '../../actions';
 
-const row = {
+let row = {
 	display: 'flex',
 	flex: '1',
 	flexWrap: 'wrap',
@@ -18,10 +18,37 @@ class ListView extends React.Component {
 		super(props);
 		this.state = {};
 	}
-	componentDidMount() {
+
+	componentDidUpdate() {
 		console.log('listView mounted!!');
-		if (this.props.numberOfColumns > 1) {
-			this.setState({ numberOfColumns: 1 });
+		console.log('componentdidUpdate number of columns = ' + this.props.numberOfColumns);
+		if (this.props.listView === false || this.props.listView === 'false') {
+			if (this.props.numberOfColumns === 6) {
+				this.setState({ numberOfColumns: 1 });
+			}
+			row = {
+				display: 'flex',
+				flex: '1',
+				flexWrap: 'wrap',
+				flexDirection: 'row',
+				flexBasis: '100%',
+				padding: '0%',
+				margin: '0%'
+			};
+		}
+		if (this.props.listView === true || this.props.listView === 'true') {
+			if (this.props.numberOfColumns > 1) {
+				this.setState({ numberOfColumns: 1 });
+			}
+			row = {
+				display: 'flex',
+				flex: '1',
+				flexWrap: 'wrap',
+				flexDirection: 'row',
+				flexBasis: '19%',
+				padding: '0%',
+				margin: '0%'
+			};
 		}
 	}
 
@@ -47,19 +74,13 @@ class ListView extends React.Component {
 		);
 	}
 }
-export default ListView;
-/*
+
+// export default ListView;
+
 const mapStateToProps = state => {
 	return {
-		isLoading: state.isLoading,
-		error: state.error,
-		currentLoad: state.currentLoad,
-		nasaID: state.nasaID,
-		mediaType: state.mediaType
+		listView: state.listView
 	};
 };
 
-export default connect(mapStateToProps, { fetchActivity })(ListView);
-
-
-*/
+export default connect(mapStateToProps, { toggleListView })(ListView);

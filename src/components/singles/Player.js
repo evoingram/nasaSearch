@@ -21,7 +21,6 @@ class PlayerC extends React.Component {
 		return (
 			(this.props.mediaType == 'video' && (
 				<div>
-					<h2>PLAYER COMPONENT:</h2>
 					<Player poster={this.props.thumbnailURL}>
 						<source src={this.props.fileURL} />
 						<track kind="captions" src={this.props.captionsURL} srcLang="en" label="English" default />
@@ -38,7 +37,6 @@ class PlayerC extends React.Component {
 			)) ||
 			(this.props.mediaType == 'audio' && (
 				<div>
-					<h2>PLAYER COMPONENT:</h2>
 					<Player poster={this.props.thumbnailURL}>
 						<source src={this.props.fileURL} />
 						<ControlBar>
@@ -54,7 +52,6 @@ class PlayerC extends React.Component {
 			)) ||
 			(this.props.mediaType == 'image' && (
 				<div>
-					<h2>IMAGE COMPONENT:</h2>
 					<img src={this.props.thumbnailURL} />
 				</div>
 			))

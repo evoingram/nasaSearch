@@ -1,6 +1,15 @@
 import React, { useEffect } from 'react';
-// do new api call to get proper file paths
+import styled from 'styled-components';
 
+const Button = styled.button`
+	margin-top: 2%;
+	margin-bottom: 2%;
+	background-color: #15418c;
+	color: white;
+	font-family: 'Audiowide', cursive;
+	border: none;
+	padding: 20px;
+`;
 const FilePath = props => {
 	useEffect(() => {
 		console.log('Checking, nasaID = ' + props.nasaID);
@@ -10,17 +19,13 @@ const FilePath = props => {
 	return (
 		<div className="App">
 			<header className="App-header">
-				<h2>FILE PATH COMPONENT:</h2>
 				<div>
 					<p>
-						<b>{props.nasaID}:</b>{' '}
-						<a href={props.fileURL} download>
-							<button>Download</button>
+						<a href={props.fileURL} target="_blank" download>
+							<Button>Download</Button>
 						</a>
 					</p>
-					<p>
-						<b>full-resolution Title:</b> {props.title}
-					</p>
+					<p>{props.title}</p>
 
 					<p>
 						<b>

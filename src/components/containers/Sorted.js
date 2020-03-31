@@ -187,7 +187,9 @@ https://images.nasa.gov/
 						</Route>
 						<Route path="/search">
 							<Link to="/search">
-								<Button id="searchView" onClick={this.props.toggleView}></Button>
+								<Button id="searchView" onClick={this.props.toggleView}>
+									Click for List View
+								</Button>
 							</Link>
 							<SearchResults
 								searchResults={this.props.searchResults}
