@@ -66,3 +66,6 @@ component
 
 ### APOD, Main
 not implemented, APOD previously astronomy photo of the day component, Main is create-react-app default
+
+- [ ] fix up comments
+- [ ] remove spaghetti code

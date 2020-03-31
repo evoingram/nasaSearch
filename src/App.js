@@ -289,8 +289,8 @@ class App extends React.Component {
 			}
 		}
 		this.props.toggleListView(this.props.listView);
-		this.setState({ listView: !this.props.listView });
-		console.log('listView at end of toggleView toggleListView action = ' + this.props.listView);
+		// this.setState({ listView: !this.props.listView });
+		console.log('listView at end of toggleView toggleListView action = ' + this.state.listView);
 	};
 
 	getSingleResult() {
@@ -384,7 +384,7 @@ class App extends React.Component {
 								saveNIDMT={this.saveNIDMT}
 								searchResults={this.props.searchResults}
 								searchNASALibrary={this.searchNASALibrary}
-								listView={this.props.listView}
+								listView={this.state.listView}
 								toggleView={this.toggleView}
 								dateCreated={this.state.dateCreated}
 							/>
