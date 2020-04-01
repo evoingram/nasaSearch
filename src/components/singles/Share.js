@@ -19,7 +19,18 @@ import {
 	TwitterIcon,
 	WhatsappIcon
 } from 'react-share';
+import styled from 'styled-components';
 
+const Div = styled.div`
+	display: inline-block;
+	max-height: 125px;
+	align-content: center;
+	align-self: center;
+	margin: auto;
+	width: 100%;
+	padding: 10px;
+	vertical-align: top;
+`;
 class Share extends React.Component {
 	constructor(props) {
 		super(props);
@@ -30,8 +41,9 @@ class Share extends React.Component {
 		console.log('share component url = ' + this.props.fileURL);
 		return (
 			this.props.fileURL && (
-				<div>
+				<Div>
 					<p>Share this media:</p>
+					<br />
 					<EmailShareButton url={this.props.fileURL}>
 						<EmailIcon size={62} round={true} />
 					</EmailShareButton>
@@ -59,7 +71,7 @@ class Share extends React.Component {
 					<WhatsappShareButton url={this.props.fileURL}>
 						<WhatsappIcon size={62} round={true} />
 					</WhatsappShareButton>
-				</div>
+				</Div>
 			)
 		);
 	}

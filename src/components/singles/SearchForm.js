@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Route, Link } from 'react-router-dom';
-import { fetchSearchResults } from '../../actions';
+import { fetchSearchResults, adjustYearRange, turnPage } from '../../actions';
 import Sorted from '../containers/Sorted.js';
 import { connect } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
 
 // - search github users with `componentDidUpdate`
 
@@ -23,6 +26,14 @@ const Center = styled.div`
 	padding: 0;
 	padding-bottom: 3%;
 `;
+const Choices = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	justify-content: center;
+	margin: 0;
+	padding: 0;
+`;
 const Div1 = styled.div`
 	width: 100%;
 	display: flex;
@@ -39,6 +50,20 @@ const fieldLength = {
 	color: '#B2B3A3',
 	border: '5px solid #15418c'
 };
+const Input = styled.input`
+	font-size: '2rem';
+	width: '50%';
+	margin: '0';
+	padding: '0';
+	background-color: '#313332';
+	color: '#B2B3A3';
+	border: '5px solid #15418c';
+	&:focus {
+		background-color: '#313332';
+		color: '#B2B3A3';
+		border: '5px solid #15418c';
+	}
+`;
 const SearchDiv = styled.div`
 	display: flex;
 	flex-wrap: wrap;
@@ -57,6 +82,7 @@ const Button = styled.button`
 	border: none;
 	padding-top: 7%;
 	padding-bottom: 7%;
+	font-size: 1rem;
 `;
 const Checks = styled.div`
 	display: flex;
@@ -64,11 +90,36 @@ const Checks = styled.div`
 	justify-content: center;
 	width: 100%;
 `;
+const PaddingTop = styled.div`
+	padding-top: 5%;
+`;
+
+let useStyles = makeStyles({
+	root: {
+		width: 300
+	}
+});
 class SearchForm extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			yearRangeLocal: [1920, 2020]
+		};
 	}
+
+	valuetext(value) {
+		return `${value}`;
+	}
+
+	handleChange = (event, newValue) => {
+		console.log('yearRange Sorted newValue = ' + newValue);
+		// setYearRange(newValue);
+		this.setState({ yearRangeLocal: newValue });
+		this.setState({ yearRange: this.state.yearRangeLocal });
+		this.props.adjustYearRange(newValue);
+		console.log('yearRange Sorted handleChange = ' + this.state.yearRangeLocal);
+		console.log('yearRange Sorted handleChange = ' + this.props.yearRange);
+	};
 
 	render() {
 		return (
@@ -76,7 +127,7 @@ class SearchForm extends React.Component {
 				<Div1>
 					<Form id="searchForm">
 						<SearchDiv>
-							<input
+							<Input
 								id="name"
 								type="text"
 								name="textfield"
@@ -86,53 +137,72 @@ class SearchForm extends React.Component {
 								style={fieldLength}
 							/>
 						</SearchDiv>
-						<Checks id="mediaFilters">
-							<div id="images" className="filter">
-								<input
-									className="magic-checkbox"
-									type="checkbox"
-									name="imagecb"
-									id="imagecb"
-									value="option"
-									defaultChecked
+						<Choices>
+							<Checks id="mediaFilters">
+								<div id="images" className="filter">
+									<input
+										className="magic-checkbox"
+										type="checkbox"
+										name="imagecb"
+										id="imagecb"
+										value="option"
+										defaultChecked
+									/>
+									<label htmlFor="imagecb"></label>
+									<label className="text" htmlFor="imagecb">
+										Images
+									</label>
+								</div>
+								<div id="video" className="filter">
+									<input
+										className="magic-checkbox"
+										type="checkbox"
+										name="videocb"
+										id="videocb"
+										value="option"
+										defaultChecked
+									/>
+									<label htmlFor="videocb"></label>
+									<label className="text" htmlFor="videocb">
+										Video
+									</label>
+								</div>
+								<div id="audio" className="filter">
+									<input
+										className="magic-checkbox"
+										type="checkbox"
+										name="audiocb"
+										id="audiocb"
+										value="option"
+										defaultChecked
+									/>
+									<label htmlFor="audiocb"></label>
+									<label className="text" htmlFor="audiocb">
+										Audio
+									</label>
+								</div>
+							</Checks>
+							<PaddingTop>
+								<Typography id="range-slider" gutterBottom>
+									Select a range from 1920 to 2020
+								</Typography>
+								<Slider
+									min={1920}
+									max={2020}
+									value={this.state.yearRangeLocal}
+									onChange={this.handleChange}
+									valueLabelDisplay="auto"
+									aria-labelledby="range-slider"
+									getAriaValueText={this.valuetext}
 								/>
-								<label htmlFor="imagecb"></label>
-								<label className="text" htmlFor="imagecb">
-									Images
-								</label>
-							</div>
-							<div id="video" className="filter">
-								<input
-									className="magic-checkbox"
-									type="checkbox"
-									name="videocb"
-									id="videocb"
-									value="option"
-									defaultChecked
-								/>
-								<label htmlFor="videocb"></label>
-								<label className="text" htmlFor="videocb">
-									Video
-								</label>
-							</div>
-							<div id="audio" className="filter">
-								<input
-									className="magic-checkbox"
-									type="checkbox"
-									name="audiocb"
-									id="audiocb"
-									value="option"
-									defaultChecked
-								/>
-								<label htmlFor="audiocb"></label>
-								<label className="text" htmlFor="audiocb">
-									Audio
-								</label>
-							</div>
-						</Checks>
-						<Link to="/search">
-							<Button onClick={this.props.searchNASALibrary}>Search NASA's multimedia library</Button>
-						</Link>
+							</PaddingTop>
+							<br />
+						</Choices>
+						<div>
+							<Link to="/search">
+								<Button onClick={this.props.searchNASALibrary}>Search NASA's multimedia library</Button>
+							</Link>
+						</div>
 					</Form>
 				</Div1>
 			</Center>
@@ -145,9 +215,11 @@ const mapStateToProps = state => {
 		isLoading: state.isLoading,
 		error: state.error,
 		searchResults: state.searchResults,
+		yearRange: state.yearRange,
 		mediaType: state.mediaType,
-		areSearchResults: state.areSearchResults
+		areSearchResults: state.areSearchResults,
+		page: state.page
 	};
 };
 
-export default connect(mapStateToProps, { fetchSearchResults })(SearchForm);
+export default connect(mapStateToProps, { fetchSearchResults, adjustYearRange, turnPage })(SearchForm);

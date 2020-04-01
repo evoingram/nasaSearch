@@ -25,7 +25,7 @@ class RowNewestPopular extends React.Component {
 	}
 
 	render() {
-		console.log('listView in RowNewestPopular = ' + this.props.listView);
+		console.log();
 		return (
 			<div className="row" style={row}>
 				{this.props.numberOfColumns <= 5 && (
@@ -39,6 +39,7 @@ class RowNewestPopular extends React.Component {
 						fetchActivity={this.props.fetchActivity}
 						listView={this.props.listView}
 						dateCreated={this.props.dateCreated}
+						title={this.props.title}
 					/>
 				)}
 			</div>

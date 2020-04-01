@@ -10,7 +10,9 @@ let row = {
 	flexDirection: 'row',
 	flexBasis: '19%',
 	padding: '0%',
-	margin: '0%'
+	margin: '0%',
+	marginLeft: '0%',
+	border: 'none'
 };
 
 class ListView extends React.Component {
@@ -20,8 +22,6 @@ class ListView extends React.Component {
 	}
 
 	componentDidUpdate() {
-		console.log('listView mounted!!');
-		console.log('componentdidUpdate number of columns = ' + this.props.numberOfColumns);
 		if (this.props.listView === false || this.props.listView === 'false') {
 			if (this.props.numberOfColumns === 6) {
 				this.setState({ numberOfColumns: 1 });
@@ -32,8 +32,11 @@ class ListView extends React.Component {
 				flexWrap: 'wrap',
 				flexDirection: 'row',
 				flexBasis: '100%',
+				maxWidth: '80%',
 				padding: '0%',
-				margin: '0%'
+				margin: '0%',
+				marginLeft: '10%',
+				border: '3px solid white'
 			};
 		}
 		if (this.props.listView === true || this.props.listView === 'true') {
@@ -47,14 +50,16 @@ class ListView extends React.Component {
 				flexDirection: 'row',
 				flexBasis: '19%',
 				padding: '0%',
-				margin: '0%'
+				margin: '0%',
+				marginLeft: '0%',
+				border: 'none'
 			};
 		}
 	}
 
 	render() {
-		console.log('listView in ListView = ' + this.props.listView);
-		console.log('number of columns = ' + this.props.numberOfColumns);
+		console.log();
+		console.log();
 		return (
 			<div className="row" style={row}>
 				{this.props.numberOfColumns < 2 && (
@@ -68,6 +73,7 @@ class ListView extends React.Component {
 						fetchActivity={this.props.fetchActivity}
 						dateCreated={this.props.dateCreated}
 						listView={this.props.listView}
+						title={this.props.title}
 					/>
 				)}
 			</div>

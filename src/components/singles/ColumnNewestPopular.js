@@ -36,8 +36,8 @@ class ColumnNewestPopular extends React.Component {
 	};
 
 	render() {
-		console.log('listView in ColumnNewestPopular = ' + this.props.listView);
-		console.log('number of columns = ' + this.props.numberOfColumns);
+		console.log();
+		console.log();
 		return (
 			<div className="column1" style={column}>
 				<Link
@@ -54,9 +54,9 @@ class ColumnNewestPopular extends React.Component {
 						value={(this.props.nasaID, this.props.mediaType)}
 					/>
 					<div value={[this.props.nasaID, this.props.mediaType]} onClick={this.handleSingleDetailLoad}>
-						date created: {this.props.dateCreated}
+						{this.props.dateCreated.substring(0, 10)}
 						<br />
-						title: {this.props.title}
+						{this.props.title}
 						<br />
 						{this.props.explanation}
 					</div>
@@ -66,21 +66,3 @@ class ColumnNewestPopular extends React.Component {
 	}
 }
 export default ColumnNewestPopular;
-
-/*
-export default ColumnNewestPopular;
-
-const mapStateToProps = state => {
-	return {
-		isLoading: state.isLoading,
-		error: state.error,
-		imgURL: state.imgURL,
-		explanation: state.explanation,
-		fileURL: state.fileURL,
-		mediaType: state.mediaType
-	};
-};
-
-export default connect(mapStateToProps, { fetchActivity })(ColumnNewestPopular);
-
-*/
