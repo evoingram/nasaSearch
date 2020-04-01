@@ -1,8 +1,5 @@
 import React from 'react';
-// import styled from 'styled-components';
-import SearchResult from '../singles/SearchResult';
 import RowNewestPopular from '../singles/RowNewestPopular.js';
-import FilterSearchResults from '../singles/FilterSearchResults.js';
 import Single from '../containers/Single';
 import SearchResults from '../containers/SearchResults';
 import { Route, Switch, Link } from 'react-router-dom';
@@ -31,14 +28,9 @@ const Button = styled.button`
 	padding-bottom: 20px;
 	font-size: 1.5rem;
 	border: 0;
-`;
-const ButtonPage = styled.button`
-	background-color: #15418c;
-	margin: 0%;
-	padding: 0;
-	border: 0;
-	height: 0;
-	display: 'none';
+	&:hover {
+		background-color: #0e3579;
+	}
 `;
 class Sorted extends React.Component {
 	constructor(props) {
@@ -51,21 +43,6 @@ class Sorted extends React.Component {
 
 	componentDidMount = () => {
 		this.props.toggleView();
-		/*
-		if (document.getElementById('previousPageButton') !== null) {
-			console.log('previous page button view toggled running');
-			if (this.props.page < 2) {
-				document.getElementById('previousPageButton').textContent = '';
-				document.getElementById('previousPageButton').classList.add('hide');
-				document.getElementById('previousPageButton').style.backgroundColor = '#15418c';
-			} else {
-				document.getElementById('previousPageButton').textContent = 'Previous Page';
-				document.getElementById('previousPageButton').classList.add('show');
-				document.getElementById('previousPageButton').classList.remove('hide');
-				document.getElementById('previousPageButton').style.backgroundColor = '#15418c';
-			}
-		}
-		*/
 	};
 
 	render() {

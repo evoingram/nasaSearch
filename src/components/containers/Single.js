@@ -7,8 +7,6 @@ import FileInfo from '../singles/FileInfo.js';
 import Explanation from '../singles/Explanation.js';
 import { connect } from 'react-redux';
 import { fetchActivity } from '../../actions';
-// import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-// import axios from 'axios';
 
 const Div = styled.div`
 	width: 50%;
@@ -187,45 +185,3 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, { fetchActivity })(Single);
-
-/*		this.state = {
-			searchResults: [],
-			searchTerm: '',
-			imgURL: '',
-			copyright: '',
-			date: '',
-			explanation: '',
-			fileURL: 'http://images-assets.nasa.gov/video/Apollo%2011%20Overview/Apollo%2011%20Overview~preview.mp4',
-			nasaID: '',
-			fileSize: '',
-			fileFormat: '',
-			center: '',
-			imagecb: true,
-			videocb: true,
-			audiocb: true,
-			page: 1,
-			newestURL: 'https://images-assets.nasa.gov/recent.json',
-			newestResults: [],
-			popularURL: 'https://images-assets.nasa.gov/popular.json',
-			popularResults: [],
-			currentResults: true,
-			currentLoad: [],
-			results: []
-			thumbnailURL: ''
-			images-assets.nasa.gov/video/ESPACIO A TIERRA Jan-24-20/ESPACIO A TIERRA Jan-24-20~orig.mp4
-		};
-
-	*/
-
-/*
-	singleResult.data[0].media_type
-	isLoading: false,
-	title: singleResult.data[0].title,
-	date: singleResult.data[0].date_created,
-	explanation: singleResult.data[0].description,
-	center: singleResult.data[0].center,
-	keywords: singleResult.data[0].keywords,
-	mediaType: singleResult.data[0].media_type,
-	thumbnailURL: singleResult.links[0].href,
-	singleResult: singleResult
-*/
