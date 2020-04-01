@@ -13,10 +13,10 @@ work in progress
 ## Major Differences
 
 - Can't download different image sizes, only 'original' size
-- w/i single detail page, keywords aren't linked to do an additional search
 - no EXIF data
 - no tooltips because of accessibility; instead same info is in small area below each thumbnail
 - no 'Visit Center Website' link because it's duplicative
 - no textfield for full resolution URL; instead just displays as a link because it's duplicative
 - NASA page is less compact w/ left-hand bar after you search; instead my search function is only in header because it's duplicative
+- w/i single detail page, keywords aren't linked to do an additional search because it's duplicative
 - mine does not display breadcrumbs in top left because it's duplicative
