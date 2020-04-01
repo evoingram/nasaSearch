@@ -20,8 +20,6 @@ search form component
 
 search results square view list component
 
-- [ ] style appropriately
-
 ### SearchResult
 
 single search result square component
@@ -36,13 +34,9 @@ search results list view component
 
 thumbnail sized images/audio/video sorted by newest/most popular component
 
-- [ ] style appropriately
-
 ### RowNewestPopular
 
 thumbnail sized images/audio/video sorted by newest/most popular component
-
-- [ ] style appropriately
 
 ### FilePath
 
@@ -58,7 +52,6 @@ single item component
 
 ### Not Component Specific
 
-- [ ] add links to keywords for searching
 - [ ] debug video player
 - [ ] plan & write tests
 - [ ] timeline
