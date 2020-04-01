@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import RowNewestPopular from '../singles/RowNewestPopular.js';
 import ListView from '../singles/ListView.js';
 import { connect } from 'react-redux';
-import { toggleListView, adjustYearRange } from '../../actions';
+import { toggleListView, adjustYearRange, turnPage } from '../../actions';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
@@ -39,10 +39,28 @@ class SearchResults extends React.Component {
 
 	componentDidMount = () => {
 		this.props.searchNASALibrary(this.props.mediaFormats, this.props.searchTerm, this.props.page);
+		/*
+		if (
+			document.getElementById('previousPageButton') !== null &&
+			document.getElementById('previousPageButton') !== 'undefined'
+		) {
+			console.log('previous page button view toggled running');
+			if (this.props.page < 2 && this.props.page >= 0) {
+				document.getElementById('previousPageButton').classList.toggle('show');
+				document.getElementById('previousPageButton').classList.toggle('hide');
+				document.getElementById('previousPageButton').textContent = '';
+				document.getElementById('previousPageButton').style.backgroundColor = '#15418c';
+			} else {
+				document.getElementById('previousPageButton').textContent = 'Previous Page';
+				document.getElementById('previousPageButton').classList.toggle('show');
+				document.getElementById('previousPageButton').classList.toggle('hide');
+				document.getElementById('previousPageButton').style.backgroundColor = '#15418c';
+			}
+		}*/
 	};
 
 	render() {
-		console.log('rendered SearchResults yearRange = ' + this.props.yearRange);
+		console.log();
 		if (
 			this.props.searchResults !== [] &&
 			this.props.searchResults !== 'undefined' &&
@@ -86,8 +104,9 @@ export default SearchResults;
 const mapStateToProps = state => {
 	return {
 		listView: state.listView,
-		yearRange: state.yearRange
+		yearRange: state.yearRange,
+		page: state.page
 	};
 };
 
-export default connect(mapStateToProps, { toggleListView, adjustYearRange })(SearchResults);
+export default connect(mapStateToProps, { toggleListView, adjustYearRange, turnPage })(SearchResults);

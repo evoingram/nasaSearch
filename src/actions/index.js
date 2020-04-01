@@ -21,6 +21,8 @@ export const FETCHING_SEARCHRESULTS_FAILURE = 'FETCHING_SEARCHRESULTS_FAILURE';
 export const FETCHING_YR_SUCCESS = 'FETCHING_YR_SUCCESS';
 export const FETCHING_YR_START = 'FETCHING_YR_START';
 export const LISTVIEW = 'LISTVIEW';
+export const TURNPAGE_START = 'TURNPAGE_START';
+export const TURNPAGE_SUCCESS = 'TURNPAGE_SUCCESS';
 export const UPDATE_NIDMT = 'UPDATE_NIDMT';
 // Where does props come from? We never passed anything in!
 export const fetchActivity = (nasaID, mediaType) => dispatch => {
@@ -29,10 +31,8 @@ export const fetchActivity = (nasaID, mediaType) => dispatch => {
 	axios
 		.get(`https://images-api.nasa.gov/search?q=${nasaID}`)
 		.then(response => {
-			console.log('fetchActivity single detail = ' + response.data.collection.items[0].data[0]);
 			// thumbnail link = response.data.collection.items[x].data.links[0].href;
 			dispatch({ type: FETCHING_ACTIVITY_SUCCESS, payload: response.data.collection.items[0] });
-			console.log(`nasa ID + media type = ${response.data.collection.items[0].data[0].media_type} ${nasaID}`);
 
 			axios
 				.get(
@@ -40,20 +40,6 @@ export const fetchActivity = (nasaID, mediaType) => dispatch => {
 				)
 				.then(response => {
 					dispatch({ type: FETCHING_FILEURL_SUCCESS, payload: response.data });
-
-					/*
-						
-						response.data.forEach(fileLink => {
-							console.log('fileLink = ' + fileLink);
-							if (fileLink.toString.includes('~orig')) {
-								this.setState({
-									fileURL: response.data[0]
-								});
-							}
-						});
-
-					*/
-					console.log('done getting single NASA collection file URL');
 				})
 				.catch(error => {
 					dispatch({ type: FETCHING_FILEURL_FAILURE, payload: error.response });
@@ -65,16 +51,12 @@ export const fetchActivity = (nasaID, mediaType) => dispatch => {
 					`https://images-assets.nasa.gov/${response.data.collection.items[0].data[0].media_type}/${nasaID}/metadata.json`
 				)
 				.then(response => {
-					console.log('fetchFileFormat response = ' + [response]);
-					console.log('fetchFileFormat metadata response stringify = ' + JSON.stringify(response));
-					console.log('fetchFileFormat FS = ' + response.data['File:FileSize']);
 					dispatch({ type: FETCHING_FILEFORMAT_SUCCESS, payload: response });
 				})
 				.catch(error => {
 					dispatch({ type: FETCHING_FILEFORMAT_FAILURE, payload: error.response });
 					console.log(error);
 				});
-			console.log('done running fetchActivity');
 		})
 		.catch(error => {
 			dispatch({ type: FETCHING_ACTIVITY_FAILURE, payload: error.response });
@@ -91,7 +73,6 @@ export const fetchNewest = () => dispatch => {
 			console.log('fetchNewest = ' + response.data.collection.items);
 			// thumbnail link = response.data.collection.items[x].data.links[0].href;
 			dispatch({ type: FETCHING_NEWEST_SUCCESS, payload: response.data.collection.items });
-			console.log('done getting newest results');
 		})
 		.catch(error => {
 			dispatch({ type: FETCHING_NEWEST_FAILURE, payload: error.response });
@@ -108,7 +89,6 @@ export const fetchPopular = () => dispatch => {
 			console.log('fetchPopular = ' + response.data.collection.items);
 			// thumbnail link = response.data.collection.items[x].data.links[0].href;
 			dispatch({ type: FETCHING_POPULAR_SUCCESS, payload: response.data.collection.items });
-			console.log('done getting popular results');
 		})
 		.catch(error => {
 			dispatch({ type: FETCHING_POPULAR_FAILURE, payload: error.response });
@@ -117,21 +97,7 @@ export const fetchPopular = () => dispatch => {
 };
 
 export const fetchSearchResults = (mediaFormats, searchTerm, page, yearRange) => dispatch => {
-	console.log('----------------ACTION searchResults-----------------------');
-	console.log('mediaFormats = ' + mediaFormats);
-	console.log(
-		'searchResults from https://images-api.nasa.gov/search' +
-			'?q=' +
-			searchTerm +
-			'&page=' +
-			page +
-			'&media_type=' +
-			mediaFormats +
-			'&year_start=' +
-			yearRange[0] +
-			'&year_end=' +
-			yearRange[1]
-	);
+	// dispatch({ type: FETCHING_SEARCHRESULTS_START });
 	axios
 		.get(
 			'https://images-api.nasa.gov/search' +
@@ -148,8 +114,6 @@ export const fetchSearchResults = (mediaFormats, searchTerm, page, yearRange) =>
 		)
 		.then(response => {
 			dispatch({ type: FETCHING_SEARCHRESULTS_SUCCESS, payload: response.data.collection.items });
-			console.log('searchResults = ' + response.data.collection.items);
-			console.log('done searching NASA images library searchResults');
 		})
 		.catch(error => {
 			dispatch({ type: FETCHING_SEARCHRESULTS_FAILURE, payload: error.response });
@@ -159,12 +123,15 @@ export const fetchSearchResults = (mediaFormats, searchTerm, page, yearRange) =>
 };
 
 export const toggleListView = listView => dispatch => {
-	console.log('toggleListView Action = ' + listView);
 	dispatch({ type: LISTVIEW, payload: listView });
 };
 
 export const adjustYearRange = yearRange => dispatch => {
 	dispatch({ type: FETCHING_YR_START });
-	console.log('adjustYearRange Action = ' + yearRange);
 	dispatch({ type: FETCHING_YR_SUCCESS, payload: yearRange });
+};
+export const turnPage = page => dispatch => {
+	dispatch({ type: TURNPAGE_START });
+	console.log('turnPage Action running = ' + page);
+	dispatch({ type: TURNPAGE_SUCCESS, payload: page });
 };

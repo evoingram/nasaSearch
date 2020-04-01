@@ -18,6 +18,8 @@ import {
 	FETCHING_YR_START,
 	FETCHING_YR_SUCCESS,
 	LISTVIEW,
+	TURNPAGE_START,
+	TURNPAGE_SUCCESS,
 	UPDATE_NIDMT
 } from '../actions';
 
@@ -47,7 +49,8 @@ const initialState = {
 	popularResults: [],
 	currentLoad: [],
 	searchResults: [],
-	results: []
+	results: [],
+	page: 1
 };
 
 export const reducer = (state = initialState, action) => {
@@ -232,9 +235,7 @@ export const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				areSearchResults: false,
-				isLoading: true,
-				currentLoad: [],
-				searchResults: []
+				isLoading: true
 			};
 		case FETCHING_SEARCHRESULTS_SUCCESS:
 			return {
@@ -249,6 +250,18 @@ export const reducer = (state = initialState, action) => {
 				...state,
 				listView: !action.payload
 			};
+
+		case TURNPAGE_START:
+			return {
+				...state,
+				isLoading: true
+			};
+		case TURNPAGE_SUCCESS:
+			return {
+				...state,
+				isLoading: false,
+				page: action.payload
+			};
 		case UPDATE_NIDMT:
 			return {
 				...state,
@@ -256,7 +269,6 @@ export const reducer = (state = initialState, action) => {
 				nasaID: action.payload[0],
 				mediaType: action.payload[1]
 			};
-
 		default:
 			return state;
 	}

@@ -22,8 +22,6 @@ class ListView extends React.Component {
 	}
 
 	componentDidUpdate() {
-		console.log('listView mounted!!');
-		console.log('componentdidUpdate number of columns = ' + this.props.numberOfColumns);
 		if (this.props.listView === false || this.props.listView === 'false') {
 			if (this.props.numberOfColumns === 6) {
 				this.setState({ numberOfColumns: 1 });
@@ -60,8 +58,8 @@ class ListView extends React.Component {
 	}
 
 	render() {
-		console.log('listView in ListView = ' + this.props.listView);
-		console.log('number of columns = ' + this.props.numberOfColumns);
+		console.log();
+		console.log();
 		return (
 			<div className="row" style={row}>
 				{this.props.numberOfColumns < 2 && (

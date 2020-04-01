@@ -6,7 +6,6 @@ work in progress
 
 ## To Do
 
-- [ ] plan & write tests
-- [ ] suggest other searches
 - [ ] fix up comments
 - [ ] remove spaghetti code
+- [ ] plan & write tests

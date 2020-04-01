@@ -20,7 +20,7 @@ class SearchResult extends React.Component {
 		};
 	}
 	render() {
-		console.log('currentLoad in SearchResult = ' + JSON.stringify(this.props.currentLoad));
+		console.log();
 		return (
 			<div className="App">
 				<div className="App-header" style={wrapper}>

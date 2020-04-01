@@ -7,12 +7,8 @@ import Single from '../containers/Single';
 import SearchResults from '../containers/SearchResults';
 import { Route, Switch, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchActivity, fetchSearchResults, toggleListView, adjustYearRange } from '../../actions';
+import { fetchActivity, fetchSearchResults, toggleListView, adjustYearRange, turnPage } from '../../actions';
 import styled from 'styled-components';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/core/Slider';
-
 const row = {
 	display: 'flex',
 	flex: '1',
@@ -24,15 +20,25 @@ const row = {
 };
 
 const Button = styled.button`
+	margin: 0%;
 	margin-top: 2%;
 	margin-bottom: 2%;
+	margin-right: 2%;
 	background-color: #15418c;
 	color: white;
 	font-family: 'Audiowide', cursive;
-	border: none;
 	padding-top: 20px;
 	padding-bottom: 20px;
 	font-size: 1.5rem;
+	border: 0;
+`;
+const ButtonPage = styled.button`
+	background-color: #15418c;
+	margin: 0%;
+	padding: 0;
+	border: 0;
+	height: 0;
+	display: 'none';
 `;
 class Sorted extends React.Component {
 	constructor(props) {
@@ -43,44 +49,27 @@ class Sorted extends React.Component {
 		};
 	}
 
-	useStyles = makeStyles({
-		root: {
-			width: 300
-		}
-	});
-
-	valuetext(value) {
-		return `${value}`;
-	}
-
-	handleChange = (event, newValue) => {
-		console.log('yearRange Sorted newValue = ' + newValue);
-		// setYearRange(newValue);
-		this.setState({ yearRangeLocal: newValue });
-		this.setState({ yearRange: this.state.yearRangeLocal });
-		this.props.adjustYearRange(newValue);
-		console.log('yearRange Sorted handleChange = ' + this.state.yearRangeLocal);
-		console.log('yearRange Sorted handleChange = ' + this.props.yearRange);
-	};
-
 	componentDidMount = () => {
 		this.props.toggleView();
-		if (
-			document.getElementById('searchResults') !== null &&
-			(document.getElementById('searchResults').style.display == 'inline-block' ||
-				document.getElementById('searchResults').style.display == 'flex' ||
-				document.getElementById('searchResults').style.display == 'block')
-		) {
-			document.getElementById('yearSlider').style.height = '100%';
-		} else {
-			if (document.getElementById('yearSlider') !== null) {
-				document.getElementById('yearSlider').style.height = '0%';
+		/*
+		if (document.getElementById('previousPageButton') !== null) {
+			console.log('previous page button view toggled running');
+			if (this.props.page < 2) {
+				document.getElementById('previousPageButton').textContent = '';
+				document.getElementById('previousPageButton').classList.add('hide');
+				document.getElementById('previousPageButton').style.backgroundColor = '#15418c';
+			} else {
+				document.getElementById('previousPageButton').textContent = 'Previous Page';
+				document.getElementById('previousPageButton').classList.add('show');
+				document.getElementById('previousPageButton').classList.remove('hide');
+				document.getElementById('previousPageButton').style.backgroundColor = '#15418c';
 			}
 		}
+		*/
 	};
 
 	render() {
-		console.log('rendered Sorted yearRange = ' + this.props.yearRange);
+		console.log();
 		if (
 			this.props.currentLoad !== [] &&
 			this.props.currentLoad !== 'undefined' &&
@@ -146,6 +135,10 @@ class Sorted extends React.Component {
 								numberOfColumns={this.state.numberOfColumns}
 								centerLink={this.props.centerLink}
 							/>
+							<Button id="previousPageButton" onClick={this.props.previousPage}>
+								Previous
+							</Button>
+							<Button onClick={this.props.nextPage}>Next</Button>
 						</Route>
 					</Switch>
 				</div>
@@ -160,7 +153,6 @@ class Sorted extends React.Component {
 									Click for List View
 								</Button>
 							</Link>
-
 							<SearchResults
 								id="searchResults"
 								nasaID={this.props.nasaID}
@@ -174,6 +166,11 @@ class Sorted extends React.Component {
 								numberOfColumns={this.state.numberOfColumns}
 								centerLink={this.props.centerLink}
 							/>
+							<Button id="previousPageButton" onClick={this.props.previousPage}>
+								Previous
+							</Button>
+
+							<Button onClick={this.props.nextPage}>Next</Button>
 						</Route>
 						<Route path="/details/:nasaID">
 							<Single
@@ -208,8 +205,15 @@ const mapStateToProps = state => {
 		listView: state.listView,
 		searchResults: state.searchResults,
 		mediaType: state.mediaType,
-		areSearchResults: state.areSearchResults
+		areSearchResults: state.areSearchResults,
+		page: state.page
 	};
 };
 
-export default connect(mapStateToProps, { fetchActivity, fetchSearchResults, toggleListView, adjustYearRange })(Sorted);
+export default connect(mapStateToProps, {
+	fetchActivity,
+	fetchSearchResults,
+	toggleListView,
+	adjustYearRange,
+	turnPage
+})(Sorted);

@@ -33,3 +33,35 @@ code {
   src: url('../fonts/RobotoMono-Regular.ttf');
   src: local('RobotoMono');
 }
+
+.show {
+  display: inline-block;
+  height: 100%;
+  margin: 0%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-right: 2%;
+  background-color: #15418c;
+  color: white;
+  font-family: 'Audiowide', cursive;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 1.5rem;
+  border: 0;
+}
+
+.hide {
+  margin: 0%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-right: 2%;
+  background-color: #15418c;
+  color: white;
+  font-family: 'Audiowide', cursive;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 1.5rem;
+  border: 0;
+  display: none;
+  height: 0;
+}

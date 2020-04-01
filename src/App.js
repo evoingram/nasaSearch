@@ -20,7 +20,8 @@ import {
 	fetchPopular,
 	fetchSearchResults,
 	toggleListView,
-	adjustYearRange
+	adjustYearRange,
+	turnPage
 } from './actions';
 import { connect } from 'react-redux';
 
@@ -55,7 +56,6 @@ class App extends React.Component {
 			imagecb: false,
 			videocb: false,
 			audiocb: false,
-			page: 1,
 			newestURL: 'https://images-assets.nasa.gov/recent.json',
 			newestResults: [],
 			popularURL: 'https://images-assets.nasa.gov/popular.json',
@@ -66,46 +66,48 @@ class App extends React.Component {
 		};
 	}
 
-	getFileSize = url => {
-		let fileInfo = new Blob([url], { type: 'video/mp4' });
-		this.setState({ fileSize: fileInfo.size });
-		console.log(fileInfo.size);
-	};
-
 	componentDidMount = () => {
 		this.getPopularNASALibrary();
 		this.getNewestNASALibrary();
 	};
 
 	componentDidUpdate = () => {};
-	/*
 
-				let fileInfo = new Blob([response.data.hdurl]);
-				this.getFileSize(response.data.hdurl);
-				this.setState({ fileSize: fileInfo.size });
-				this.setState({ fileFormat: fileInfo.type });
+	getFileSize = url => {
+		let fileInfo = new Blob([url], { type: 'video/mp4' });
+		this.setState({ fileSize: fileInfo.size });
+		console.log(fileInfo.size);
+	};
+	nextPage = () => {
+		console.log('next page running');
+		console.log('next page running before =' + this.props.page);
+		let newPage = this.props.page + 1;
+		console.log('next newPage running before =' + newPage);
+		if (this.props.page > 3) {
+			this.props.turnPage(1);
+		} else {
+			this.props.turnPage(newPage);
+		}
+		console.log('next this.props.page running after =' + this.props.page);
+		this.searchNASALibrary();
+	};
+	previousPage = () => {
+		console.log('previous page running');
+		console.log('previous page running before =' + this.props.page);
+		if (this.props.page >= 2) {
+			let newPage = this.props.page - 1;
+			console.log('previous newPage running before =' + newPage);
+			this.props.turnPage(newPage);
+			console.log('previous this.props.page running after =' + this.props.page);
+		} else {
+			this.props.turnPage(4);
+		}
+		this.searchNASALibrary();
+	};
 
-
-*/
 	changeSearchTerm = event => {
 		console.log('search term being set');
 		this.setState({ searchTerm: event.target.value });
-		/*
-
-			useEffect(() => {
-				if (props.tickets !== null) {
-				const results = props.tickets.filter(ticket =>
-					ticket.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-					ticket.status.toLowerCase().includes(searchTerm.toLowerCase()) ||
-					ticket.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-					ticket.category.toLowerCase().includes(searchTerm.toLowerCase())  ||
-					ticket.date.toLowerCase().includes(searchTerm.toLowerCase()) 
-				);
-				console.log("useEffect Search Results = " + results);
-				setSearchResults([...results]);
-				}
-			}, [searchTerm, props.tickets]);
-		*/
 	};
 
 	toggleMediaFormatBoolean = () => {
@@ -132,7 +134,7 @@ class App extends React.Component {
 				mediaFormats.substring(0, mediaFormats.length - 1);
 			}
 			console.log(`searchTerm: ${this.state.searchTerm}`);
-			console.log(`page: ${this.state.page}`);
+			console.log(`toggleMediaFormatBoolean page: ${this.props.page}`);
 			console.log(`local mediaFormats: ${mediaFormats}`);
 			this.setState({ mediaFormats: mediaFormats });
 			console.log(`mediaFormats: ${this.state.mediaFormats}`);
@@ -140,6 +142,7 @@ class App extends React.Component {
 	};
 	searchNASALibrary = event => {
 		console.log('running searchNASALibrary');
+		console.log('searchNASALibrary page running =' + this.props.page);
 		if (this.state.searchTerm !== '' && this.state.searchTerm !== 'undefined' && this.state.searchTerm !== null) {
 			let videoCBElement = document.getElementById('videocb');
 			let audioCBElement = document.getElementById('audiocb');
@@ -159,87 +162,24 @@ class App extends React.Component {
 					this.setState({ audiocb: true });
 					mediaFormats += 'audio';
 				}
-				console.log(`image checked: ${imageCBElement.checked}`);
 				if (mediaFormats.slice(-1) === ',') {
 					mediaFormats.substring(0, mediaFormats.length - 1);
 				}
-				console.log(`searchTerm: ${this.state.searchTerm}`);
-				console.log(`page: ${this.state.page}`);
-				console.log(`local mediaFormats: ${mediaFormats}`);
+				console.log(`searchNASALibrary page running: ${this.props.page}`);
 				this.setState({ mediaFormats: mediaFormats });
-				console.log(`mediaFormats: ${this.state.mediaFormats}`);
 			}
-			console.log(`props mediaFormats: ${this.state.mediaFormats}`);
-			console.log(`state mediaFormats: ${this.props.mediaFormats}`);
-			this.props.fetchSearchResults(mediaFormats, this.state.searchTerm, this.state.page, this.props.yearRange);
+			this.props.fetchSearchResults(mediaFormats, this.state.searchTerm, this.props.page, this.props.yearRange);
 			this.setState({ areSearchResults: true });
 		}
 	};
-	/* 
-		
 
-
-		rest of action
-
-			event.preventDefault();
-			this.toggleMediaFormatBoolean();
-			console.log(this.state.searchTerm);
-			let mediaFormats = '';
-			if (this.state.imagecb === true) {
-				mediaFormats += 'image,';
-			}
-			if (this.state.videocb === true) {
-				mediaFormats += 'video,';
-			}
-			if (this.state.audiocb === true) {
-				mediaFormats += 'audio';
-			}
-			if (mediaFormats.slice(-1) === ',') {
-				mediaFormats.substring(0, mediaFormats.length - 1);
-			}
-			console.log(
-				'https://images-api.nasa.gov/search' +
-					'?q=' +
-					this.state.searchTerm +
-					'&page=' +
-					this.state.page +
-					'&media_type=' +
-					mediaFormats
-			);
-			axios
-				.get(
-					'https://images-api.nasa.gov/search' +
-						'?q=' +
-						this.state.searchTerm +
-						'&page=' +
-						this.state.page +
-						'&media_type=' +
-						mediaFormats
-				)
-				.then(response => {
-					this.setState({ searchResults: response.data.collection.items });
-					console.log('searchResults = ' + this.state.searchResults);
-					this.setState({ nasaID: response.data.collection.items[0].data[0].nasa_id });
-					console.log('nasa id = ' + this.state.nasaID);
-					console.log('done searching NASA images library');
-				})
-				.catch(error => {
-					console.log(error);
-				});
-		*/
 	getNewestNASALibrary = () => {
 		console.log('running newestNASALibrary');
-		console.log(this.state.newestURL);
 		axios
 			.get(this.state.newestURL)
 			.then(response => {
 				console.log(response);
 				this.setState({ newestResults: response.data.collection.items });
-				console.log('newest results = ' + this.state.newestResults);
-				// thumbnail link = response.data.collection.items[x].data.links[0].href;
-				// this.setState({ results: this.state.newestResults });
-				// console.log('results = ' + this.state.results);
-				console.log('done getting newest NASA images app function');
 			})
 			.catch(error => {
 				console.log(error);
@@ -251,9 +191,6 @@ class App extends React.Component {
 			.get(this.state.popularURL)
 			.then(response => {
 				this.setState({ popularResults: response.data.collection.items });
-				// thumbnail link = response.data.collection.items[x].data.links[0].href;
-				console.log('popular results = ' + this.state.popularResults);
-				console.log('done getting popular NASA images app function');
 			})
 			.catch(error => {
 				console.log(error);
@@ -301,6 +238,7 @@ class App extends React.Component {
 		}
 		this.props.toggleListView(this.props.listView);
 		// this.setState({ listView: !this.props.listView });
+
 		console.log('listView at end of toggleView toggleListView action = ' + this.state.listView);
 	};
 
@@ -324,20 +262,13 @@ class App extends React.Component {
 			.catch(error => {
 				console.log(error);
 			});
-
-		console.log('shorthand done getting single Q NASA details');
 		// https://images-assets.nasa.gov/image/as11-40-5874/collection.json
 		axios
 			.get(`https://images-assets.nasa.gov/image/${this.nasaID}/collection.json`)
 			.then(response => {
-				console.log('single detail collection = ' + response.data[0]);
-				console.log('single detail collection data = ' + response.data);
-				console.log('single detail collection response = ' + response);
 				this.setState({
 					fileURL: response.data[0]
 				});
-
-				console.log('done getting single NASA collection file URL');
 			})
 			.catch(error => {
 				console.log(error);
@@ -347,18 +278,12 @@ class App extends React.Component {
 		axios
 			.get(`https://images-assets.nasa.gov/image/${this.nasaID}/metadata.json`)
 			.then(response => {
-				console.log('single detail metadata r = ' + [response]);
-				console.log('single detail metadata d = ' + JSON.stringify(response));
-				console.log('single detail metadata FS = ' + response.data['File:FileSize']);
-				console.log('single detail metadata FF = ' + response.data['File:MIMEType']);
 				let fileFormat = response.data['File:MIMEType'];
 				let fileFormatString = toString(fileFormat).substring(0, 5);
 				this.setState({
 					fileSize: response.data['File:FileSize'],
 					fileFormat: fileFormatString
 				});
-
-				console.log('done getting metadata');
 			})
 			.catch(error => {
 				console.log(error);
@@ -371,30 +296,10 @@ class App extends React.Component {
 				this.setState({
 					captionsURL: response.location
 				});
-
-				console.log('done getting single NASA collection file URL');
 			})
 			.catch(error => {
 				console.log(error);
 			});
-
-		// get full array
-		// for each item in array check if includes '~orig'
-		// if found set that as fileURL
-		/*
-		if (this.fileURL !== '') {
-			let appArray = this.fileURL.split(',');
-			appArray.forEach(fileLink => {
-				console.log('App fileLink = ' + fileLink);
-				if (fileLink.toString.includes('~orig')) {
-					this.setState({
-						fileURL: fileLink
-					});
-				}
-			});
-		}
-
-		*/
 	}
 	render() {
 		return (
@@ -427,6 +332,8 @@ class App extends React.Component {
 								centerLink={this.state.centerLink}
 								yearRange={this.state.yearRange}
 								adjustYearRange={this.adjustYearRange}
+								nextPage={this.nextPage}
+								previousPage={this.previousPage}
 							/>
 						)}
 					</div>
@@ -452,7 +359,8 @@ const mapStateToProps = state => {
 		listView: state.listView,
 		mediaFormats: state.mediaFormats,
 		searchResults: state.searchResults,
-		areSearchResults: state.areSearchResults
+		areSearchResults: state.areSearchResults,
+		page: state.page
 	};
 };
 
@@ -462,7 +370,8 @@ export default connect(mapStateToProps, {
 	fetchPopular,
 	fetchSearchResults,
 	toggleListView,
-	adjustYearRange
+	adjustYearRange,
+	turnPage
 })(App);
 
 /*

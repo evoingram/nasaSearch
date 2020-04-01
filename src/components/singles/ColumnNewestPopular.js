@@ -36,8 +36,8 @@ class ColumnNewestPopular extends React.Component {
 	};
 
 	render() {
-		console.log('listView in ColumnNewestPopular = ' + this.props.listView);
-		console.log('number of columns = ' + this.props.numberOfColumns);
+		console.log();
+		console.log();
 		return (
 			<div className="column1" style={column}>
 				<Link

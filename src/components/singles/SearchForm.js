@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Route, Link } from 'react-router-dom';
-import { fetchSearchResults, adjustYearRange } from '../../actions';
+import { fetchSearchResults, adjustYearRange, turnPage } from '../../actions';
 import Sorted from '../containers/Sorted.js';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
@@ -90,6 +90,15 @@ const Checks = styled.div`
 	justify-content: center;
 	width: 100%;
 `;
+const PaddingTop = styled.div`
+	padding-top: 5%;
+`;
+
+let useStyles = makeStyles({
+	root: {
+		width: 300
+	}
+});
 class SearchForm extends React.Component {
 	constructor(props) {
 		super(props);
@@ -97,11 +106,6 @@ class SearchForm extends React.Component {
 			yearRangeLocal: [1920, 2020]
 		};
 	}
-	useStyles = makeStyles({
-		root: {
-			width: 300
-		}
-	});
 
 	valuetext(value) {
 		return `${value}`;
@@ -178,7 +182,7 @@ class SearchForm extends React.Component {
 									</label>
 								</div>
 							</Checks>
-							<div id="yearSlider" className={this.useStyles}>
+							<PaddingTop>
 								<Typography id="range-slider" gutterBottom>
 									Select a range from 1920 to 2020
 								</Typography>
@@ -191,7 +195,7 @@ class SearchForm extends React.Component {
 									aria-labelledby="range-slider"
 									getAriaValueText={this.valuetext}
 								/>
-							</div>
+							</PaddingTop>
 							<br />
 						</Choices>
 						<div>
@@ -213,8 +217,9 @@ const mapStateToProps = state => {
 		searchResults: state.searchResults,
 		yearRange: state.yearRange,
 		mediaType: state.mediaType,
-		areSearchResults: state.areSearchResults
+		areSearchResults: state.areSearchResults,
+		page: state.page
 	};
 };
 
-export default connect(mapStateToProps, { fetchSearchResults, adjustYearRange })(SearchForm);
+export default connect(mapStateToProps, { fetchSearchResults, adjustYearRange, turnPage })(SearchForm);
