@@ -25,13 +25,10 @@ class ColumnNewestPopular extends React.Component {
 	}
 
 	handleSingleDetailLoad = e => {
-		console.log('e = ' + e.target.value);
 		this.props.fetchActivity(this.props.nasaID, this.props.mediaType);
 	};
 
 	render() {
-		console.log();
-		console.log();
 		return (
 			<div className="column1" style={column}>
 				<Link

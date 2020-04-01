@@ -58,8 +58,6 @@ class ListView extends React.Component {
 	}
 
 	render() {
-		console.log();
-		console.log();
 		return (
 			<div className="row" style={row}>
 				{this.props.numberOfColumns < 2 && (

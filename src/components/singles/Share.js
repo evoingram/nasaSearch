@@ -38,7 +38,6 @@ class Share extends React.Component {
 	}
 
 	render() {
-		console.log('share component url = ' + this.props.fileURL);
 		return (
 			this.props.fileURL && (
 				<Div>

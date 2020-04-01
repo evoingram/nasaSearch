@@ -1,16 +1,12 @@
 import React from 'react';
 import './css/App.css';
-import './css/index.css';
 import './css/magic.css';
 import './css/video-react.css';
 import './css/tiledSearchResults.css';
 import Header from './components/Header.js';
 import Footer from './components/Footer.js';
 import Sorted from './components/containers/Sorted.js';
-// import APOD from './components/singles/APOD.js';
-// import PlayerC from './components/singles/Player.js';
 import SearchResult from './components/singles/SearchResult';
-import SearchResults from './components/containers/SearchResults';
 import axios from 'axios';
 import styled from 'styled-components';
 import { Route, Link } from 'react-router-dom';

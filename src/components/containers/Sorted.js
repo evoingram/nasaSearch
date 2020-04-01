@@ -168,8 +168,6 @@ class Sorted extends React.Component {
 	}
 }
 
-// infinite loop if you pass into fetchActivity  ([newResult.data[0].nasa_id,newResult.data[0].mediaType])
-
 const mapStateToProps = state => {
 	return {
 		isLoading: state.isLoading,
