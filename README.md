@@ -7,9 +7,7 @@ work in progress
 ## To Do
 
 - [ ] style list view
-- [ ] fix white search box on focus
 - [ ] plan & write tests
-- [ ] timeline
 - [ ] suggest other searches
 - [ ] fix up comments
 - [ ] remove spaghetti code
