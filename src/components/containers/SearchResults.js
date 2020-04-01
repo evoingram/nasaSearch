@@ -4,7 +4,10 @@ import styled from 'styled-components';
 import RowNewestPopular from '../singles/RowNewestPopular.js';
 import ListView from '../singles/ListView.js';
 import { connect } from 'react-redux';
-import { toggleListView } from '../../actions';
+import { toggleListView, adjustYearRange } from '../../actions';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
 
 const Button = styled.button`
 	margin-top: 2%;
@@ -29,7 +32,9 @@ const row = {
 class SearchResults extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			yearRangeLocal: [1920, 2020]
+		};
 	}
 
 	componentDidMount = () => {
@@ -37,7 +42,7 @@ class SearchResults extends React.Component {
 	};
 
 	render() {
-		console.log();
+		console.log('rendered SearchResults yearRange = ' + this.props.yearRange);
 		if (
 			this.props.searchResults !== [] &&
 			this.props.searchResults !== 'undefined' &&
@@ -45,29 +50,31 @@ class SearchResults extends React.Component {
 			this.props.searchResults !== ''
 		) {
 			return (
-				<div className="row" style={row}>
-					{this.props.searchResults.map(newResult => (
-						<ListView
-							key={newResult.data[0].nasa_id}
-							className="row"
-							newResult={newResult}
-							numberOfColumns={this.props.numberOfColumns}
-							fetchActivity={this.props.fetchActivity}
-							nasaID={newResult.data[0].nasa_id}
-							imgURL={newResult.links[0].href}
-							dateCreated={newResult.data[0].date_created}
-							mediaType={newResult.data[0].mediaType}
-							explanation={
-								(newResult.data[0].description
-									? newResult.data[0].description.substring(0, 50)
-									: newResult.data[0].description_508.substring(0, 50)) + '...'
-							}
-							dateCreated={newResult.data[0].date_created.substring(0, 10)}
-							fetchActivity={this.props.fetchActivity}
-							listView={this.props.listView}
-							title={newResult.data[0].title}
-						/>
-					))}
+				<div>
+					<div className="row" style={row}>
+						{this.props.searchResults.map(newResult => (
+							<ListView
+								key={newResult.data[0].nasa_id}
+								className="row"
+								newResult={newResult}
+								numberOfColumns={this.props.numberOfColumns}
+								fetchActivity={this.props.fetchActivity}
+								nasaID={newResult.data[0].nasa_id}
+								imgURL={newResult.links[0].href}
+								dateCreated={newResult.data[0].date_created}
+								mediaType={newResult.data[0].mediaType}
+								explanation={
+									(newResult.data[0].description
+										? newResult.data[0].description.substring(0, 50)
+										: newResult.data[0].description_508.substring(0, 50)) + '...'
+								}
+								dateCreated={newResult.data[0].date_created.substring(0, 10)}
+								fetchActivity={this.props.fetchActivity}
+								listView={this.props.listView}
+								title={newResult.data[0].title}
+							/>
+						))}
+					</div>
 				</div>
 			);
 		}
@@ -78,8 +85,9 @@ export default SearchResults;
 */
 const mapStateToProps = state => {
 	return {
-		listView: state.listView
+		listView: state.listView,
+		yearRange: state.yearRange
 	};
 };
 
-export default connect(mapStateToProps, { toggleListView })(SearchResults);
+export default connect(mapStateToProps, { toggleListView, adjustYearRange })(SearchResults);

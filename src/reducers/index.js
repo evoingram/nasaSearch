@@ -15,6 +15,8 @@ import {
 	FETCHING_SEARCHRESULTS_START,
 	FETCHING_SEARCHRESULTS_SUCCESS,
 	FETCHING_SEARCHRESULTS_FAILURE,
+	FETCHING_YR_START,
+	FETCHING_YR_SUCCESS,
 	LISTVIEW,
 	UPDATE_NIDMT
 } from '../actions';
@@ -28,6 +30,7 @@ const initialState = {
 	copyright: '',
 	date: '',
 	explanation: '',
+	yearRange: [1920, 2020],
 	fileURL: [],
 	nasaID: '',
 	fileSize: '',
@@ -49,6 +52,17 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
 	switch (action.type) {
+		case FETCHING_YR_START:
+			return {
+				...state,
+				isLoading: true
+			};
+		case FETCHING_YR_SUCCESS:
+			return {
+				...state,
+				yearRange: action.payload,
+				isLoading: false
+			};
 		case FETCHING_ACTIVITY_START:
 			return {
 				...state,

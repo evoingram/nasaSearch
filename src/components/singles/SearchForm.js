@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Route, Link } from 'react-router-dom';
-import { fetchSearchResults } from '../../actions';
+import { fetchSearchResults, adjustYearRange } from '../../actions';
 import Sorted from '../containers/Sorted.js';
 import { connect } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
 
 // - search github users with `componentDidUpdate`
 
@@ -68,8 +71,29 @@ const Checks = styled.div`
 class SearchForm extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			yearRangeLocal: [1920, 2020]
+		};
 	}
+	useStyles = makeStyles({
+		root: {
+			width: 300
+		}
+	});
+
+	valuetext(value) {
+		return `${value}`;
+	}
+
+	handleChange = (event, newValue) => {
+		console.log('yearRange Sorted newValue = ' + newValue);
+		// setYearRange(newValue);
+		this.setState({ yearRangeLocal: newValue });
+		this.setState({ yearRange: this.state.yearRangeLocal });
+		this.props.adjustYearRange(newValue);
+		console.log('yearRange Sorted handleChange = ' + this.state.yearRangeLocal);
+		console.log('yearRange Sorted handleChange = ' + this.props.yearRange);
+	};
 
 	render() {
 		return (
@@ -131,6 +155,21 @@ class SearchForm extends React.Component {
 								</label>
 							</div>
 						</Checks>
+						<div id="yearSlider" className={this.useStyles} width="50%">
+							<Typography id="range-slider" gutterBottom>
+								Select a range from 1920 to 2020
+							</Typography>
+							<Slider
+								min={1920}
+								max={2020}
+								value={this.state.yearRangeLocal}
+								onChange={this.handleChange}
+								valueLabelDisplay="auto"
+								aria-labelledby="range-slider"
+								getAriaValueText={this.valuetext}
+							/>
+						</div>
+						<br />
 						<Link to="/search">
 							<Button onClick={this.props.searchNASALibrary}>Search NASA's multimedia library</Button>
 						</Link>
@@ -146,9 +185,10 @@ const mapStateToProps = state => {
 		isLoading: state.isLoading,
 		error: state.error,
 		searchResults: state.searchResults,
+		yearRange: state.yearRange,
 		mediaType: state.mediaType,
 		areSearchResults: state.areSearchResults
 	};
 };
 
-export default connect(mapStateToProps, { fetchSearchResults })(SearchForm);
+export default connect(mapStateToProps, { fetchSearchResults, adjustYearRange })(SearchForm);

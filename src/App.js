@@ -14,7 +14,14 @@ import SearchResults from './components/containers/SearchResults';
 import axios from 'axios';
 import styled from 'styled-components';
 import { Route, Link } from 'react-router-dom';
-import { fetchActivity, fetchNewest, fetchPopular, fetchSearchResults, toggleListView } from './actions';
+import {
+	fetchActivity,
+	fetchNewest,
+	fetchPopular,
+	fetchSearchResults,
+	toggleListView,
+	adjustYearRange
+} from './actions';
 import { connect } from 'react-redux';
 
 const Button = styled.button`
@@ -44,6 +51,7 @@ class App extends React.Component {
 			centerLink: 'centerLink Test',
 			searchTerm: '',
 			mediaFormats: '',
+			yearRange: [1920, 2020],
 			imagecb: false,
 			videocb: false,
 			audiocb: false,
@@ -163,7 +171,7 @@ class App extends React.Component {
 			}
 			console.log(`props mediaFormats: ${this.state.mediaFormats}`);
 			console.log(`state mediaFormats: ${this.props.mediaFormats}`);
-			this.props.fetchSearchResults(mediaFormats, this.state.searchTerm, this.state.page);
+			this.props.fetchSearchResults(mediaFormats, this.state.searchTerm, this.state.page, this.props.yearRange);
 			this.setState({ areSearchResults: true });
 		}
 	};
@@ -391,7 +399,12 @@ class App extends React.Component {
 	render() {
 		return (
 			<div className="App">
-				<Header searchNASALibrary={this.searchNASALibrary} changeSearchTerm={this.changeSearchTerm} />
+				<Header
+					searchNASALibrary={this.searchNASALibrary}
+					changeSearchTerm={this.changeSearchTerm}
+					yearRange={this.state.yearRange}
+					adjustYearRange={this.adjustYearRange}
+				/>
 				<header className="App-header">
 					<Link to="/">
 						<Button id="MostRecentPopular" onClick={this.toggleResults}>
@@ -412,6 +425,8 @@ class App extends React.Component {
 								toggleView={this.toggleView}
 								dateCreated={this.state.dateCreated}
 								centerLink={this.state.centerLink}
+								yearRange={this.state.yearRange}
+								adjustYearRange={this.adjustYearRange}
 							/>
 						)}
 					</div>
@@ -431,6 +446,7 @@ const mapStateToProps = state => {
 		videocb: state.videocb,
 		center: state.center,
 		audiocb: state.audiocb,
+		yearRange: state.yearRange,
 		centerLink: state.centerLink,
 		dateCreated: state.dateCreated,
 		listView: state.listView,
@@ -445,7 +461,8 @@ export default connect(mapStateToProps, {
 	fetchNewest,
 	fetchPopular,
 	fetchSearchResults,
-	toggleListView
+	toggleListView,
+	adjustYearRange
 })(App);
 
 /*

@@ -18,6 +18,8 @@ export const FETCHING_POPULAR_FAILURE = 'FETCHING_POPULAR_FAILURE';
 export const FETCHING_SEARCHRESULTS_SUCCESS = 'FETCHING_SEARCHRESULTS_SUCCESS';
 export const FETCHING_SEARCHRESULTS_START = 'FETCHING_SEARCHRESULTS_START';
 export const FETCHING_SEARCHRESULTS_FAILURE = 'FETCHING_SEARCHRESULTS_FAILURE';
+export const FETCHING_YR_SUCCESS = 'FETCHING_YR_SUCCESS';
+export const FETCHING_YR_START = 'FETCHING_YR_START';
 export const LISTVIEW = 'LISTVIEW';
 export const UPDATE_NIDMT = 'UPDATE_NIDMT';
 // Where does props come from? We never passed anything in!
@@ -114,7 +116,7 @@ export const fetchPopular = () => dispatch => {
 		});
 };
 
-export const fetchSearchResults = (mediaFormats, searchTerm, page) => dispatch => {
+export const fetchSearchResults = (mediaFormats, searchTerm, page, yearRange) => dispatch => {
 	console.log('----------------ACTION searchResults-----------------------');
 	console.log('mediaFormats = ' + mediaFormats);
 	console.log(
@@ -124,11 +126,25 @@ export const fetchSearchResults = (mediaFormats, searchTerm, page) => dispatch =
 			'&page=' +
 			page +
 			'&media_type=' +
-			mediaFormats
+			mediaFormats +
+			'&year_start=' +
+			yearRange[0] +
+			'&year_end=' +
+			yearRange[1]
 	);
 	axios
 		.get(
-			'https://images-api.nasa.gov/search' + '?q=' + searchTerm + '&page=' + page + '&media_type=' + mediaFormats
+			'https://images-api.nasa.gov/search' +
+				'?q=' +
+				searchTerm +
+				'&page=' +
+				page +
+				'&media_type=' +
+				mediaFormats +
+				'&year_start=' +
+				yearRange[0] +
+				'&year_end=' +
+				yearRange[1]
 		)
 		.then(response => {
 			dispatch({ type: FETCHING_SEARCHRESULTS_SUCCESS, payload: response.data.collection.items });
@@ -145,4 +161,10 @@ export const fetchSearchResults = (mediaFormats, searchTerm, page) => dispatch =
 export const toggleListView = listView => dispatch => {
 	console.log('toggleListView Action = ' + listView);
 	dispatch({ type: LISTVIEW, payload: listView });
+};
+
+export const adjustYearRange = yearRange => dispatch => {
+	dispatch({ type: FETCHING_YR_START });
+	console.log('adjustYearRange Action = ' + yearRange);
+	dispatch({ type: FETCHING_YR_SUCCESS, payload: yearRange });
 };

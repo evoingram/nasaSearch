@@ -2,12 +2,16 @@ import React from 'react';
 // import styled from 'styled-components';
 import SearchResult from '../singles/SearchResult';
 import RowNewestPopular from '../singles/RowNewestPopular.js';
+import FilterSearchResults from '../singles/FilterSearchResults.js';
 import Single from '../containers/Single';
 import SearchResults from '../containers/SearchResults';
 import { Route, Switch, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchActivity, fetchSearchResults, toggleListView } from '../../actions';
+import { fetchActivity, fetchSearchResults, toggleListView, adjustYearRange } from '../../actions';
 import styled from 'styled-components';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
 
 const row = {
 	display: 'flex',
@@ -34,114 +38,49 @@ class Sorted extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			numberOfColumns: 1
+			numberOfColumns: 1,
+			yearRangeLocal: [1920, 2020]
 		};
 	}
 
+	useStyles = makeStyles({
+		root: {
+			width: 300
+		}
+	});
+
+	valuetext(value) {
+		return `${value}`;
+	}
+
+	handleChange = (event, newValue) => {
+		console.log('yearRange Sorted newValue = ' + newValue);
+		// setYearRange(newValue);
+		this.setState({ yearRangeLocal: newValue });
+		this.setState({ yearRange: this.state.yearRangeLocal });
+		this.props.adjustYearRange(newValue);
+		console.log('yearRange Sorted handleChange = ' + this.state.yearRangeLocal);
+		console.log('yearRange Sorted handleChange = ' + this.props.yearRange);
+	};
+
 	componentDidMount = () => {
 		this.props.toggleView();
-	};
-	/*
-`;
-const ALink = styled.a`
-	color: white;
-	text-decoration: none;
-`;
-https://images-assets.nasa.gov/recent.json
-https://images-assets.nasa.gov/video/Apollo%2011%20Overview/collection.json
-https://images-api.nasa.gov/search?q=apollo%2011&description=moon%20landing&media_type=video
-https://images.nasa.gov/
-
-*/
-	/*	
-	componentDidUpdate() {
 		if (
-			this.props.currentLoad !== [] ||
-			this.props.currentLoad !== 'undefined' ||
-			this.props.currentLoad !== null
+			document.getElementById('searchResults') !== null &&
+			(document.getElementById('searchResults').style.display == 'inline-block' ||
+				document.getElementById('searchResults').style.display == 'flex' ||
+				document.getElementById('searchResults').style.display == 'block')
 		) {
-			let resultContainer = document.getElementById('wrapperNewest');
-			resultContainer.textContent = '';
-			let rowDiv;
-			let columnDiv;
-			let imgDiv;
-			let shortDescriptionDiv;
-			let shortDescription;
-			let searchDescription;
-			let detailsURL;
-			let detailsLinkDiv;
-			rowDiv = document.createElement('div');
-			rowDiv.className = 'row';
-			resultContainer.appendChild(rowDiv);
-			let y = 1;
-			console.log('current results DidUpdate = ' + this.props.currentResults);
-			console.log('current load DidUpdate = ' + this.props.currentLoad);
-			this.props.currentLoad.map(newResult => {
-				console.log('thumbnail link = ' + newResult.links[0].href);
-				detailsURL = '/details-' + newResult.data[0].nasa_id;
-				console.log('nasa id = ' + newResult.data[0].nasa_id);
-				console.log('nasa description = ' + newResult.data[0].description_508);
-				searchDescription = newResult.data[0].description_508;
-				if (searchDescription === undefined) {
-					searchDescription = newResult.data[0].description;
-				}
-				if (searchDescription === 'undefined') {
-					searchDescription = '';
-				}
-				if (searchDescription.length > 50) {
-					shortDescription = searchDescription.substring(0, 50) + '...';
-				} else {
-					shortDescription = searchDescription + '...';
-				}
-				if (y <= 5) {
-					columnDiv = document.createElement('div');
-					columnDiv.className = 'column';
-					columnDiv.id = 'column' + y;
-					rowDiv.appendChild(columnDiv);
-					detailsLinkDiv = columnDiv.appendChild(document.createElement('a'));
-					detailsLinkDiv.href = detailsURL;
-					detailsLinkDiv.style.color = 'white';
-					detailsLinkDiv.style.textDecoration = 'none';
-					imgDiv = detailsLinkDiv.appendChild(document.createElement('img'));
-					imgDiv.src = newResult.links[0].href;
-					shortDescriptionDiv = detailsLinkDiv.appendChild(document.createElement('div'));
-					shortDescriptionDiv.textContent = shortDescription;
-					shortDescriptionDiv.style.fontSize = '1rem';
-					y += 1;
-				}
-				if (y === 6) {
-					y = 1;
-					resultContainer = document.getElementById('wrapperNewest');
-					rowDiv = document.createElement('div');
-					rowDiv.className = 'row';
-					resultContainer.appendChild(rowDiv);
-					columnDiv = document.createElement('div');
-					columnDiv.className = 'column';
-					columnDiv.id = 'column' + y;
-					rowDiv.appendChild(columnDiv);
-					detailsLinkDiv = columnDiv.appendChild(document.createElement('a'));
-					detailsLinkDiv.style.color = 'white';
-					detailsLinkDiv.style.textDecoration = 'none';
-					detailsLinkDiv.href = detailsURL;
-					imgDiv = detailsLinkDiv.appendChild(document.createElement('img'));
-					imgDiv.src = newResult.links[0].href;
-					shortDescriptionDiv = detailsLinkDiv.appendChild(document.createElement('div'));
-					shortDescription = newResult.data[0].description;
-					shortDescription = shortDescription.substring(0, 50);
-					shortDescriptionDiv.textContent = shortDescription;
-					shortDescriptionDiv.style.fontSize = '1rem';
-					y += 1;
-				}
-				console.log('y = ' + y);
-			});
+			document.getElementById('yearSlider').style.height = '100%';
+		} else {
+			if (document.getElementById('yearSlider') !== null) {
+				document.getElementById('yearSlider').style.height = '0%';
+			}
 		}
-	}
-*/
-	// mapped to display below
-	// response.data.collection.items[x].data.links[0].href = link to preview image
+	};
 
 	render() {
-		console.log();
+		console.log('rendered Sorted yearRange = ' + this.props.yearRange);
 		if (
 			this.props.currentLoad !== [] &&
 			this.props.currentLoad !== 'undefined' &&
@@ -195,6 +134,7 @@ https://images.nasa.gov/
 									Click for List View
 								</Button>
 							</Link>
+
 							<SearchResults
 								searchResults={this.props.searchResults}
 								fetchSearchResults={this.props.fetchSearchResults}
@@ -220,7 +160,9 @@ https://images.nasa.gov/
 									Click for List View
 								</Button>
 							</Link>
+
 							<SearchResults
+								id="searchResults"
 								nasaID={this.props.nasaID}
 								mediaType={this.props.mediaType}
 								searchResults={this.props.searchResults}
@@ -262,6 +204,7 @@ const mapStateToProps = state => {
 		currentLoad: state.currentLoad,
 		results: state.results,
 		nasaID: state.nasaID,
+		yearRange: state.yearRange,
 		listView: state.listView,
 		searchResults: state.searchResults,
 		mediaType: state.mediaType,
@@ -269,4 +212,4 @@ const mapStateToProps = state => {
 	};
 };
 
-export default connect(mapStateToProps, { fetchActivity, fetchSearchResults, toggleListView })(Sorted);
+export default connect(mapStateToProps, { fetchActivity, fetchSearchResults, toggleListView, adjustYearRange })(Sorted);
