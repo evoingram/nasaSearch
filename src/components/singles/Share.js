@@ -23,7 +23,7 @@ import styled from 'styled-components';
 
 const Div = styled.div`
 	display: inline-block;
-	max-height: 125px;
+	max-height: 150px;
 	align-content: center;
 	align-self: center;
 	margin: auto;
