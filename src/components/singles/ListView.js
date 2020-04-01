@@ -10,7 +10,9 @@ let row = {
 	flexDirection: 'row',
 	flexBasis: '19%',
 	padding: '0%',
-	margin: '0%'
+	margin: '0%',
+	marginLeft: '0%',
+	border: 'none'
 };
 
 class ListView extends React.Component {
@@ -32,8 +34,11 @@ class ListView extends React.Component {
 				flexWrap: 'wrap',
 				flexDirection: 'row',
 				flexBasis: '100%',
+				maxWidth: '80%',
 				padding: '0%',
-				margin: '0%'
+				margin: '0%',
+				marginLeft: '10%',
+				border: '3px solid white'
 			};
 		}
 		if (this.props.listView === true || this.props.listView === 'true') {
@@ -47,7 +52,9 @@ class ListView extends React.Component {
 				flexDirection: 'row',
 				flexBasis: '19%',
 				padding: '0%',
-				margin: '0%'
+				margin: '0%',
+				marginLeft: '0%',
+				border: 'none'
 			};
 		}
 	}

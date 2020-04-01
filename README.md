@@ -6,7 +6,6 @@ work in progress
 
 ## To Do
 
-- [ ] style list view
 - [ ] plan & write tests
 - [ ] suggest other searches
 - [ ] fix up comments
