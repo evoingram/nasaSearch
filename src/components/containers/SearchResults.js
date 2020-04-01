@@ -5,21 +5,7 @@ import RowNewestPopular from '../singles/RowNewestPopular.js';
 import ListView from '../singles/ListView.js';
 import { connect } from 'react-redux';
 import { toggleListView, adjustYearRange, turnPage } from '../../actions';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/core/Slider';
 
-const Button = styled.button`
-	margin-top: 2%;
-	margin-bottom: 2%;
-	background-color: #15418c;
-	color: white;
-	font-family: 'Audiowide', cursive;
-	border: none;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	font-size: 2rem;
-`;
 const row = {
 	display: 'flex',
 	flex: '1',
@@ -39,24 +25,6 @@ class SearchResults extends React.Component {
 
 	componentDidMount = () => {
 		this.props.searchNASALibrary(this.props.mediaFormats, this.props.searchTerm, this.props.page);
-		/*
-		if (
-			document.getElementById('previousPageButton') !== null &&
-			document.getElementById('previousPageButton') !== 'undefined'
-		) {
-			console.log('previous page button view toggled running');
-			if (this.props.page < 2 && this.props.page >= 0) {
-				document.getElementById('previousPageButton').classList.toggle('show');
-				document.getElementById('previousPageButton').classList.toggle('hide');
-				document.getElementById('previousPageButton').textContent = '';
-				document.getElementById('previousPageButton').style.backgroundColor = '#15418c';
-			} else {
-				document.getElementById('previousPageButton').textContent = 'Previous Page';
-				document.getElementById('previousPageButton').classList.toggle('show');
-				document.getElementById('previousPageButton').classList.toggle('hide');
-				document.getElementById('previousPageButton').style.backgroundColor = '#15418c';
-			}
-		}*/
 	};
 
 	render() {

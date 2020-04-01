@@ -1,9 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import Single from '../containers/Single';
-import axios from 'axios';
-import { fetchActivity } from '../../actions';
-import { connect } from 'react-redux';
 
 const column = {
 	flexBasis: '100%',
@@ -30,8 +26,6 @@ class ColumnNewestPopular extends React.Component {
 
 	handleSingleDetailLoad = e => {
 		console.log('e = ' + e.target.value);
-		// This is the other place where we call this, again without data!
-		// newResult.data[0].nasa_id, newResult.data[0].media_type;
 		this.props.fetchActivity(this.props.nasaID, this.props.mediaType);
 	};
 

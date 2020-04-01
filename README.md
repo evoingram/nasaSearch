@@ -6,7 +6,6 @@ work in progress
 
 ## To Do
 
-- [ ] darker hover effect on buttons
 - [ ] fix up comments
 - [ ] remove spaghetti code
 - [ ] plan & write tests

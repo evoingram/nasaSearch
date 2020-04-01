@@ -10,6 +10,9 @@ const Button = styled.button`
 	border: none;
 	padding: 20px;
 	font-size: 2rem;
+	&:hover {
+		background-color: #0e3579;
+	}
 `;
 const PText = styled.span`
 	font-family: 'RobotoMono', monospace;

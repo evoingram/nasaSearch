@@ -38,18 +38,6 @@ class PlayerC extends React.Component {
 				})}
 			/>
 		);
-		console.log(
-			'Checking Player fileURL = ' +
-				this.props.fileURL.filter(currentLink => {
-					return currentLink.includes('~orig');
-				})
-		);
-		console.log(
-			'Checking Player captions = ' +
-				this.props.fileURL.filter(currentLink => {
-					return currentLink.includes('srt');
-				})
-		);
 		return (
 			(this.props.mediaType == 'video' && (
 				<Div>

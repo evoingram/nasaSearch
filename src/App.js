@@ -35,6 +35,9 @@ const Button = styled.button`
 	padding-top: 6%;
 	padding-bottom: 6%;
 	font-size: 1.5rem;
+	&:hover {
+		background-color: #0e3579;
+	}
 `;
 
 const footerWidth = {

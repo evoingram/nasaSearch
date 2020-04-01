@@ -83,6 +83,9 @@ const Button = styled.button`
 	padding-top: 7%;
 	padding-bottom: 7%;
 	font-size: 1rem;
+	&:hover {
+		background-color: #0e3579;
+	}
 `;
 const Checks = styled.div`
 	display: flex;
@@ -94,11 +97,6 @@ const PaddingTop = styled.div`
 	padding-top: 5%;
 `;
 
-let useStyles = makeStyles({
-	root: {
-		width: 300
-	}
-});
 class SearchForm extends React.Component {
 	constructor(props) {
 		super(props);
