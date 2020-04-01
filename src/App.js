@@ -26,6 +26,7 @@ const Button = styled.button`
 	border: none;
 	padding-top: 6%;
 	padding-bottom: 6%;
+	font-size: 1.5rem;
 `;
 
 const footerWidth = {

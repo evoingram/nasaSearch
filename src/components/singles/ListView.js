@@ -68,6 +68,7 @@ class ListView extends React.Component {
 						fetchActivity={this.props.fetchActivity}
 						dateCreated={this.props.dateCreated}
 						listView={this.props.listView}
+						title={this.props.title}
 					/>
 				)}
 			</div>

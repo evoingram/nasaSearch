@@ -15,6 +15,7 @@ const Button = styled.button`
 	border: none;
 	padding-top: 20px;
 	padding-bottom: 20px;
+	font-size: 2rem;
 `;
 const row = {
 	display: 'flex',
@@ -61,9 +62,10 @@ class SearchResults extends React.Component {
 									? newResult.data[0].description.substring(0, 50)
 									: newResult.data[0].description_508.substring(0, 50)) + '...'
 							}
-							dateCreated={newResult.data[0].date_created}
+							dateCreated={newResult.data[0].date_created.substring(0, 10)}
 							fetchActivity={this.props.fetchActivity}
 							listView={this.props.listView}
+							title={newResult.data[0].title}
 						/>
 					))}
 				</div>

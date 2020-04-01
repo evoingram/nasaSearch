@@ -28,6 +28,7 @@ const Button = styled.button`
 	border: none;
 	padding-top: 20px;
 	padding-bottom: 20px;
+	font-size: 1.5rem;
 `;
 class Sorted extends React.Component {
 	constructor(props) {
@@ -172,6 +173,7 @@ https://images.nasa.gov/
 										searchNASALibrary={this.props.searchNASALibrary}
 										listView={this.props.listView}
 										toggleView={this.props.toggleView}
+										title={newResult.data[0].title}
 									/>
 								))}
 							</div>

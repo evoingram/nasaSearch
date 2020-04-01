@@ -9,8 +9,7 @@ const Button = styled.button`
 	font-family: 'Audiowide', cursive;
 	border: none;
 	padding: 20px;
-	width: 20vh;
-	font-size: 18;
+	font-size: 2rem;
 `;
 const PText = styled.span`
 	font-family: 'RobotoMono', monospace;

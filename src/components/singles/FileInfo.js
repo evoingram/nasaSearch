@@ -32,7 +32,7 @@ class FileInfo extends React.Component {
 				<br />
 				<b>center:</b> <PText>{this.props.center}</PText>
 				<br />
-				<b>date created:</b> <PText>{this.props.center}</PText>
+				<b>date created:</b> <PText>{this.props.dateCreated}</PText>
 			</Div>
 		);
 	}

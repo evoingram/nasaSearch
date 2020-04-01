@@ -57,6 +57,7 @@ const Button = styled.button`
 	border: none;
 	padding-top: 7%;
 	padding-bottom: 7%;
+	font-size: 1rem;
 `;
 const Checks = styled.div`
 	display: flex;

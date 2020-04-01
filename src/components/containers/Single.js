@@ -89,7 +89,7 @@ class Single extends React.Component {
 											fileURL={this.props.fileURL}
 											keywords={this.props.singleResult.data[0].keywords}
 											center={this.props.singleResult.data[0].center}
-											date={this.props.singleResult.data[0].date_created}
+											dateCreated={this.props.singleResult.data[0].date_created.substring(0, 10)}
 											centerURL={this.props.centerURL}
 											explanation={this.props.singleResult.data[0].description}
 										/>

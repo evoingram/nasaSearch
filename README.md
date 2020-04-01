@@ -58,6 +58,8 @@ single item component
 
 ### Not Component Specific
 
+- [ ] add links to keywords for searching
+- [ ] debug video player
 - [ ] plan & write tests
 - [ ] timeline
 - [ ] suggest other searches
