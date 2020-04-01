@@ -66,21 +66,3 @@ class ColumnNewestPopular extends React.Component {
 	}
 }
 export default ColumnNewestPopular;
-
-/*
-export default ColumnNewestPopular;
-
-const mapStateToProps = state => {
-	return {
-		isLoading: state.isLoading,
-		error: state.error,
-		imgURL: state.imgURL,
-		explanation: state.explanation,
-		fileURL: state.fileURL,
-		mediaType: state.mediaType
-	};
-};
-
-export default connect(mapStateToProps, { fetchActivity })(ColumnNewestPopular);
-
-*/

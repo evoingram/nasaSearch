@@ -174,6 +174,7 @@ https://images.nasa.gov/
 										listView={this.props.listView}
 										toggleView={this.props.toggleView}
 										title={newResult.data[0].title}
+										centerLink={this.props.centerLink}
 									/>
 								))}
 							</div>
@@ -185,6 +186,7 @@ https://images.nasa.gov/
 								singleResult={this.props.singleResult}
 								mediaType={this.props.mediaType}
 								getSingleResult={this.props.getSingleResult}
+								centerLink={this.props.centerLink}
 							/>
 						</Route>
 						<Route path="/search">
@@ -202,6 +204,7 @@ https://images.nasa.gov/
 								listView={this.props.listView}
 								toggleView={this.props.toggleView}
 								numberOfColumns={this.state.numberOfColumns}
+								centerLink={this.props.centerLink}
 							/>
 						</Route>
 					</Switch>
@@ -227,6 +230,7 @@ https://images.nasa.gov/
 								listView={this.props.listView}
 								toggleView={this.props.toggleView}
 								numberOfColumns={this.state.numberOfColumns}
+								centerLink={this.props.centerLink}
 							/>
 						</Route>
 						<Route path="/details/:nasaID">
@@ -237,6 +241,7 @@ https://images.nasa.gov/
 								getSingleResult={this.props.getSingleResult}
 								fetchActivity={this.props.fetchActivity}
 								toggleView={this.props.toggleView}
+								centerLink={this.props.centerLink}
 							/>
 						</Route>
 					</Switch>

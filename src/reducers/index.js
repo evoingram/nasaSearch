@@ -34,6 +34,7 @@ const initialState = {
 	fileFormat: '',
 	captionsFileURL: '',
 	center: '',
+	centerLink: '',
 	keywords: [],
 	secondaryC: '',
 	mediaType: '',
@@ -56,6 +57,69 @@ export const reducer = (state = initialState, action) => {
 				searchResults: []
 			};
 		case FETCHING_ACTIVITY_SUCCESS:
+			let centerLink = '';
+			if (action.payload.data[0].center === 'JPL') {
+				centerLink = 'http://www.jpl.nasa.gov';
+			}
+			if (action.payload.data[0].center === 'HQ') {
+				centerLink = 'http://www.nasa.gov/centers/hq/home/index.html';
+			}
+			if (action.payload.data[0].center === 'KSC') {
+				centerLink = 'http://www.nasa.gov/centers/kennedy/home/index.html';
+			}
+			if (action.payload.data[0].center === 'GSFC') {
+				centerLink = 'https://www.nasa.gov/centers/goddard/home/index.html';
+			}
+			if (action.payload.data[0].center === 'ARC') {
+				centerLink = 'http://www.nasa.gov/centers/ames/home/index.html';
+			}
+			if (action.payload.data[0].center === 'AFRC') {
+				centerLink = 'http://www.nasa.gov/centers/armstrong/home/index.html';
+			}
+			if (action.payload.data[0].center === 'GRC') {
+				centerLink = 'ttp://www.nasa.gov/centers/glenn/home/index.html';
+			}
+			if (action.payload.data[0].center === 'GISS') {
+				centerLink = 'http://www.giss.nasa.gov/';
+			}
+			if (action.payload.data[0].center === 'IVV') {
+				centerLink = 'http://www.nasa.gov/centers/ivv/home/index.html';
+			}
+			if (action.payload.data[0].center === 'LRC') {
+				centerLink = 'http://www.nasa.gov/centers/langley/home/index.html';
+			}
+			if (action.payload.data[0].center === 'MSFC') {
+				centerLink = 'http://www.nasa.gov/centers/marshall/home/index.html';
+			}
+			if (action.payload.data[0].center === 'MAF') {
+				this.setState({
+					centerLink: 'http://www.nasa.gov/centers/marshall/michoud/index.html'
+				});
+			}
+			if (action.payload.data[0].center === 'ESC') {
+				centerLink = 'http://www.nasa.gov/offices/nesc/home/';
+			}
+			if (action.payload.data[0].center === 'NESC') {
+				centerLink = 'http://www.nasa.gov/offices/nesc/home/';
+			}
+			if (action.payload.data[0].center === 'NSC') {
+				centerLink = 'http://www.nasa.gov/offices/nsc/home/index.html';
+			}
+			if (action.payload.data[0].center === 'NSSC') {
+				centerLink = 'http://www.nssc.nasa.gov/';
+			}
+			if (action.payload.data[0].center === 'PBS') {
+				centerLink = 'http://www.nasa.gov/centers/glenn/about/testfacilities/index.html';
+			}
+			if (action.payload.data[0].center === 'SSC') {
+				centerLink = 'http://www.nasa.gov/centers/stennis/home/index.html';
+			}
+			if (action.payload.data[0].center === 'WFF') {
+				centerLink = 'http://www.nasa.gov/centers/wallops/home/index.html';
+			}
+			if (action.payload.data[0].center === 'WSTF') {
+				centerLink = 'http://www.nasa.gov/centers/wstf/home/index.html';
+			}
 			return {
 				...state,
 				isLoading: false,
@@ -69,7 +133,8 @@ export const reducer = (state = initialState, action) => {
 				nasaID: action.payload.data[0].nasa_id,
 				thumbnailURL: action.payload.links[0].href,
 				singleResult: action.payload,
-				searchResults: []
+				searchResults: [],
+				centerLink: centerLink
 			};
 		case FETCHING_FILEURL_START:
 			return {

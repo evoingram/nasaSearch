@@ -40,6 +40,8 @@ class App extends React.Component {
 			areSearchResults: false,
 			listView: false,
 			dateCreated: '',
+			center: 'none',
+			centerLink: 'centerLink Test',
 			searchTerm: '',
 			mediaFormats: '',
 			imagecb: false,
@@ -295,7 +297,7 @@ class App extends React.Component {
 	};
 
 	getSingleResult() {
-		console.log('running single detail axios get');
+		console.log('shorthand running single detail axios get');
 		axios
 			.get(`https://images-api.nasa.gov/search?q=${this.nasaID}`)
 			.then(response => {
@@ -310,11 +312,12 @@ class App extends React.Component {
 					mediaType: response.data.collection.items[0].data[0].media_type,
 					thumbnailURL: response.data.collection.items[0].links[0].href
 				});
-				console.log('done getting single Q NASA details');
 			})
 			.catch(error => {
 				console.log(error);
 			});
+
+		console.log('shorthand done getting single Q NASA details');
 		// https://images-assets.nasa.gov/image/as11-40-5874/collection.json
 		axios
 			.get(`https://images-assets.nasa.gov/image/${this.nasaID}/collection.json`)
@@ -364,6 +367,75 @@ class App extends React.Component {
 			.catch(error => {
 				console.log(error);
 			});
+		/*
+		console.log('center shorthand app = ' + this.state.center);
+		console.log('centerLink shorthand app = ' + this.state.centerLink);
+		if (this.state.center === 'JPL') {
+			this.setState({ centerLink: 'http://www.jpl.nasa.gov' });
+		}
+		if (this.state.center === 'HQ') {
+			this.setState({ centerLink: 'http://www.nasa.gov/centers/hq/home/index.html' });
+		}
+		if (this.state.center === 'KSC') {
+			this.setState({ centerLink: 'http://www.nasa.gov/centers/kennedy/home/index.html' });
+		}
+		if (this.state.center === 'GSFC') {
+			this.setState({ centerLink: 'https://www.nasa.gov/centers/goddard/home/index.html' });
+		}
+		if (this.state.center === 'ARC') {
+			this.setState({ centerLink: 'http://www.nasa.gov/centers/ames/home/index.html' });
+		}
+		if (this.state.center === 'AFRC') {
+			this.setState({ centerLink: 'http://www.nasa.gov/centers/armstrong/home/index.html' });
+		}
+		if (this.state.center === 'GRC') {
+			this.setState({ centerLink: 'ttp://www.nasa.gov/centers/glenn/home/index.html' });
+		}
+		if (this.state.center === 'GISS') {
+			this.setState({ centerLink: 'http://www.giss.nasa.gov/' });
+		}
+		if (this.state.center === 'IVV') {
+			this.setState({ centerLink: 'http://www.nasa.gov/centers/ivv/home/index.html' });
+		}
+		if (this.state.center === 'LRC') {
+			this.setState({ centerLink: 'http://www.nasa.gov/centers/langley/home/index.html' });
+		}
+		if (this.state.center === 'MSFC') {
+			this.setState({ centerLink: 'http://www.nasa.gov/centers/marshall/home/index.html' });
+		}
+		if (this.state.center === 'MAF') {
+			this.setState({
+				centerLink: 'http://www.nasa.gov/centers/marshall/michoud/index.html'
+			});
+		}
+		if (this.props.center === 'ESC') {
+			this.setState({ centerLink: 'http://www.nasa.gov/offices/nesc/home/' });
+		}
+		if (this.props.center === 'NESC') {
+			this.setState({ centerLink: 'http://www.nasa.gov/offices/nesc/home/' });
+		}
+		if (this.props.center === 'NSC') {
+			this.setState({ centerLink: 'http://www.nasa.gov/offices/nsc/home/index.html' });
+		}
+		if (this.props.center === 'NSSC') {
+			this.setState({ centerLink: 'http://www.nssc.nasa.gov/' });
+		}
+		if (this.props.center === 'PBS') {
+			this.setState({
+				centerLink: 'http://www.nasa.gov/centers/glenn/about/testfacilities/index.html'
+			});
+		}
+		if (this.props.center === 'SSC') {
+			this.setState({ centerLink: 'http://www.nasa.gov/centers/stennis/home/index.html' });
+		}
+		if (this.props.center === 'WFF') {
+			this.setState({ centerLink: 'http://www.nasa.gov/centers/wallops/home/index.html' });
+		}
+		if (this.props.center === 'WSTF') {
+			this.setState({ centerLink: 'http://www.nasa.gov/centers/wstf/home/index.html' });
+		}
+		console.log('shorthand centerLink end = ' + this.state.centerLink);
+		*/
 	}
 	render() {
 		return (
@@ -388,6 +460,7 @@ class App extends React.Component {
 								listView={this.state.listView}
 								toggleView={this.toggleView}
 								dateCreated={this.state.dateCreated}
+								centerLink={this.state.centerLink}
 							/>
 						)}
 					</div>
@@ -405,7 +478,9 @@ const mapStateToProps = state => {
 		currentLoad: state.currentLoad,
 		imagecb: state.imagecb,
 		videocb: state.videocb,
+		center: state.center,
 		audiocb: state.audiocb,
+		centerLink: state.centerLink,
 		dateCreated: state.dateCreated,
 		listView: state.listView,
 		mediaFormats: state.mediaFormats,

@@ -54,6 +54,73 @@ class Single extends React.Component {
 	}
 	componentDidMount() {
 		this.props.getSingleResult();
+		console.log('center shorthand = ' + this.props.center);
+		console.log('centerLink shorthand = ' + this.state.centerLink);
+		if (this.props.center === 'JPL') {
+			this.setState({ centerLink: 'http://www.jpl.nasa.gov' });
+		}
+		if (this.props.center === 'HQ') {
+			this.setState({ centerLink: 'http://www.nasa.gov/centers/hq/home/index.html' });
+		}
+		if (this.props.center === 'KSC') {
+			this.setState({ centerLink: 'http://www.nasa.gov/centers/kennedy/home/index.html' });
+		}
+		if (this.props.center === 'GSFC') {
+			this.setState({ centerLink: 'https://www.nasa.gov/centers/goddard/home/index.html' });
+		}
+		if (this.props.center === 'ARC') {
+			this.setState({ centerLink: 'http://www.nasa.gov/centers/ames/home/index.html' });
+		}
+		if (this.props.center === 'AFRC') {
+			this.setState({ centerLink: 'http://www.nasa.gov/centers/armstrong/home/index.html' });
+		}
+		if (this.props.center === 'GRC') {
+			this.setState({ centerLink: 'ttp://www.nasa.gov/centers/glenn/home/index.html' });
+		}
+		if (this.props.center === 'GISS') {
+			this.setState({ centerLink: 'http://www.giss.nasa.gov/' });
+		}
+		if (this.props.center === 'IVV') {
+			this.setState({ centerLink: 'http://www.nasa.gov/centers/ivv/home/index.html' });
+		}
+		if (this.props.center === 'LRC') {
+			this.setState({ centerLink: 'http://www.nasa.gov/centers/langley/home/index.html' });
+		}
+		if (this.props.center === 'MSFC') {
+			this.setState({ centerLink: 'http://www.nasa.gov/centers/marshall/home/index.html' });
+		}
+		if (this.props.center === 'MAF') {
+			this.setState({
+				centerLink: 'http://www.nasa.gov/centers/marshall/michoud/index.html'
+			});
+		}
+		if (this.props.center === 'ESC') {
+			this.setState({ centerLink: 'http://www.nasa.gov/offices/nesc/home/' });
+		}
+		if (this.props.center === 'NESC') {
+			this.setState({ centerLink: 'http://www.nasa.gov/offices/nesc/home/' });
+		}
+		if (this.props.center === 'NSC') {
+			this.setState({ centerLink: 'http://www.nasa.gov/offices/nsc/home/index.html' });
+		}
+		if (this.props.center === 'NSSC') {
+			this.setState({ centerLink: 'http://www.nssc.nasa.gov/' });
+		}
+		if (this.props.center === 'PBS') {
+			this.setState({
+				centerLink: 'http://www.nasa.gov/centers/glenn/about/testfacilities/index.html'
+			});
+		}
+		if (this.props.center === 'SSC') {
+			this.setState({ centerLink: 'http://www.nasa.gov/centers/stennis/home/index.html' });
+		}
+		if (this.props.center === 'WFF') {
+			this.setState({ centerLink: 'http://www.nasa.gov/centers/wallops/home/index.html' });
+		}
+		if (this.props.center === 'WSTF') {
+			this.setState({ centerLink: 'http://www.nasa.gov/centers/wstf/home/index.html' });
+		}
+		console.log('shorthand centerLink end = ' + this.state.centerLink);
 	}
 	render() {
 		return (
@@ -81,17 +148,19 @@ class Single extends React.Component {
 											fileURL={this.props.fileURL}
 											fileSize={this.props.fileSize}
 											fileFormat={this.props.singleResult.data[0].media_type}
+											centerLink={this.props.centerLink}
 										/>
 									</DivChildren>
 									<DivChildren>
 										<FileInfo
 											nasaID={this.props.singleResult.data[0].nasa_id}
 											fileURL={this.props.fileURL}
-											keywords={this.props.singleResult.data[0].keywords}
+											keywords={this.props.singleResult.data[0].keywords.toString()}
 											center={this.props.singleResult.data[0].center}
 											dateCreated={this.props.singleResult.data[0].date_created.substring(0, 10)}
 											centerURL={this.props.centerURL}
 											explanation={this.props.singleResult.data[0].description}
+											centerLink={this.state.centerLink}
 										/>
 									</DivChildren>
 								</Div>
@@ -110,6 +179,7 @@ const mapStateToProps = state => {
 		error: state.error,
 		singleResult: state.singleResult,
 		nasaID: state.nasaID,
+		center: state.center,
 		mediaType: state.mediaType,
 		fileSize: state.fileSize,
 		fileURL: state.fileURL
