@@ -37,7 +37,7 @@ class SearchResults extends React.Component {
 	};
 
 	render() {
-		console.log('listView in SearchResults = ' + this.props.listView);
+		console.log();
 		if (
 			this.props.searchResults !== [] &&
 			this.props.searchResults !== 'undefined' &&

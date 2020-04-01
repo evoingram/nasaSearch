@@ -27,15 +27,20 @@ const Div = styled.div`
 	align-content: left;
 `;
 const FilePath = props => {
+	function originalFileURLFilter(currentLink) {
+		return currentLink.includes('~orig');
+	}
+
 	useEffect(() => {
 		// console.log('Checking, nasaID = ' + props.nasaID);
 		// console.log('Checking, fileURL = ' + props.fileURL);
+		console.log('Checking, fileURL filter = ' + props.fileURL.filter(originalFileURLFilter));
 		// console.log('Checking, fileSize = ' + props.fileSize);
 	});
 	return (
 		<Div>
 			<p>
-				<a href={props.fileURL} target="_blank" download>
+				<a href={props.fileURL.filter(originalFileURLFilter)} target="_blank" download>
 					<Button>Download</Button>
 				</a>
 			</p>

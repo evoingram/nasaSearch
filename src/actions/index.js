@@ -37,9 +37,20 @@ export const fetchActivity = (nasaID, mediaType) => dispatch => {
 					`https://images-assets.nasa.gov/${response.data.collection.items[0].data[0].media_type}/${nasaID}/collection.json`
 				)
 				.then(response => {
-					console.log('fetchFileURL response.data = ' + response.data[0]);
-					dispatch({ type: FETCHING_FILEURL_SUCCESS, payload: response.data[0] });
+					dispatch({ type: FETCHING_FILEURL_SUCCESS, payload: response.data });
 
+					/*
+						
+						response.data.forEach(fileLink => {
+							console.log('fileLink = ' + fileLink);
+							if (fileLink.toString.includes('~orig')) {
+								this.setState({
+									fileURL: response.data[0]
+								});
+							}
+						});
+
+					*/
 					console.log('done getting single NASA collection file URL');
 				})
 				.catch(error => {

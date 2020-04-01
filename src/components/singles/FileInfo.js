@@ -50,7 +50,7 @@ class FileInfo extends React.Component {
 
 	componentDidMount = () => {};
 	render() {
-		console.log('shorthand centerLink fileInfo = ' + this.props.centerLink);
+		console.log();
 		return (
 			<Div>
 				<b>nasa id:</b> <PText>{this.props.nasaID}</PText>

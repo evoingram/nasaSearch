@@ -141,7 +141,7 @@ https://images.nasa.gov/
 	// response.data.collection.items[x].data.links[0].href = link to preview image
 
 	render() {
-		console.log('listView in Sorted = ' + this.props.listView);
+		console.log();
 		if (
 			this.props.currentLoad !== [] &&
 			this.props.currentLoad !== 'undefined' &&

@@ -52,6 +52,7 @@ single item component
 
 ### Not Component Specific
 
+- [ ] fix white search box on focus
 - [ ] debug video player
 - [ ] plan & write tests
 - [ ] timeline

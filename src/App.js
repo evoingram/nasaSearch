@@ -323,6 +323,8 @@ class App extends React.Component {
 			.get(`https://images-assets.nasa.gov/image/${this.nasaID}/collection.json`)
 			.then(response => {
 				console.log('single detail collection = ' + response.data[0]);
+				console.log('single detail collection data = ' + response.data);
+				console.log('single detail collection response = ' + response);
 				this.setState({
 					fileURL: response.data[0]
 				});
@@ -367,74 +369,23 @@ class App extends React.Component {
 			.catch(error => {
 				console.log(error);
 			});
+
+		// get full array
+		// for each item in array check if includes '~orig'
+		// if found set that as fileURL
 		/*
-		console.log('center shorthand app = ' + this.state.center);
-		console.log('centerLink shorthand app = ' + this.state.centerLink);
-		if (this.state.center === 'JPL') {
-			this.setState({ centerLink: 'http://www.jpl.nasa.gov' });
-		}
-		if (this.state.center === 'HQ') {
-			this.setState({ centerLink: 'http://www.nasa.gov/centers/hq/home/index.html' });
-		}
-		if (this.state.center === 'KSC') {
-			this.setState({ centerLink: 'http://www.nasa.gov/centers/kennedy/home/index.html' });
-		}
-		if (this.state.center === 'GSFC') {
-			this.setState({ centerLink: 'https://www.nasa.gov/centers/goddard/home/index.html' });
-		}
-		if (this.state.center === 'ARC') {
-			this.setState({ centerLink: 'http://www.nasa.gov/centers/ames/home/index.html' });
-		}
-		if (this.state.center === 'AFRC') {
-			this.setState({ centerLink: 'http://www.nasa.gov/centers/armstrong/home/index.html' });
-		}
-		if (this.state.center === 'GRC') {
-			this.setState({ centerLink: 'ttp://www.nasa.gov/centers/glenn/home/index.html' });
-		}
-		if (this.state.center === 'GISS') {
-			this.setState({ centerLink: 'http://www.giss.nasa.gov/' });
-		}
-		if (this.state.center === 'IVV') {
-			this.setState({ centerLink: 'http://www.nasa.gov/centers/ivv/home/index.html' });
-		}
-		if (this.state.center === 'LRC') {
-			this.setState({ centerLink: 'http://www.nasa.gov/centers/langley/home/index.html' });
-		}
-		if (this.state.center === 'MSFC') {
-			this.setState({ centerLink: 'http://www.nasa.gov/centers/marshall/home/index.html' });
-		}
-		if (this.state.center === 'MAF') {
-			this.setState({
-				centerLink: 'http://www.nasa.gov/centers/marshall/michoud/index.html'
+		if (this.fileURL !== '') {
+			let appArray = this.fileURL.split(',');
+			appArray.forEach(fileLink => {
+				console.log('App fileLink = ' + fileLink);
+				if (fileLink.toString.includes('~orig')) {
+					this.setState({
+						fileURL: fileLink
+					});
+				}
 			});
 		}
-		if (this.props.center === 'ESC') {
-			this.setState({ centerLink: 'http://www.nasa.gov/offices/nesc/home/' });
-		}
-		if (this.props.center === 'NESC') {
-			this.setState({ centerLink: 'http://www.nasa.gov/offices/nesc/home/' });
-		}
-		if (this.props.center === 'NSC') {
-			this.setState({ centerLink: 'http://www.nasa.gov/offices/nsc/home/index.html' });
-		}
-		if (this.props.center === 'NSSC') {
-			this.setState({ centerLink: 'http://www.nssc.nasa.gov/' });
-		}
-		if (this.props.center === 'PBS') {
-			this.setState({
-				centerLink: 'http://www.nasa.gov/centers/glenn/about/testfacilities/index.html'
-			});
-		}
-		if (this.props.center === 'SSC') {
-			this.setState({ centerLink: 'http://www.nasa.gov/centers/stennis/home/index.html' });
-		}
-		if (this.props.center === 'WFF') {
-			this.setState({ centerLink: 'http://www.nasa.gov/centers/wallops/home/index.html' });
-		}
-		if (this.props.center === 'WSTF') {
-			this.setState({ centerLink: 'http://www.nasa.gov/centers/wstf/home/index.html' });
-		}
-		console.log('shorthand centerLink end = ' + this.state.centerLink);
+
 		*/
 	}
 	render() {

@@ -27,12 +27,42 @@ class PlayerC extends React.Component {
 	}
 
 	render() {
+		console.log(
+			'Checking Player fileURL = ' +
+				this.props.fileURL.filter(currentLink => {
+					return currentLink.includes('~orig');
+				})
+		);
+		console.log(
+			'Checking Player captions = ' +
+				this.props.fileURL.filter(currentLink => {
+					return currentLink.includes('srt');
+				})
+		);
 		return (
 			(this.props.mediaType == 'video' && (
 				<Div>
-					<Player poster={this.props.thumbnailURL}>
-						<source src={this.props.fileURL} />
-						<track kind="captions" src={this.props.captionsURL} srcLang="en" label="English" default />
+					<Player
+						poster={this.props.thumbnailURL}
+						playsInline
+						src={this.props.fileURL.filter(currentLink => {
+							return currentLink.includes('~orig');
+						})}
+					>
+						<source
+							src={this.props.fileURL.filter(currentLink => {
+								return currentLink.includes('~orig');
+							})}
+						/>
+						<track
+							kind="captions"
+							src={this.props.fileURL.filter(currentLink => {
+								return currentLink.includes('srt');
+							})}
+							srcLang="en"
+							label="English"
+							default
+						/>
 						<ControlBar>
 							<ReplayControl seconds={10} order={1.1} />
 							<ForwardControl seconds={30} order={1.2} />
@@ -48,7 +78,11 @@ class PlayerC extends React.Component {
 			(this.props.mediaType == 'audio' && (
 				<Div>
 					<Player poster={this.props.thumbnailURL}>
-						<source src={this.props.fileURL} />
+						<source
+							src={this.props.fileURL.filter(currentLink => {
+								return currentLink.includes('~orig');
+							})}
+						/>
 						<ControlBar>
 							<ReplayControl seconds={10} order={1.1} />
 							<ForwardControl seconds={30} order={1.2} />
