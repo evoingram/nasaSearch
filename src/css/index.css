@@ -25,3 +25,11 @@ code {
   src: url('../fonts/RussoOne-Regular.ttf');
   src: local('Russo One');
 }
+
+@font-face {
+  font-family: 'RobotoMono';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/RobotoMono-Regular.ttf');
+  src: local('RobotoMono');
+}

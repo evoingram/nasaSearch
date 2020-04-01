@@ -9,38 +9,45 @@ const Button = styled.button`
 	font-family: 'Audiowide', cursive;
 	border: none;
 	padding: 20px;
+	width: 20vh;
+	font-size: 18;
+`;
+const PText = styled.span`
+	font-family: 'RobotoMono', monospace;
+	font-size: 10;
+	word-break: break-word;
+	font-size: 11;
+	width: '100%';
+	flex-wrap: nowrap;
+`;
+
+const Div = styled.div`
+	width: 100%;
+	margin: 0%;
+	padding: 0%;
+	align-content: left;
 `;
 const FilePath = props => {
 	useEffect(() => {
-		console.log('Checking, nasaID = ' + props.nasaID);
-		console.log('Checking, fileURL = ' + props.fileURL);
-		console.log('Checking, fileSize = ' + props.fileSize);
+		// console.log('Checking, nasaID = ' + props.nasaID);
+		// console.log('Checking, fileURL = ' + props.fileURL);
+		// console.log('Checking, fileSize = ' + props.fileSize);
 	});
 	return (
-		<div className="App">
-			<header className="App-header">
-				<div>
-					<p>
-						<a href={props.fileURL} target="_blank" download>
-							<Button>Download</Button>
-						</a>
-					</p>
-					<p>{props.title}</p>
-
-					<p>
-						<b>
-							<a href={props.fileURL}>full-resolution file</a>
-						</b>
-					</p>
-					<p>
-						<b>file size:</b> {props.fileSize}
-					</p>
-					<p>
-						<b>file format:</b> {props.fileFormat}
-					</p>
-				</div>
-			</header>
-		</div>
+		<Div>
+			<p>
+				<a href={props.fileURL} target="_blank" download>
+					<Button>Download</Button>
+				</a>
+			</p>
+			<PText>{props.title}</PText>
+			<p>
+				<b>file size:</b> <PText>{props.fileSize}</PText>
+			</p>
+			<p>
+				<b>file format:</b> <PText>{props.fileFormat}</PText>
+			</p>
+		</Div>
 	);
 };
 export default FilePath;

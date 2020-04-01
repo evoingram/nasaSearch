@@ -1,15 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Button = styled.button`
-	margin-top: 2%;
-	margin-bottom: 2%;
-	background-color: #15418c;
-	color: white;
-	font-family: 'Audiowide', cursive;
-	border: none;
-	padding-top: 20px;
-	padding-bottom: 20px;
+const PText = styled.span`
+	font-family: 'RobotoMono', monospace;
+	font-size: 10;
+	word-break: break-word;
+	font-size: 11;
+	width: '100%';
+	flex-wrap: nowrap;
+	padding-top: 5%;
+	padding-bottom: 5%;
+`;
+
+const Div = styled.div`
+	width: 100%;
+	margin: 0%;
+	padding: 0%;
 `;
 class FileInfo extends React.Component {
 	constructor(props) {
@@ -19,35 +25,15 @@ class FileInfo extends React.Component {
 
 	render() {
 		return (
-			<div>
-				<p>
-					<b>{this.props.nasaID}:</b>{' '}
-					<a href={this.props.fileURL} target="_blank" download>
-						<Button>Download</Button>
-					</a>
-				</p>
-
-				<p>
-					<b>
-						<a href={this.props.fileURL}>full-resolution file</a>
-					</b>
-				</p>
-				<p>
-					<b>nasa id:</b> {this.props.nasaID}
-				</p>
-				<p>
-					<b>keywords:</b> {this.props.keywords}
-				</p>
-				<p>
-					<b>center:</b> {this.props.center}
-				</p>
-				<p>
-					<b>date created:</b> {this.props.center}
-				</p>
-				<p>
-					<b>explanation:</b> {this.props.explanation}
-				</p>
-			</div>
+			<Div>
+				<b>nasa id:</b> <PText>{this.props.nasaID}</PText>
+				<br />
+				<b>keywords:</b> <PText>{this.props.keywords}</PText>
+				<br />
+				<b>center:</b> <PText>{this.props.center}</PText>
+				<br />
+				<b>date created:</b> <PText>{this.props.center}</PText>
+			</Div>
 		);
 	}
 }

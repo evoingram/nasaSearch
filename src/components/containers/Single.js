@@ -4,6 +4,7 @@ import PlayerC from '../singles/Player.js';
 import Share from '../singles/Share.js';
 import FilePath from '../singles/FilePath.js';
 import FileInfo from '../singles/FileInfo.js';
+import Explanation from '../singles/Explanation.js';
 import { connect } from 'react-redux';
 import { fetchActivity } from '../../actions';
 // import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
@@ -20,26 +21,31 @@ const firstColumn = {
 	flexWrap: 'wrap',
 	flexDirection: 'row',
 	maxWidth: '60%',
-	padding: '0%',
+	padding: '3%',
 	margin: '0%',
-	left: '-30vh',
-	marginTop: '5vh'
+	marginTop: '5%',
+	width: '60%'
 };
 const secondColumn = {
 	display: 'flex',
 	flexWrap: 'wrap',
 	flexDirection: 'row',
-	maxWidth: '35%',
-	padding: '0%',
-	margin: '0%'
+	maxWidth: '30%',
+	padding: '3%',
+	margin: '0%',
+	width: '30%'
 };
 const container = {
 	display: 'flex',
 	flexWrap: 'nowrap',
 	flexDirection: 'row',
 	flex: '1',
-	width: '100%'
+	width: '100%',
+	overflow: 'hidden'
 };
+const DivChildren = styled.div`
+	width: 100%;
+`;
 
 class Single extends React.Component {
 	constructor(props) {
@@ -56,34 +62,41 @@ class Single extends React.Component {
 				<div style={container}>
 					{!this.props.singleResult && !this.props.isLoading && <p>Loading...</p>}
 					{this.props.singleResult && !this.props.isLoading && (
-						<div style={container}>
-							<Div className="firstColumn" style={firstColumn}>
-								<PlayerC
-									thumbnailURL={this.props.singleResult.links[0].href}
-									fileURL={this.props.fileURL}
-									mediaType={this.props.mediaType}
-									captionsURL={this.props.captionsURL}
-								/>
-								<Share fileURL={this.props.fileURL} width="100%" />
-							</Div>
-							<Div className="secondColumn" style={secondColumn}>
-								<FilePath
-									nasaID={this.props.singleResult.data[0].nasa_id}
-									title={this.props.singleResult.data[0].title}
-									fileURL={this.props.fileURL}
-									fileSize={this.props.fileSize}
-									fileFormat={this.props.singleResult.data[0].media_type}
-								/>
-								<FileInfo
-									nasaID={this.props.singleResult.data[0].nasa_id}
-									fileURL={this.props.fileURL}
-									keywords={this.props.singleResult.data[0].keywords}
-									center={this.props.singleResult.data[0].center}
-									date={this.props.singleResult.data[0].date_created}
-									centerURL={this.props.centerURL}
-									explanation={this.props.singleResult.data[0].description}
-								/>
-							</Div>
+						<div>
+							<div style={container}>
+								<Div className="firstColumn" style={firstColumn}>
+									<PlayerC
+										thumbnailURL={this.props.singleResult.links[0].href}
+										fileURL={this.props.fileURL}
+										mediaType={this.props.mediaType}
+										captionsURL={this.props.captionsURL}
+									/>
+									<Share fileURL={this.props.fileURL} width="100%" />
+								</Div>
+								<Div className="secondColumn" style={secondColumn}>
+									<DivChildren>
+										<FilePath
+											nasaID={this.props.singleResult.data[0].nasa_id}
+											title={this.props.singleResult.data[0].title}
+											fileURL={this.props.fileURL}
+											fileSize={this.props.fileSize}
+											fileFormat={this.props.singleResult.data[0].media_type}
+										/>
+									</DivChildren>
+									<DivChildren>
+										<FileInfo
+											nasaID={this.props.singleResult.data[0].nasa_id}
+											fileURL={this.props.fileURL}
+											keywords={this.props.singleResult.data[0].keywords}
+											center={this.props.singleResult.data[0].center}
+											date={this.props.singleResult.data[0].date_created}
+											centerURL={this.props.centerURL}
+											explanation={this.props.singleResult.data[0].description}
+										/>
+									</DivChildren>
+								</Div>
+							</div>
+							<Explanation explanation={this.props.singleResult.data[0].description} />
 						</div>
 					)}
 				</div>

@@ -16,8 +16,6 @@ filter search results component
 
 search form component
 
-- [ ] style appropriately
-
 ### SearchResults
 
 search results square view list component
@@ -27,8 +25,6 @@ search results square view list component
 ### SearchResult
 
 single search result square component
-
-- [ ] style appropriately
 
 ### ListView
 
@@ -52,19 +48,13 @@ thumbnail sized images/audio/video sorted by newest/most popular component
 
 file path section component
 
-- [ ] style appropriately
-
 ### FileInfo
 
 file info section component
 
-- [ ] style appropriately
-
 ### Single
 
 single item component
-
-- [ ] style so components are shaped correctly
 
 ### Not Component Specific
 
