@@ -26,6 +26,14 @@ const Center = styled.div`
 	padding: 0;
 	padding-bottom: 3%;
 `;
+const Choices = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	justify-content: center;
+	margin: 0;
+	padding: 0;
+`;
 const Div1 = styled.div`
 	width: 100%;
 	display: flex;
@@ -42,6 +50,20 @@ const fieldLength = {
 	color: '#B2B3A3',
 	border: '5px solid #15418c'
 };
+const Input = styled.input`
+	font-size: '2rem';
+	width: '50%';
+	margin: '0';
+	padding: '0';
+	background-color: '#313332';
+	color: '#B2B3A3';
+	border: '5px solid #15418c';
+	&:focus {
+		background-color: '#313332';
+		color: '#B2B3A3';
+		border: '5px solid #15418c';
+	}
+`;
 const SearchDiv = styled.div`
 	display: flex;
 	flex-wrap: wrap;
@@ -101,7 +123,7 @@ class SearchForm extends React.Component {
 				<Div1>
 					<Form id="searchForm">
 						<SearchDiv>
-							<input
+							<Input
 								id="name"
 								type="text"
 								name="textfield"
@@ -111,68 +133,72 @@ class SearchForm extends React.Component {
 								style={fieldLength}
 							/>
 						</SearchDiv>
-						<Checks id="mediaFilters">
-							<div id="images" className="filter">
-								<input
-									className="magic-checkbox"
-									type="checkbox"
-									name="imagecb"
-									id="imagecb"
-									value="option"
-									defaultChecked
+						<Choices>
+							<Checks id="mediaFilters">
+								<div id="images" className="filter">
+									<input
+										className="magic-checkbox"
+										type="checkbox"
+										name="imagecb"
+										id="imagecb"
+										value="option"
+										defaultChecked
+									/>
+									<label htmlFor="imagecb"></label>
+									<label className="text" htmlFor="imagecb">
+										Images
+									</label>
+								</div>
+								<div id="video" className="filter">
+									<input
+										className="magic-checkbox"
+										type="checkbox"
+										name="videocb"
+										id="videocb"
+										value="option"
+										defaultChecked
+									/>
+									<label htmlFor="videocb"></label>
+									<label className="text" htmlFor="videocb">
+										Video
+									</label>
+								</div>
+								<div id="audio" className="filter">
+									<input
+										className="magic-checkbox"
+										type="checkbox"
+										name="audiocb"
+										id="audiocb"
+										value="option"
+										defaultChecked
+									/>
+									<label htmlFor="audiocb"></label>
+									<label className="text" htmlFor="audiocb">
+										Audio
+									</label>
+								</div>
+							</Checks>
+							<div id="yearSlider" className={this.useStyles}>
+								<Typography id="range-slider" gutterBottom>
+									Select a range from 1920 to 2020
+								</Typography>
+								<Slider
+									min={1920}
+									max={2020}
+									value={this.state.yearRangeLocal}
+									onChange={this.handleChange}
+									valueLabelDisplay="auto"
+									aria-labelledby="range-slider"
+									getAriaValueText={this.valuetext}
 								/>
-								<label htmlFor="imagecb"></label>
-								<label className="text" htmlFor="imagecb">
-									Images
-								</label>
 							</div>
-							<div id="video" className="filter">
-								<input
-									className="magic-checkbox"
-									type="checkbox"
-									name="videocb"
-									id="videocb"
-									value="option"
-									defaultChecked
-								/>
-								<label htmlFor="videocb"></label>
-								<label className="text" htmlFor="videocb">
-									Video
-								</label>
-							</div>
-							<div id="audio" className="filter">
-								<input
-									className="magic-checkbox"
-									type="checkbox"
-									name="audiocb"
-									id="audiocb"
-									value="option"
-									defaultChecked
-								/>
-								<label htmlFor="audiocb"></label>
-								<label className="text" htmlFor="audiocb">
-									Audio
-								</label>
-							</div>
-						</Checks>
-						<div id="yearSlider" className={this.useStyles} width="50%">
-							<Typography id="range-slider" gutterBottom>
-								Select a range from 1920 to 2020
-							</Typography>
-							<Slider
-								min={1920}
-								max={2020}
-								value={this.state.yearRangeLocal}
-								onChange={this.handleChange}
-								valueLabelDisplay="auto"
-								aria-labelledby="range-slider"
-								getAriaValueText={this.valuetext}
-							/>
+							<br />
+						</Choices>
+						<div>
+							<Link to="/search">
+								<Button onClick={this.props.searchNASALibrary}>Search NASA's multimedia library</Button>
+							</Link>
 						</div>
-						<br />
-						<Link to="/search">
-							<Button onClick={this.props.searchNASALibrary}>Search NASA's multimedia library</Button>
-						</Link>
 					</Form>
 				</Div1>
 			</Center>

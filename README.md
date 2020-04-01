@@ -6,7 +6,6 @@ work in progress
 
 ## To Do
 
-- [ ] set up filter for searchresults (year/center/other)
 - [ ] style list view
 - [ ] fix white search box on focus
 - [ ] plan & write tests
