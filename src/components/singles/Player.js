@@ -27,6 +27,17 @@ class PlayerC extends React.Component {
 	}
 
 	render() {
+		const track = (
+			<track
+				kind="captions"
+				srclang="en-US"
+				label="English"
+				default
+				src={this.props.fileURL.filter(currentLink => {
+					return currentLink.includes('srt');
+				})}
+			/>
+		);
 		console.log(
 			'Checking Player fileURL = ' +
 				this.props.fileURL.filter(currentLink => {
@@ -70,7 +81,7 @@ class PlayerC extends React.Component {
 							<TimeDivider order={4.2} />
 							<PlaybackRateMenuButton rates={[5, 2, 1, 0.5, 0.1]} order={7.1} />
 							<VolumeMenuButton enabled />
-							<ClosedCaptionButton enabled />
+							<ClosedCaptionButton order={7} enabled />
 						</ControlBar>
 					</Player>
 				</Div>
