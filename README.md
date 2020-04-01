@@ -6,6 +6,7 @@ work in progress
 
 ## To Do
 
+- [ ] fix share component being cut off
 - [ ] fix up comments
 - [ ] remove spaghetti code
 - [ ] plan & write tests
