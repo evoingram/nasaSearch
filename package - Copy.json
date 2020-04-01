@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "create-react-app": "^3.3.0",
-    "react-router": "^5.1.2",
-    "reactdom": "^2.0.0",
-    "styled-components": "^5.0.0"
-  }
-}

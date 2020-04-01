@@ -44,8 +44,6 @@ const Rocket = styled.img`
 	overflow: hidden;
 `;
 
-// need rocket animation sliding in and out of screen side to side
-
 class Header extends React.Component {
 	constructor(props) {
 		super(props);
