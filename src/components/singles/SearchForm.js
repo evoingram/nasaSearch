@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { fetchSearchResults, adjustYearRange, turnPage } from '../../actions';
-import Sorted from '../containers/Sorted.js';
 import { connect } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 

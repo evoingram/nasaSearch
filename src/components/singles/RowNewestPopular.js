@@ -25,7 +25,6 @@ class RowNewestPopular extends React.Component {
 	}
 
 	render() {
-		console.log();
 		return (
 			<div className="row" style={row}>
 				{this.props.numberOfColumns <= 5 && (
@@ -46,9 +45,6 @@ class RowNewestPopular extends React.Component {
 		);
 	}
 }
-/*
-export default RowNewestPopular;
-*/
 const mapStateToProps = state => {
 	return {
 		listView: state.listView

@@ -24,14 +24,12 @@ export const LISTVIEW = 'LISTVIEW';
 export const TURNPAGE_START = 'TURNPAGE_START';
 export const TURNPAGE_SUCCESS = 'TURNPAGE_SUCCESS';
 export const UPDATE_NIDMT = 'UPDATE_NIDMT';
-// Where does props come from? We never passed anything in!
+
 export const fetchActivity = (nasaID, mediaType) => dispatch => {
-	console.log(`running fetchActivity on ${nasaID} ${mediaType}`);
 	dispatch({ type: FETCHING_ACTIVITY_START });
 	axios
 		.get(`https://images-api.nasa.gov/search?q=${nasaID}`)
 		.then(response => {
-			// thumbnail link = response.data.collection.items[x].data.links[0].href;
 			dispatch({ type: FETCHING_ACTIVITY_SUCCESS, payload: response.data.collection.items[0] });
 
 			axios
@@ -65,13 +63,10 @@ export const fetchActivity = (nasaID, mediaType) => dispatch => {
 };
 
 export const fetchNewest = () => dispatch => {
-	console.log(`running fetchNewest`);
 	dispatch({ type: FETCHING_NEWEST_START });
 	axios
 		.get(`https://images-assets.nasa.gov/recent.json`)
 		.then(response => {
-			console.log('fetchNewest = ' + response.data.collection.items);
-			// thumbnail link = response.data.collection.items[x].data.links[0].href;
 			dispatch({ type: FETCHING_NEWEST_SUCCESS, payload: response.data.collection.items });
 		})
 		.catch(error => {
@@ -98,6 +93,7 @@ export const fetchPopular = () => dispatch => {
 
 export const fetchSearchResults = (mediaFormats, searchTerm, page, yearRange) => dispatch => {
 	// dispatch({ type: FETCHING_SEARCHRESULTS_START });
+
 	axios
 		.get(
 			'https://images-api.nasa.gov/search' +
@@ -119,7 +115,6 @@ export const fetchSearchResults = (mediaFormats, searchTerm, page, yearRange) =>
 			dispatch({ type: FETCHING_SEARCHRESULTS_FAILURE, payload: error.response });
 			console.log(error);
 		});
-	console.log('------------------searchResults---------------------');
 };
 
 export const toggleListView = listView => dispatch => {
@@ -132,6 +127,5 @@ export const adjustYearRange = yearRange => dispatch => {
 };
 export const turnPage = page => dispatch => {
 	dispatch({ type: TURNPAGE_START });
-	console.log('turnPage Action running = ' + page);
 	dispatch({ type: TURNPAGE_SUCCESS, payload: page });
 };

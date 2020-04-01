@@ -2,6 +2,7 @@ import React from 'react';
 import RowNewestPopular from './RowNewestPopular.js';
 import { fetchActivity } from '../../actions';
 import { connect } from 'react-redux';
+import '../../css/App.css';
 
 const wrapper = {
 	display: 'flex',
@@ -20,7 +21,6 @@ class SearchResult extends React.Component {
 		};
 	}
 	render() {
-		console.log();
 		return (
 			<div className="App">
 				<div className="App-header" style={wrapper}>

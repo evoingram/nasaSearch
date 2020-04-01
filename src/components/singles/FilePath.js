@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const Button = styled.button`
@@ -33,13 +33,6 @@ const FilePath = props => {
 	function originalFileURLFilter(currentLink) {
 		return currentLink.includes('~orig');
 	}
-
-	useEffect(() => {
-		// console.log('Checking, nasaID = ' + props.nasaID);
-		// console.log('Checking, fileURL = ' + props.fileURL);
-		console.log('Checking, fileURL filter = ' + props.fileURL.filter(originalFileURLFilter));
-		// console.log('Checking, fileSize = ' + props.fileSize);
-	});
 	return (
 		<Div>
 			<p>

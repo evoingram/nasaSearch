@@ -1,7 +1,4 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
-import styled from 'styled-components';
-import RowNewestPopular from '../singles/RowNewestPopular.js';
 import ListView from '../singles/ListView.js';
 import { connect } from 'react-redux';
 import { toggleListView, adjustYearRange, turnPage } from '../../actions';
@@ -66,9 +63,6 @@ class SearchResults extends React.Component {
 		}
 	}
 }
-/*
-export default SearchResults;
-*/
 const mapStateToProps = state => {
 	return {
 		listView: state.listView,
