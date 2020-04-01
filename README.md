@@ -1,59 +1,14 @@
-work in progress
-
 # NASA Images Search Clone
+
+work in progress
 
 ## Clone of images.NASA.gov image/audio/video library in React & Redux
 
-## To Do Per Component
+## To Do
 
-### FilterSearchResults
-
-filter search results component
-
-- [ ] narrow by year/other?
-
-### SearchForm
-
-search form component
-
-### SearchResults
-
-search results square view list component
-
-### SearchResult
-
-single search result square component
-
-### ListView
-
-search results list view component
-
-- [ ] style appropriately
-
-### ColumnNewestPopular
-
-thumbnail sized images/audio/video sorted by newest/most popular component
-
-### RowNewestPopular
-
-thumbnail sized images/audio/video sorted by newest/most popular component
-
-### FilePath
-
-file path section component
-
-### FileInfo
-
-file info section component
-
-### Single
-
-single item component
-
-### Not Component Specific
-
+- [ ] set up filter for searchresults (year/center/other)
+- [ ] style list view
 - [ ] fix white search box on focus
-- [ ] debug video player
 - [ ] plan & write tests
 - [ ] timeline
 - [ ] suggest other searches
