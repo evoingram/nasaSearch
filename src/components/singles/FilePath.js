@@ -30,9 +30,11 @@ const Div = styled.div`
 	align-content: left;
 `;
 const FilePath = props => {
+	// filters link list to original file only
 	function originalFileURLFilter(currentLink) {
 		return currentLink.includes('~orig');
 	}
+	//upper right quadrant of info on single nasa id detail page, above fileinfo, right of picture
 	return (
 		<Div>
 			<p>

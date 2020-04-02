@@ -161,24 +161,6 @@ export const reducer = (state = initialState, action) => {
 				searchResults: []
 			};
 		case FETCHING_FILEURL_SUCCESS:
-			/*
-			console.log('fetchFileURL reducer action.payload = ' + actionArray);
-			for (let x = 0; x < actionArray.length; x++) {
-				console.log('fetchFileURL reducer x = ' + x);
-				console.log('fetchFileURL reducer fileLink = ' + actionArray[x]);
-				console.log('fetchFileURL reducer actionArray[x] = ' + actionArray[x]);
-				if (actionArray[x].toString.includes('~orig')) {
-					fileLink = actionArray[x];
-				}
-			}
-			actionArray.forEach(currentFileLink => {
-				console.log('fetchFileURL reducer currentFileLink forEach = ' + currentFileLink);
-				if (currentFileLink.toString.includes('~orig')) {
-					fileLink = currentFileLink;
-				}
-			});
-			console.log('fetchFileURL reducer fileLink = ' + action.payload);
-			*/
 			return {
 				...state,
 				areSearchResults: false,

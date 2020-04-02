@@ -6,6 +6,7 @@ import { Route, Switch, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchActivity, fetchSearchResults, toggleListView, adjustYearRange, turnPage } from '../../actions';
 import styled from 'styled-components';
+
 const row = {
 	display: 'flex',
 	flex: '1',
@@ -46,7 +47,8 @@ class Sorted extends React.Component {
 	};
 
 	render() {
-		console.log();
+		// if newest/popular results exist, load this component
+		// else load search results (see below)
 		if (
 			this.props.currentLoad !== [] &&
 			this.props.currentLoad !== 'undefined' &&
@@ -121,6 +123,7 @@ class Sorted extends React.Component {
 				</div>
 			);
 		} else if (this.props.searchResults !== '') {
+			// else load this if search results exist
 			return (
 				<div>
 					<Switch>

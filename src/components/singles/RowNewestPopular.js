@@ -19,12 +19,14 @@ class RowNewestPopular extends React.Component {
 		this.state = {};
 	}
 	componentDidMount() {
+		// resets columns to 1 at new row to facilitate grid view
 		if (this.props.numberOfColumns === 6) {
 			this.setState({ numberOfColumns: 1 });
 		}
 	}
 
 	render() {
+		// organizes results into several per row in grid form
 		return (
 			<div className="row" style={row}>
 				{this.props.numberOfColumns <= 5 && (

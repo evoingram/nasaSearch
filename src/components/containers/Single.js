@@ -33,6 +33,8 @@ const secondColumn = {
 	margin: '0%',
 	width: '30%'
 };
+
+// container holding both columns
 const container = {
 	display: 'flex',
 	flexWrap: 'nowrap',
@@ -41,6 +43,8 @@ const container = {
 	width: '100%',
 	overflow: 'hidden'
 };
+
+// children of second column
 const DivChildren = styled.div`
 	width: 100%;
 `;
@@ -52,8 +56,7 @@ class Single extends React.Component {
 	}
 	componentDidMount() {
 		this.props.getSingleResult();
-		console.log('center shorthand = ' + this.props.center);
-		console.log('centerLink shorthand = ' + this.state.centerLink);
+		// sets center URL which links center initials in FileInfo component
 		if (this.props.center === 'JPL') {
 			this.setState({ centerLink: 'http://www.jpl.nasa.gov' });
 		}
@@ -118,9 +121,10 @@ class Single extends React.Component {
 		if (this.props.center === 'WSTF') {
 			this.setState({ centerLink: 'http://www.nasa.gov/centers/wstf/home/index.html' });
 		}
-		console.log('shorthand centerLink end = ' + this.state.centerLink);
 	}
 	render() {
+		// displays details of single nasa id
+		// explanation sometimes huge which throws off share component, so it got its own container div at bottom
 		return (
 			this.props.nasaID !== '' &&
 			this.props.mediaType !== '' && (

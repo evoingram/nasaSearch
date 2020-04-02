@@ -22,6 +22,7 @@ class Explanation extends React.Component {
 	}
 
 	render() {
+		// explanation sometimes huge which throws off share component, so it got its own container div at bottom
 		return (
 			<Div>
 				<b>explanation:</b> <br />

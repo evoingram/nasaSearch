@@ -22,6 +22,7 @@ class ListView extends React.Component {
 	}
 
 	componentDidUpdate() {
+		// toggles grid/list view, 1 column or up to 6 columns
 		if (this.props.listView === false || this.props.listView === 'false') {
 			if (this.props.numberOfColumns === 6) {
 				this.setState({ numberOfColumns: 1 });
@@ -58,6 +59,7 @@ class ListView extends React.Component {
 	}
 
 	render() {
+		// displays search results in list view (1 column)
 		return (
 			<div className="row" style={row}>
 				{this.props.numberOfColumns < 2 && (
@@ -78,9 +80,6 @@ class ListView extends React.Component {
 		);
 	}
 }
-
-// export default ListView;
-
 const mapStateToProps = state => {
 	return {
 		listView: state.listView

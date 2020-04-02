@@ -29,6 +29,7 @@ class ColumnNewestPopular extends React.Component {
 	};
 
 	render() {
+		// loads results in grid fashion
 		return (
 			<div className="column1" style={column}>
 				<Link
