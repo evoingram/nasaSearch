@@ -21,6 +21,7 @@ import {
 } from './actions';
 import { connect } from 'react-redux';
 
+// button styling
 const Button = styled.button`
 	margin-top: 2%;
 	margin-bottom: 2%;
@@ -36,6 +37,7 @@ const Button = styled.button`
 	}
 `;
 
+// applies height restraint to footer
 const footerWidth = {
 	maxHeight: '50px'
 };
@@ -73,31 +75,28 @@ class App extends React.Component {
 	componentDidUpdate = () => {};
 
 	getFileSize = url => {
+		// gets file size
+		// called on by
 		let fileInfo = new Blob([url], { type: 'video/mp4' });
 		this.setState({ fileSize: fileInfo.size });
-		console.log(fileInfo.size);
 	};
 	nextPage = () => {
-		console.log('next page running');
-		console.log('next page running before =' + this.props.page);
+		// turns to next page, cycles through page 1-3
+		// called on by Sorted.js
 		let newPage = this.props.page + 1;
-		console.log('next newPage running before =' + newPage);
 		if (this.props.page > 3) {
 			this.props.turnPage(1);
 		} else {
 			this.props.turnPage(newPage);
 		}
-		console.log('next this.props.page running after =' + this.props.page);
 		this.searchNASALibrary();
 	};
 	previousPage = () => {
-		console.log('previous page running');
-		console.log('previous page running before =' + this.props.page);
+		// turns to previous page, cycles through page 1-3
+		// called on by Sorted.js
 		if (this.props.page >= 2) {
 			let newPage = this.props.page - 1;
-			console.log('previous newPage running before =' + newPage);
 			this.props.turnPage(newPage);
-			console.log('previous this.props.page running after =' + this.props.page);
 		} else {
 			this.props.turnPage(4);
 		}
@@ -105,43 +104,14 @@ class App extends React.Component {
 	};
 
 	changeSearchTerm = event => {
-		console.log('search term being set');
+		// updates search term as user types it in
+		// called on by
 		this.setState({ searchTerm: event.target.value });
 	};
 
-	toggleMediaFormatBoolean = () => {
-		let videoCBElement = document.getElementById('videocb');
-		let audioCBElement = document.getElementById('audiocb');
-		let imageCBElement = document.getElementById('imagecb');
-
-		let mediaFormats = '';
-		if (document.getElementById('videocb')) {
-			if (videoCBElement.checked === true) {
-				this.setState({ videocb: true });
-				mediaFormats += 'video,';
-			}
-			if (imageCBElement.checked === true) {
-				this.setState({ imagecb: true });
-				mediaFormats += 'image,';
-			}
-			if (audioCBElement.checked === true) {
-				this.setState({ audiocb: true });
-				mediaFormats += 'audio';
-			}
-			console.log(`image checked: ${imageCBElement.checked}`);
-			if (mediaFormats.slice(-1) === ',') {
-				mediaFormats.substring(0, mediaFormats.length - 1);
-			}
-			console.log(`searchTerm: ${this.state.searchTerm}`);
-			console.log(`toggleMediaFormatBoolean page: ${this.props.page}`);
-			console.log(`local mediaFormats: ${mediaFormats}`);
-			this.setState({ mediaFormats: mediaFormats });
-			console.log(`mediaFormats: ${this.state.mediaFormats}`);
-		}
-	};
 	searchNASALibrary = event => {
-		console.log('running searchNASALibrary');
-		console.log('searchNASALibrary page running =' + this.props.page);
+		// uses user search input to search nasa library
+		// called on by SearchResults.js
 		if (this.state.searchTerm !== '' && this.state.searchTerm !== 'undefined' && this.state.searchTerm !== null) {
 			let videoCBElement = document.getElementById('videocb');
 			let audioCBElement = document.getElementById('audiocb');
@@ -164,7 +134,6 @@ class App extends React.Component {
 				if (mediaFormats.slice(-1) === ',') {
 					mediaFormats.substring(0, mediaFormats.length - 1);
 				}
-				console.log(`searchNASALibrary page running: ${this.props.page}`);
 				this.setState({ mediaFormats: mediaFormats });
 			}
 			this.props.fetchSearchResults(mediaFormats, this.state.searchTerm, this.props.page, this.props.yearRange);
@@ -173,11 +142,11 @@ class App extends React.Component {
 	};
 
 	getNewestNASALibrary = () => {
-		console.log('running newestNASALibrary');
+		// retrieves 'newest' results from nasa
+		// called on by app.js
 		axios
 			.get(this.state.newestURL)
 			.then(response => {
-				console.log(response);
 				this.setState({ newestResults: response.data.collection.items });
 			})
 			.catch(error => {
@@ -185,7 +154,8 @@ class App extends React.Component {
 			});
 	};
 	getPopularNASALibrary = () => {
-		console.log('running popularNASALibrary');
+		// retrieves 'most popular' results from nasa
+		// called on by app.js
 		axios
 			.get(this.state.popularURL)
 			.then(response => {
@@ -196,21 +166,20 @@ class App extends React.Component {
 			});
 	};
 	toggleResults = () => {
+		// toggles newest/most popular
+		// called on by sorted.js
 		let toggleButton = document.getElementById('MostRecentPopular');
 		if (this.state.currentResults === true) {
 			//newest results
 			toggleButton.textContent = 'Click to See Most Popular';
 			this.props.fetchNewest();
 			this.setState({ currentResults: false });
-			// this.setState({ currentLoad: this.state.newestResults });
 		} else {
 			//most popular results
 			toggleButton.textContent = 'Click to See Most Recent';
 			this.props.fetchPopular();
 			this.setState({ currentResults: true });
-			// this.setState({ currentLoad: this.state.popularResults });
 		}
-		console.log('current results boolean = ' + this.state.currentResults);
 		return (
 			<Route exact path="/">
 				<SearchResult currentLoad={this.props.currentLoad} />
@@ -219,35 +188,29 @@ class App extends React.Component {
 	};
 
 	toggleView = () => {
-		console.log('toggleView running');
-		console.log('listView at beginning of toggleView toggleListView action = ' + this.props.listView);
+		// toggles list/grid views
+		// called on by Sorted.js
 		let toggleButton = document.getElementById('searchView');
 		if (this.props.listView === true) {
 			// display default view
 			if (toggleButton) {
 				toggleButton.textContent = 'Click for List View';
-				console.log('toggleButton text content = ' + toggleButton.textContent);
 			}
 		} else {
 			// display list view
 			if (toggleButton) {
 				toggleButton.textContent = 'Click for Grid View';
-				console.log('toggleButton text content = ' + toggleButton.textContent);
 			}
 		}
 		this.props.toggleListView(this.props.listView);
-		// this.setState({ listView: !this.props.listView });
-
-		console.log('listView at end of toggleView toggleListView action = ' + this.state.listView);
 	};
 
 	getSingleResult() {
-		console.log('shorthand running single detail axios get');
+		// gets details of single nasa id
+		// called on by Single.js
 		axios
 			.get(`https://images-api.nasa.gov/search?q=${this.nasaID}`)
 			.then(response => {
-				console.log('single detail = ' + response.data.collection.items[0].data[0]);
-				// thumbnail link = response.data.collection.items[x].data.links[0].href;
 				this.setState({
 					title: response.data.collection.items[0].data[0].title,
 					date: response.data.collection.items[0].data[0].date_created,
@@ -291,7 +254,6 @@ class App extends React.Component {
 		axios
 			.get(`https://images-api.nasa.gov/captions/${this.nasaID}`)
 			.then(response => {
-				console.log('captions URL = ' + response.location);
 				this.setState({
 					captionsURL: response.location
 				});
@@ -372,24 +334,3 @@ export default connect(mapStateToProps, {
 	adjustYearRange,
 	turnPage
 })(App);
-
-/*
-
-		var minYear = 2000;
-		var maxYear = 2019;
-		var randomYear = minYear + Math.round(Math.random() * (maxYear - minYear));
-		var minMonth = 1;
-		var maxMonth = 12;
-		var randomMonth = minMonth + Math.round(Math.random() * (maxMonth - minMonth));
-		var minDay = 1;
-		var maxDay = 28;
-		var randomDay = minDay + Math.round(Math.random() * (maxDay - minDay));
-		var randomDate = randomYear + '-' + randomMonth + '-' + randomDay;
-
-					<APOD
-						imgURL={this.state.imgURL}
-						copyright={this.state.copyright}
-						date={this.state.date}
-						explanation={this.state.explanation}
-					/>
-*/

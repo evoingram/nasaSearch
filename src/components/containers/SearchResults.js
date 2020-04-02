@@ -3,6 +3,7 @@ import ListView from '../singles/ListView.js';
 import { connect } from 'react-redux';
 import { toggleListView, adjustYearRange, turnPage } from '../../actions';
 
+// this const helps arrange grid format for results
 const row = {
 	display: 'flex',
 	flex: '1',
@@ -12,6 +13,7 @@ const row = {
 	padding: '0%',
 	margin: '0%'
 };
+
 class SearchResults extends React.Component {
 	constructor(props) {
 		super(props);
@@ -25,7 +27,7 @@ class SearchResults extends React.Component {
 	};
 
 	render() {
-		console.log();
+		// maps ListView to search results if results exist
 		if (
 			this.props.searchResults !== [] &&
 			this.props.searchResults !== 'undefined' &&

@@ -69,7 +69,7 @@ function Footer() {
 				<h2 style={paddingBottom}>
 					<div style={paddingTop}>
 						{' '}
-						<Link href="https://www.ericaingram.com/" target="_blank">
+						<Link href="http://www.ericaingram.com/" target="_blank">
 							See more of Erica's work in her portfolio.
 						</Link>
 					</div>

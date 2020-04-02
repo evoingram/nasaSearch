@@ -27,6 +27,10 @@ class PlayerC extends React.Component {
 	}
 
 	render() {
+		// audio/video player
+		// below filter filters to select only captions link
+		// displays images w/o player
+		// captions don't work for some reason, link is working
 		const track = (
 			<track
 				kind="captions"

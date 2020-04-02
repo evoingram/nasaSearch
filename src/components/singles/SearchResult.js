@@ -21,6 +21,7 @@ class SearchResult extends React.Component {
 		};
 	}
 	render() {
+		// displays results in grid view
 		return (
 			<div className="App">
 				<div className="App-header" style={wrapper}>
@@ -38,12 +39,7 @@ class SearchResult extends React.Component {
 									: newResult.data[0].description_508.substring(0, 50)) + '...'
 							}
 							fetchActivity={this.props.fetchActivity}
-							//Here is a place to pass data along!
-							onClick={this.props.fetchActivity(
-								/*data*/
-								newResult.data[0].nasa_id,
-								newResult.data[0].media_type
-							)}
+							onClick={this.props.fetchActivity(newResult.data[0].nasa_id, newResult.data[0].media_type)}
 						/>
 					))}
 				</div>

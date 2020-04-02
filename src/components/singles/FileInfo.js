@@ -18,8 +18,7 @@ const Div = styled.div`
 	padding: 0%;
 `;
 
-/* 
-centers:
+/* nasa centers list:
 	JPL = http://www.jpl.nasa.gov
 	HQ = http://www.nasa.gov/centers/hq/home/index.html
 	KSC = http://www.nasa.gov/centers/kennedy/home/index.html
@@ -50,6 +49,7 @@ class FileInfo extends React.Component {
 
 	componentDidMount = () => {};
 	render() {
+		// file info component, lower right quadrant of info above explanation in single nasa id detail
 		return (
 			<Div>
 				<b>nasa id:</b> <PText>{this.props.nasaID}</PText>

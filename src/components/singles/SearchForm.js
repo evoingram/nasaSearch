@@ -108,16 +108,14 @@ class SearchForm extends React.Component {
 	}
 
 	handleChange = (event, newValue) => {
-		console.log('yearRange Sorted newValue = ' + newValue);
-		// setYearRange(newValue);
+		// sets year range for slider
 		this.setState({ yearRangeLocal: newValue });
 		this.setState({ yearRange: this.state.yearRangeLocal });
 		this.props.adjustYearRange(newValue);
-		console.log('yearRange Sorted handleChange = ' + this.state.yearRangeLocal);
-		console.log('yearRange Sorted handleChange = ' + this.props.yearRange);
 	};
 
 	render() {
+		// search form in header
 		return (
 			<Center>
 				<Div1>

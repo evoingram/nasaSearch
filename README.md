@@ -6,8 +6,6 @@ work in progress
 
 ## To Do
 
-- [ ] fix up comments
-- [ ] remove spaghetti code
 - [ ] plan & write tests
 
 ## Major Differences
@@ -15,6 +13,7 @@ work in progress
 - Can't download different image sizes, only 'original' size
 - no EXIF data
 - no tooltips because of accessibility; instead same info is in small area below each thumbnail
+- video/audio captions not working, link/code correct, so not sure why
 - no 'Visit Center Website' link because it's duplicative (link is dynamically created w/ center initials on single detail page)
 - no textfield for full resolution URL; instead just displays as a link because it's duplicative
 - NASA page is less compact w/ left-hand bar after you search; not w/ mine because it's duplicative; instead my search function is only in header

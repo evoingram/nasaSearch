@@ -38,6 +38,8 @@ class Share extends React.Component {
 	}
 
 	render() {
+		// share component that displays tons of sharing options
+		// lower left above explanation in single nasa id detail
 		return (
 			this.props.fileURL && (
 				<Div>
