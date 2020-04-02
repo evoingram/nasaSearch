@@ -57,7 +57,7 @@ class FileInfo extends React.Component {
 				<b>keywords:</b> <PText>{this.props.keywords}</PText>
 				<br />
 				<b>center:</b>{' '}
-				<a href={this.props.centerLink} target="_blank">
+				<a href={this.props.centerLink} target="_blank" rel="noopener noreferrer">
 					<PText>{this.props.center}</PText>
 				</a>
 				<br />

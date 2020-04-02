@@ -38,7 +38,12 @@ const FilePath = props => {
 	return (
 		<Div>
 			<p>
-				<a href={props.fileURL.filter(originalFileURLFilter)} target="_blank" download>
+				<a
+					href={props.fileURL.filter(originalFileURLFilter)}
+					target="_blank"
+					rel="noopener noreferrer"
+					download
+				>
 					<Button>Download</Button>
 				</a>
 			</p>
