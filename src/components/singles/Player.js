@@ -43,7 +43,7 @@ class PlayerC extends React.Component {
 			/>
 		);
 		return (
-			(this.props.mediaType == 'video' && (
+			(this.props.mediaType === 'video' && (
 				<Div>
 					<Player
 						poster={this.props.thumbnailURL}
@@ -78,7 +78,7 @@ class PlayerC extends React.Component {
 					</Player>
 				</Div>
 			)) ||
-			(this.props.mediaType == 'audio' && (
+			(this.props.mediaType === 'audio' && (
 				<Div>
 					<Player poster={this.props.thumbnailURL}>
 						<source
@@ -97,7 +97,7 @@ class PlayerC extends React.Component {
 					</Player>
 				</Div>
 			)) ||
-			(this.props.mediaType == 'image' && (
+			(this.props.mediaType === 'image' && (
 				<Div>
 					<Img src={this.props.thumbnailURL} />
 				</Div>
