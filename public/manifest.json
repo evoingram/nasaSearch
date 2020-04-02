@@ -1,8 +1,7 @@
 {
 	"short_name": "NASA Search Clone",
 	"name": "NASA Search Clone in React/Redux",
-	"icons": [
-	],
+	"icons": [],
 	"start_url": ".",
 	"display": "standalone",
 	"theme_color": "#000000",
