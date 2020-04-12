@@ -9,7 +9,7 @@
 | **can download many file sizes**   | only original available (future feature)     |
 | **EXIF data** | no EXIF data (future feature) |
 | tooltips to display extra info in search results | **grid view to eliminate tooltips for accessibility** |
-| displays textfield displaying file URL and link to same URL | **displays no textfield, only link to file URL** |
+| displays textfield displaying file URL and link to same URL | **displays no textfield, only button to download file** |
 | three share options | **nine share options** |
 | displays breadcrumbs in top left AND right side of detail page | **displays same info on right side only of detail page** |
 | displays keywords and links them to search  | **displays keywords, unlinked because search is always in header** |
