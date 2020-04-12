@@ -2,10 +2,6 @@
 
 ## Clone of images.NASA.gov image/audio/video library in React & Redux
 
-## To Do
-
-- [ ] plan & write tests
-
 ## Major Differences
 
 - Can't download different image sizes, only 'original' size (future feature, not part of MVP)
