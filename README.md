@@ -12,3 +12,4 @@
 - NASA search feature is less compact with left-hand bar after you search, and some search features are not available until after you search the first time; with clone, a full-featured search function is in header and available from first search.
 - within a single nasaid's detail page, keywords on the NASA version are linked to do an additional search, which is duplicative; in clone, you use search header to search by center initials or keyword and keywords are simply displayed unlinked on the detail page.
 - in clone, there is no breadcrumbs display in top left because it's duplicative, and the info is listed on the single detail page already.
+- many more share options in clone than original
