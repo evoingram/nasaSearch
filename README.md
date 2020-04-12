@@ -10,7 +10,6 @@ work in progress
 
 ## Major Differences
 
-- couple of the buttons need to be hit twice to work
 - Can't download different image sizes, only 'original' size
 - no EXIF data
 - no tooltips because of accessibility; instead same info is in small area below each thumbnail
