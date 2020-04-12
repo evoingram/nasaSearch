@@ -6,8 +6,8 @@
 
 | NASA version | Clone           |
 | :------------- | :--------------- |
-| X can download many file sizes   | only original available      |
-| X EXIF data | no EXIF data |
+| *can download many file sizes*   | only original available      |
+| *EXIF data* | no EXIF data |
 | tooltips to display extra info in search results | X grid view to eliminate tooltips for accessibility |
 | displays textfield displaying file URL and link to same URL | X displays no textfield, only link to file URL |
 | three share options | X nine share options |
