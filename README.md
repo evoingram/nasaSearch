@@ -1,6 +1,6 @@
 # [NASA Images Search Clone](https://nasasearchclone.now.sh/)
 
-## Clone of images.NASA.gov image/audio/video library in React & Redux
+## Clone of images.NASA.gov, NASA's media library, in React & Redux
 
 ## Major Differences
 
