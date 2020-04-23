@@ -1,3 +1,5 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/b21fbbb38f5918d60ada/maintainability)](https://codeclimate.com/github/evoingram/nasaSearch/maintainability)
+
 # [NASA Images Search Clone](https://nasasearchclone.now.sh/)
 
 ## React & Redux clone of images.NASA.gov, NASA's media library
