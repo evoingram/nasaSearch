@@ -65,4 +65,3 @@ in the project directory, you can run:
 # Testing
 
 Cypress testing will be completed in a future release.
-
