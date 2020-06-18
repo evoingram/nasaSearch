@@ -24,6 +24,7 @@ This is a clone of images.NASA.gov, NASA's media library, improved over the orig
 - share single media file on social media
 
 ## Major Differences
+### "Better" options are bolded.
 
 | NASA version | Clone           |
 | :------------- | :--------------- |
