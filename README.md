@@ -4,9 +4,7 @@
 
 ## Product Overview
 
-* [Deployed Project](https://nasasearchclone.now.sh/)
-
-* [Original Cloned Site](https://images.nasa.gov/)
+### [Deployed Project](https://nasasearchclone.now.sh/)   |   [Original Cloned Site](https://images.nasa.gov/)
 
 # Project Description
 
