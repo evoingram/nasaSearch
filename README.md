@@ -1,12 +1,10 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/b21fbbb38f5918d60ada/maintainability)](https://codeclimate.com/github/evoingram/nasaSearch/maintainability)
 
-# NASA Images Search Clone
+# NASA Images Search Clone Product Overview
 
-## Product Overview
+## [Deployed Project](https://nasasearchclone.now.sh/)   |   [Original Non-React Site](https://images.nasa.gov/)
 
-### [Deployed Project](https://nasasearchclone.now.sh/)   |   [Original Non-React Site](https://images.nasa.gov/)
-
-# Project Description
+## Project Description
 
 This is a clone of images.NASA.gov, NASA's media library, improved over the original.
 
@@ -48,14 +46,14 @@ Front end deployed to `Vercel` and built using:
 - [Axios](https://github.com/axios/axios):  promise-based HTTP client for both browser and node.js.
 - [Cypress](https://github.com/cypress-io/cypress):  fast, easy and reliable testing for anything that runs in a browser.
 
-# Available Scripts 
+## Available Scripts 
 
 ### `npm start`
 
-# APIs
+## APIs
 
 [NASA API](https://images.nasa.gov/docs/images.nasa.gov_api_docs.pdf)
    
-# Testing
+## Testing
 
 Cypress testing will be completed in a future release.
