@@ -50,12 +50,7 @@ Front end deployed to `Vercel` and built using:
 
 # Available Scripts 
 
-in the project directory, you can run: 
-
 ### `npm start`
-### `npm build`
-### `npm test`
-### `npm eject`
 
 # APIs
 
