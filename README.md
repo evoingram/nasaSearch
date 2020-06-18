@@ -4,7 +4,7 @@
 
 ## My Role
 
-This was a solo project, so I completed every aspect of this project.
+This was a solo project.
 
 ## Project Description
 
