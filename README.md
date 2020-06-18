@@ -14,6 +14,7 @@ This is a clone of images.NASA.gov, NASA's media library, improved over the orig
 
 ## Key Features
 
+- Live solo project
 - search NASA's media library by media type
 - view 100 most popular media files
 - view 100 most recently uploaded media files
