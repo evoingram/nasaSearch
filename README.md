@@ -2,6 +2,10 @@
 
 # NASA Images Search Clone Product Overview
 
+## My Role
+
+This was a solo project, so I completed every aspect of this project.
+
 ## Project Description
 
 ### [Deployed Project](https://nasasearchclone.now.sh/)   |   [Original Non-React Site](https://images.nasa.gov/)
