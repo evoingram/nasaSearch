@@ -2,10 +2,9 @@
 
 # NASA Images Search Clone Product Overview
 
-## [Deployed Project](https://nasasearchclone.now.sh/)   |   [Original Non-React Site](https://images.nasa.gov/)
-
 ## Project Description
 
+### [Deployed Project](https://nasasearchclone.now.sh/)   |   [Original Non-React Site](https://images.nasa.gov/)
 This is a clone of images.NASA.gov, NASA's media library, improved over the original.
 
 ## Key Features
