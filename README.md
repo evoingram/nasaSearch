@@ -48,6 +48,7 @@ Front end deployed to `Vercel` and built using:
 - [Styled Components](https://styled-components.com/):  visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress.
 - [Video React](https://video-react.js.org/):  a web video player built for the HTML5 world using React library.
 - [Axios](https://github.com/axios/axios):  promise-based HTTP client for both browser and node.js.
+- [Cypress](https://github.com/cypress-io/cypress):  fast, easy and reliable testing for anything that runs in a browser.
 
 # Available Scripts 
 
