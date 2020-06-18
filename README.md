@@ -4,7 +4,7 @@
 
 ## Product Overview
 
-* You can find the deployed project at [NASA Images Search Clone](https://nasasearchclone.now.sh/)
+* [Deployed Project](https://nasasearchclone.now.sh/).
 
 * [Original Cloned Site](https://images.nasa.gov/)
 
